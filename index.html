@@ -5,8 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TrackTor — Control total, máximo rendimiento.</title>
   <meta name="description" content="TrackTor digitaliza la operación de tus maquinarias en el origen. Registro asistido con evidencia fotográfica y GPS, sin depender de Excel ni WhatsApp, y reportes claros para decidir mejor." />
-  <link rel="icon" href="assets/logo-icon.png" />
   <link rel="canonical" href="https://tracktor.lat/" />
+
+  <!-- Favicons e íconos -->
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#F5A623" />
 
   <!-- Open Graph (previews en WhatsApp / redes) -->
   <meta property="og:type" content="website" />
@@ -14,17 +20,20 @@
   <meta property="og:url" content="https://tracktor.lat/" />
   <meta property="og:title" content="TrackTor — Control total, máximo rendimiento." />
   <meta property="og:description" content="Plataforma móvil para el registro verificado, control y análisis de la operación agrícola, sin depender de Excel ni WhatsApp." />
-  <meta property="og:image" content="https://tracktor.lat/assets/hero-dron-1.png" />
+  <meta property="og:image" content="https://tracktor.lat/assets/og-image.jpg" />
   <meta property="og:locale" content="es_BO" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="TrackTor — Control total, máximo rendimiento." />
   <meta name="twitter:description" content="Monitoreo en tiempo real de toda tu maquinaria, sin depender de Excel ni WhatsApp." />
-  <meta name="twitter:image" content="https://tracktor.lat/assets/hero-dron-1.png" />
+  <meta name="twitter:image" content="https://tracktor.lat/assets/og-image.jpg" />
 
   <!-- Tipografía TrackTor: Montserrat (títulos/KPIs) + Inter (cuerpo) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Precarga del hero para mejorar LCP -->
+  <link rel="preload" as="image" href="assets/hero-user-tracktor.webp" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -33,7 +42,7 @@
   <header class="nav">
     <div class="container nav__inner">
       <div class="brand">
-        <img src="assets/logo-foreground-dark-icon.png" alt="TrackTor" class="brand__logo" />
+        <img src="assets/logo-foreground-dark-icon.png" alt="TrackTor" class="brand__logo" width="719" height="472" />
         <span class="brand__name">TrackTor</span>
       </div>
       <nav class="nav__links">
@@ -47,12 +56,13 @@
   </header>
 
   <!-- ============ HERO ============ -->
-  <section id="hero" class="hero" style="background-image: url('assets/hero-user-tracktor.png');">
+  <section id="hero" class="hero" style="background-image: url('assets/hero-user-tracktor.webp');">
     <div class="container hero__inner">
       <h1 class="hero__title">Cada operación.<br /><em>Bajo control.</em></h1>
       <p class="hero__subtitle">
-        Plataforma móvil para el registro, control y análisis de la operación
-        agrícola en tiempo real. Sin depender de Excel ni WhatsApp.
+        Plataforma móvil offline-first para el registro, control y análisis de tu
+        operación agrícola. Registrá sin conexión o dictá por voz con IA — sin
+        depender de Excel ni WhatsApp.
       </p>
       <div class="hero__actions">
         <button class="btn btn--primary btn--lg" data-cta="hero">Solicitar demo</button>
@@ -124,6 +134,17 @@
           <p>Te enteras de lo que pasó en el campo cuando ya no hay nada que corregir.</p>
         </div>
       </div>
+      <div class="problem__value">
+        <div class="problem__value-block">
+          <span class="problem__value-label">Perdés en promedio</span>
+          <strong class="problem__value-amount">$5,164<span>USD/año por propiedad</span></strong>
+        </div>
+        <div class="problem__value-multiplier">4x–7x<span>de retorno</span></div>
+        <div class="problem__value-block">
+          <span class="problem__value-label">TrackTor cuesta desde</span>
+          <strong class="problem__value-amount problem__value-amount--gold">$708<span>USD/año</span></strong>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -132,10 +153,10 @@
     <div class="container solution__inner">
       <div class="solution__phones">
         <figure class="phone phone--tall">
-          <img src="assets/screenshots/screen-2.png" alt="Métricas y rendimiento en la app TrackTor" loading="lazy" />
+          <img src="assets/screenshots/screen-2.webp" alt="Métricas y rendimiento en la app TrackTor" loading="lazy" width="1170" height="2532" />
         </figure>
         <figure class="phone phone--tall phone--offset">
-          <img src="assets/screenshots/screen-3.png" alt="Iniciar trabajo en la app TrackTor" loading="lazy" />
+          <img src="assets/screenshots/screen-3.webp" alt="Iniciar trabajo en la app TrackTor" loading="lazy" width="1170" height="2532" />
         </figure>
       </div>
       <div class="solution__copy">
@@ -143,7 +164,7 @@
         <h2 class="solution__title">TrackTor conecta tu operación y te da el control.</h2>
         <ul class="checklist">
           <li><span class="checklist__icon">✓</span> Visibilidad de toda tu maquinaria, centralizada en un dashboard.</li>
-          <li><span class="checklist__icon">✓</span> Registro asistido con evidencia fotográfica y GPS — sin hardware, sin Excel, sin WhatsApp.</li>
+          <li><span class="checklist__icon">✓</span> Registro offline-first con evidencia fotográfica y GPS, con dictado por voz asistido por IA — sin hardware, sin Excel, sin WhatsApp.</li>
           <li><span class="checklist__icon">✓</span> Reportes claros para tomar mejores decisiones.</li>
           <li><span class="checklist__icon">✓</span> Más eficiencia, menos pérdidas, más rentabilidad.</li>
         </ul>
@@ -163,7 +184,7 @@
         <div class="how__step">
           <span class="how__num">1</span>
           <h3>El operador abre turno</h3>
-          <p>Registra horómetro, hectáreas y diésel con una foto tomada en el momento, directo desde la app.</p>
+          <p>Registra horómetro, hectáreas y diésel con una foto tomada en el momento, sin necesidad de conexión — o dicta por voz cuando hay internet.</p>
         </div>
         <div class="how__step">
           <span class="how__num">2</span>
@@ -197,11 +218,11 @@
           <p>Cliente pagando en producción</p>
         </div>
         <div class="results__item">
-          <div class="results__value">15</div>
+          <div class="results__value">9</div>
           <p>Operadores activos registrando en campo</p>
         </div>
         <div class="results__item">
-          <div class="results__value">70%</div>
+          <div class="results__value">80%</div>
           <p>De los productores entrevistados validó este dolor</p>
         </div>
         <div class="results__item">
@@ -223,7 +244,7 @@
   </section>
 
   <!-- ============ CTA FINAL ============ -->
-  <section id="closer" class="closer" style="background-image: url('assets/hero-field.png');">
+  <section id="closer" class="closer" style="background-image: url('assets/hero-field.webp');">
     <div class="container closer__inner">
       <div>
         <h2 class="closer__title">Tu campo. Conectado. Bajo control.</h2>
@@ -306,22 +327,22 @@
       <div class="step" data-step="pricing" hidden>
         <span class="section-header">PASO 2 DE 2 · ELIGE TU PLAN</span>
         <h2 class="modal__title">¿Qué plan se ajusta a tu operación?</h2>
-        <p class="modal__lead">Selecciona un plan para reservar tu lugar en la preventa.</p>
+        <p class="modal__lead">Selecciona un plan para activar tu cuenta.</p>
         <div class="plans">
           <button class="plan" data-plan="free">
             <div class="plan__head">
               <span class="plan__name">Plan Free</span>
             </div>
             <div class="plan__price"><strong>Gratis</strong><span>/para siempre</span></div>
-            <p class="plan__detail">2 máquinas · 2 operadores</p>
+            <p class="plan__detail">2 máquinas · 2 operadores · sin fotos ni voz IA</p>
             <span class="plan__select">Empezar gratis →</span>
           </button>
           <button class="plan" data-plan="pro">
             <div class="plan__head">
               <span class="plan__name">Plan Pro</span>
             </div>
-            <div class="plan__price"><strong>USD 49</strong><span>/mes</span></div>
-            <p class="plan__detail">Hasta 10 máquinas · hasta 10 operadores</p>
+            <div class="plan__price"><strong>USD 59</strong><span>/mes</span></div>
+            <p class="plan__detail">Hasta 10 máquinas · hasta 10 operadores · fotos y voz con IA</p>
             <span class="plan__select">Elegir este plan →</span>
           </button>
           <button class="plan" data-plan="max">
@@ -329,7 +350,7 @@
               <span class="plan__name">Plan Max</span>
             </div>
             <div class="plan__price"><strong>USD 99</strong><span>/mes</span></div>
-            <p class="plan__detail">Máquinas y operadores ilimitados</p>
+            <p class="plan__detail">Máquinas y operadores ilimitados · fotos y voz con IA</p>
             <span class="plan__select">Elegir este plan →</span>
           </button>
         </div>
@@ -338,9 +359,9 @@
       <!-- PASO 3: Confirmación -->
       <div class="step step--confirm" data-step="confirm" hidden>
         <div class="confirm__check">✓</div>
-        <h2 class="modal__title">¡Estás dentro de la preventa!</h2>
+        <h2 class="modal__title">¡Listo! Ya sos parte de TrackTor.</h2>
         <p class="modal__lead">
-          TrackTor está en fase de acceso anticipado / preventa. Revisamos tu perfil y te
+          Ya estamos trabajando con productores en Santa Cruz. Revisamos tu perfil y te
           contactamos en un plazo de <strong>3 días hábiles</strong> para activar
           tu cuenta y empezar.
         </p>
