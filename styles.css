@@ -330,7 +330,7 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   box-shadow: 0 24px 50px rgba(27, 25, 25, 0.18);
   overflow: hidden;
 }
-.phone img { display: block; width: 100%; border-radius: 26px; }
+.phone img { display: block; width: 100%; height: auto; border-radius: 26px; }
 .phone--tall { width: 230px; }
 .phone--offset { transform: translateY(-30px); }
 
