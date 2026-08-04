@@ -325,33 +325,29 @@
 
       <!-- PASO 2: Pricing -->
       <div class="step" data-step="pricing" hidden>
-        <span class="section-header">PASO 2 DE 2 · ELIGE TU PLAN</span>
-        <h2 class="modal__title">¿Qué plan se ajusta a tu operación?</h2>
-        <p class="modal__lead">Selecciona un plan para activar tu cuenta.</p>
+        <span class="section-header">PASO 2 DE 2 · TU PRECIO</span>
+        <h2 class="modal__title">Pagás solo por las máquinas que gestionás.</h2>
+        <p class="modal__lead">
+          Las primeras 2 máquinas son gratis. De la tercera en adelante, USD 5.99 por
+          máquina al mes. Operadores ilimitados y todas las funciones incluidas.
+        </p>
         <div class="plans">
           <button class="plan" data-plan="free">
             <div class="plan__head">
-              <span class="plan__name">Plan Free</span>
+              <span class="plan__name">Empezar gratis</span>
             </div>
-            <div class="plan__price"><strong>Gratis</strong><span>/para siempre</span></div>
-            <p class="plan__detail">2 máquinas · 2 operadores · sin fotos ni voz IA</p>
+            <div class="plan__price"><strong>Gratis</strong><span>/hasta 2 máquinas</span></div>
+            <p class="plan__detail">Sin tarjeta. Todas las funciones incluidas.</p>
             <span class="plan__select">Empezar gratis →</span>
           </button>
-          <button class="plan" data-plan="pro">
+          <button class="plan" data-plan="seats">
             <div class="plan__head">
-              <span class="plan__name">Plan Pro</span>
+              <span class="plan__name">Por máquina</span>
             </div>
-            <div class="plan__price"><strong>USD 49</strong><span>/mes</span></div>
-            <p class="plan__detail">Hasta 10 máquinas · hasta 10 operadores · fotos y voz con IA</p>
-            <span class="plan__select">Elegir este plan →</span>
-          </button>
-          <button class="plan" data-plan="max">
-            <div class="plan__head">
-              <span class="plan__name">Plan Max</span>
-            </div>
-            <div class="plan__price"><strong>USD 99</strong><span>/mes</span></div>
-            <p class="plan__detail">Máquinas y operadores ilimitados · fotos y voz con IA</p>
-            <span class="plan__select">Elegir este plan →</span>
+            <div class="plan__price"><strong>USD 5.99</strong><span>/máquina al mes</span></div>
+            <!-- Precio estimado con las máquinas que declaró en el paso 1 (lo rellena app.js). -->
+            <p class="plan__detail" data-seat-estimate>Sumá las máquinas que necesites, cuando las necesites.</p>
+            <span class="plan__select">Quiero este precio →</span>
           </button>
         </div>
       </div>

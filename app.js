@@ -187,9 +187,36 @@
     track("form_submit", leadData);
     submitLead(leadData);
 
+    renderSeatEstimate(leadData.maquinarias);
     showStep("pricing");
     track("pricing_view");
   });
+
+  /* Máquinas incluidas sin costo y precio por máquina adicional.
+     Deben coincidir con FREE_MACHINES / MACHINE_SEAT_PRICE_USD del backend. */
+  var FREE_MACHINES = 2;
+  var SEAT_PRICE_USD = 5.99;
+
+  /* Traduce las máquinas declaradas en el paso 1 a lo que pagaría por mes, para
+     que el precio deje de ser abstracto justo antes de elegir. */
+  function renderSeatEstimate(maquinarias) {
+    var target = modal.querySelector("[data-seat-estimate]");
+    if (!target) return;
+
+    var count = parseInt(maquinarias, 10);
+    if (!isFinite(count) || count <= 0) return; // deja el copy por defecto
+
+    var billable = Math.max(0, count - FREE_MACHINES);
+    if (billable === 0) {
+      target.textContent =
+        "Con " + count + " máquina(s) entrás en el plan gratuito: USD 0 al mes.";
+      return;
+    }
+    target.textContent =
+      "Con " + count + " máquinas pagarías USD " +
+      (billable * SEAT_PRICE_USD).toFixed(2) + " al mes (" +
+      FREE_MACHINES + " gratis + " + billable + " a USD " + SEAT_PRICE_USD.toFixed(2) + ").";
+  }
 
   function submitLead(data) {
     var record = Object.assign({ type: "lead", sid: sessionId, ts: new Date().toISOString() }, data);
