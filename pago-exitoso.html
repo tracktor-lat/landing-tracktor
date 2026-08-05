@@ -2,63 +2,205 @@
 <html lang="es"><head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pago exitoso · Tracktor</title>
+<meta name="robots" content="noindex" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
+  /* Tokens tomados de la app (AppColors / AppTypography), para que esta pantalla
+     se sienta continuación de Suscripción y Reportes y no de la landing. */
   :root {
-    --bg: #F9FAFB; --card1: #1B1919; --card2: #1A2F4C;
-    --gold: #E8B040; --green: #16A34A; --white: #FFFFFF;
+    --bg: #F9FAFB;              /* AppColors.background */
+    --primary: #2D3436;
+    --primary-dark: #1B1919;
+    --secondary: #636E72;
+    --surface: #FFFFFF;
+    --gold: #E8B040;            /* AppColors.accent */
+    --green: #16A34A;           /* AppColors.success */
+    --grad-a: #1B1919;          /* premiumGradient */
+    --grad-b: #1A2F4C;
   }
+
   * { box-sizing: border-box; }
+
   body {
-    font-family: 'Inter', system-ui, sans-serif; background: var(--bg);
-    margin: 0; min-height: 100vh; display: flex; align-items: center;
-    justify-content: center; padding: 24px;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--primary-dark);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
   }
-  .card {
-    width: 100%; max-width: 380px;
-    background: linear-gradient(135deg, var(--card1), var(--card2));
-    border-radius: 24px; padding: 40px 28px; text-align: center;
-    box-shadow: 0 20px 48px rgba(27,25,25,0.18);
+
+  .wrap { width: 100%; max-width: 420px; }
+
+  /* Encabezado de sección: mismo patrón que RcmSectionHeader. */
+  .section-header {
+    font-size: 11px; font-weight: 800; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--primary);
+    padding-left: 4px; margin: 0 0 12px;
   }
-  .check {
-    width: 76px; height: 76px; margin: 0 auto 24px; border-radius: 50%;
-    background: rgba(22,163,74,0.15); border: 2px solid rgba(22,163,74,0.5);
+
+  /* ── Hero: la card de gradiente premium de Suscripción / Reportes ───────── */
+  .hero {
+    background: linear-gradient(135deg, var(--grad-a), var(--grad-b));
+    border-radius: 24px;
+    padding: 24px 20px;
+    box-shadow: 0 8px 16px rgba(27,25,25,0.10);
+  }
+  .hero-top {
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 16px;
+  }
+  .hero-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+    margin: 0 0 6px;
+  }
+  .hero h1 {
+    font-family: 'Montserrat', sans-serif; font-weight: 900;
+    color: #FFFFFF; font-size: 26px; letter-spacing: -0.5px;
+    margin: 0 0 2px; line-height: 1.15;
+  }
+  .hero p {
+    font-size: 12px; color: rgba(255,255,255,0.45);
+    margin: 0; line-height: 1.45;
+  }
+
+  /* Círculo del ícono: igual que el del hero de Suscripción. */
+  .glyph {
+    flex: none; width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(255,255,255,0.12);
     display: flex; align-items: center; justify-content: center;
   }
-  .check svg { width: 38px; height: 38px; stroke: var(--green); }
-  .badge {
-    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
-    color: var(--gold); background: rgba(232,176,64,0.14);
-    border: 1px solid rgba(232,176,64,0.3); border-radius: 10px;
-    padding: 5px 12px; margin-bottom: 18px;
+  .glyph svg { width: 26px; height: 26px; }
+
+  /* Spinner del estado "en proceso". */
+  .spinner {
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 2.5px solid rgba(232,176,64,0.25);
+    border-top-color: var(--gold);
+    animation: spin 0.9s linear infinite;
   }
-  h1 {
-    font-family: 'Montserrat', sans-serif; font-weight: 900; color: var(--white);
-    font-size: 26px; letter-spacing: -0.5px; margin: 0 0 10px;
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .check { display: none; stroke: var(--green); fill: none;
+    stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .is-done .check { display: block; }
+  .is-done .spinner { display: none; }
+  .is-done .glyph {
+    background: rgba(22,163,74,0.15);
+    box-shadow: inset 0 0 0 2px rgba(22,163,74,0.35);
   }
-  p { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.5; margin: 0 0 28px; }
-  a.btn {
-    display: block; background: var(--gold); color: var(--card1);
-    font-weight: 800; font-size: 14px; letter-spacing: 0.5px; text-decoration: none;
-    padding: 16px; border-radius: 14px; transition: transform 0.12s ease;
+
+  /* Barra de progreso: el mismo LinearProgressIndicator de "USO ACTUAL". */
+  .bar {
+    height: 5px; border-radius: 4px; overflow: hidden;
+    background: rgba(255,255,255,0.10); margin-top: 20px;
   }
-  a.btn:active { transform: scale(0.98); }
-  .muted { opacity: 0.6; }
+  .bar span {
+    display: block; height: 100%; width: 40%; border-radius: 4px;
+    background: var(--gold); animation: slide 1.4s ease-in-out infinite;
+  }
+  .is-done .bar span { width: 100%; background: var(--green); animation: none; }
+  @keyframes slide {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
+  }
+
+  /* ── Card blanca de detalle: surface + borde y sombra tenues ────────────── */
+  .card {
+    background: var(--surface);
+    border-radius: 20px;
+    border: 1px solid rgba(45,52,54,0.12);
+    box-shadow: 0 6px 12px rgba(45,52,54,0.04);
+    padding: 18px;
+  }
+  .step { display: flex; gap: 12px; align-items: flex-start; }
+  .step + .step {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid rgba(45,52,54,0.06);
+  }
+  .step-num {
+    flex: none; width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(45,52,54,0.05); color: var(--primary);
+    font-size: 11px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-text { font-size: 13px; line-height: 1.45; color: var(--secondary); margin: 0; }
+  .step-text b { color: var(--primary-dark); font-weight: 700; }
+
+  /* ── CTA: dorado sobre oscuro, radio y peso de los botones de la app ────── */
+  .btn {
+    display: block; text-align: center; text-decoration: none;
+    background: var(--gold); color: var(--primary-dark);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; font-size: 14px; letter-spacing: 0.5px;
+    padding: 16px; border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(232,176,64,0.28);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .btn:active { transform: scale(0.98); box-shadow: 0 3px 8px rgba(232,176,64,0.24); }
+
+  .foot {
+    text-align: center; font-size: 11px; font-weight: 500;
+    color: rgba(99,110,114,0.75); line-height: 1.5; margin: 0;
+  }
+
+  .stack > * + * { margin-top: 16px; }
+  .gap-lg { margin-top: 28px !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spinner, .bar span { animation: none; }
+  }
 </style></head>
 <body>
-  <div class="card">
-    <div class="check">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M20 6L9 17l-5-5"/>
-      </svg>
+  <div class="wrap stack" id="root">
+
+    <!-- Estado del pago -->
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <p class="hero-label" id="badge">Confirmando…</p>
+          <h1 id="title">Un momento…</h1>
+          <p id="msg">Estamos confirmando tu pago.</p>
+        </div>
+        <div class="glyph">
+          <div class="spinner" role="status" aria-label="Confirmando el pago"></div>
+          <svg class="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+        </div>
+      </div>
+      <div class="bar"><span></span></div>
+    </section>
+
+    <!-- Qué sigue -->
+    <div class="gap-lg">
+      <p class="section-header">Qué sigue</p>
+      <section class="card">
+        <div class="step">
+          <div class="step-num">1</div>
+          <p class="step-text">Vuelve a la app de <b>Tracktor</b> con el botón de abajo.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <p class="step-text">En <b>Suscripción</b> vas a ver tus cupos actualizados. Si tarda, desliza hacia abajo para refrescar.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <p class="step-text">Registra tus máquinas nuevas y listo.</p>
+        </div>
+      </section>
     </div>
-    <span class="badge" id="badge">CONFIRMANDO…</span>
-    <h1 id="title">Un momento…</h1>
-    <p id="msg">Estamos confirmando tu pago.</p>
+
     <a class="btn" id="cta" href="rcm://subscription/success">VOLVER A TRACKTOR</a>
+
+    <p class="foot">Puedes cerrar esta ventana cuando quieras.<br>El comprobante llega a tu correo.</p>
   </div>
+
   <script>
     // URL pública de la API de RCM.
     var API_BASE = 'https://rcm-api.koddo.tech';
@@ -67,21 +209,22 @@
       return new URLSearchParams(window.location.search).get(name);
     }
 
+    function set(id, text) { document.getElementById(id).textContent = text; }
+
     function showConfirmed() {
-      document.getElementById('badge').textContent = 'PAGO CONFIRMADO';
-      document.getElementById('title').textContent = '¡Todo listo!';
-      document.getElementById('msg').textContent =
-        'Tu suscripción se está activando. Vuelve a la app de Tracktor para registrar tus máquinas.';
+      // `is-done` cambia el spinner por el check y tiñe de verde el estado.
+      document.getElementById('root').className = 'wrap stack is-done';
+      set('badge', 'Pago confirmado');
+      set('title', '¡Todo listo!');
+      set('msg', 'Tu suscripción se está activando.');
       // Deep link automático de vuelta a la app.
       setTimeout(function () { window.location.href = 'rcm://subscription/success'; }, 800);
     }
 
     function showPending() {
-      document.getElementById('badge').textContent = 'EN PROCESO';
-      document.getElementById('title').textContent = 'Estamos confirmando tu pago';
-      document.getElementById('msg').innerHTML =
-        'Si acabas de pagar, tu suscripción se activará en unos segundos. ' +
-        '<span class="muted">Vuelve a la app de Tracktor para verla.</span>';
+      set('badge', 'En proceso');
+      set('title', 'Confirmando tu pago');
+      set('msg', 'Si acabas de pagar, se activará en unos segundos.');
     }
 
     (function () {
