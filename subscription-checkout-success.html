@@ -183,11 +183,11 @@
       <section class="card">
         <div class="step">
           <div class="step-num">1</div>
-          <p class="step-text">Vuelve a la app de <b>Tracktor</b> con el botón de abajo.</p>
+          <p class="step-text" id="paso1">Vuelve a la app de <b>Tracktor</b> con el botón de abajo.</p>
         </div>
         <div class="step">
           <div class="step-num">2</div>
-          <p class="step-text">En <b>Suscripción</b> vas a ver tu nuevo límite de máquinas. Si tarda, desliza hacia abajo para refrescar.</p>
+          <p class="step-text" id="paso2">En <b>Suscripción</b> vas a ver tu nuevo límite de máquinas. Si tarda, desliza hacia abajo para refrescar.</p>
         </div>
         <div class="step">
           <div class="step-num">3</div>
@@ -205,11 +205,54 @@
     // URL pública de la API de RCM.
     var API_BASE = 'https://rcm-api.koddo.tech';
 
+    // Panel web del cliente. Es a donde vuelve quien pagó desde una computadora.
+    var PANEL_URL = 'https://dash.tracktor.lat/suscripcion';
+
+    var APP_DEEP_LINK = 'rcm://subscription/success';
+
+    /**
+     * ¿El dispositivo puede abrir la app?
+     *
+     * El deep link `rcm://` solo significa algo en un teléfono con la app
+     * instalada. En una computadora el navegador no tiene qué hacer con ese
+     * esquema: se queda en la página o muestra un error. Como el panel web
+     * ofrece la misma pantalla de Suscripción, ahí es a donde conviene volver.
+     *
+     * iPadOS 13+ se identifica como «Macintosh», así que no alcanza con mirar
+     * el user agent: se lo distingue de una Mac por los puntos táctiles.
+     */
+    function puedeAbrirLaApp() {
+      var ua = navigator.userAgent || '';
+      if (/Android|iPhone|iPad|iPod/i.test(ua)) return true;
+      return /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+    }
+
+    var enMovil = puedeAbrirLaApp();
+    var destino = enMovil ? APP_DEEP_LINK : PANEL_URL;
+
     function getParam(name) {
       return new URLSearchParams(window.location.search).get(name);
     }
 
     function set(id, text) { document.getElementById(id).textContent = text; }
+
+    /**
+     * Adapta el botón y las instrucciones al dispositivo.
+     *
+     * Se hace apenas carga la página y no solo al confirmar el pago: aunque la
+     * confirmación quede pendiente, el botón tiene que llevar a algún lado que
+     * exista.
+     */
+    function ajustarDestino() {
+      var cta = document.getElementById('cta');
+      cta.href = destino;
+      cta.textContent = enMovil ? 'VOLVER A TRACKTOR' : 'IR AL PANEL';
+
+      if (enMovil) return;
+
+      set('paso1', 'Volvé al panel de Tracktor con el botón de abajo.');
+      set('paso2', 'En Suscripción vas a ver tu nuevo límite de máquinas. Si tarda, actualizá la página.');
+    }
 
     function showConfirmed() {
       // `is-done` cambia el spinner por el check y tiñe de verde el estado.
@@ -217,8 +260,10 @@
       set('badge', 'Pago confirmado');
       set('title', '¡Todo listo!');
       set('msg', 'Tu suscripción se está activando.');
-      // Deep link automático de vuelta a la app.
-      setTimeout(function () { window.location.href = 'rcm://subscription/success'; }, 800);
+      // En móvil el salto es a la app; en escritorio, al panel. Un poco más de
+      // margen en escritorio para que se alcance a leer la confirmación: acá el
+      // cambio no es de aplicación, es la misma ventana navegando.
+      setTimeout(function () { window.location.href = destino; }, enMovil ? 800 : 1800);
     }
 
     function showPending() {
@@ -228,6 +273,8 @@
     }
 
     (function () {
+      ajustarDestino();
+
       var token = getParam('token');
       if (!token) { showPending(); return; }
       fetch(API_BASE + '/subscriptions/checkout-success/verify?token=' + encodeURIComponent(token))
