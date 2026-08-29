@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Eliminar cuenta — Tracktor</title>
-  <meta name="description" content="Cómo solicitar la eliminación de tu cuenta de Tracktor y de los datos asociados." />
+  <meta name="description" content="Cómo eliminar tu cuenta de Tracktor desde la app y qué datos se borran." />
   <link rel="canonical" href="https://tracktor.lat/eliminar-cuenta.html" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
@@ -74,6 +74,30 @@
     li { margin-bottom: 6px; }
     strong { color: var(--navy-dark); }
     a { color: var(--navy); }
+    .steps { counter-reset: step; list-style: none; padding: 0; margin: 8px 0 0; }
+    .steps li {
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 14px;
+    }
+    .steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--navy);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .btn {
       display: inline-block;
       background: var(--navy);
@@ -84,6 +108,7 @@
       font-weight: 600;
       margin-top: 8px;
     }
+    .muted { color: var(--text-secondary); font-size: 13.5px; }
   </style>
 </head>
 <body>
@@ -91,45 +116,83 @@
     <div class="wrap">
       <p class="brand">TRACKTOR</p>
       <h1>Eliminar cuenta</h1>
-      <p>Última actualización: 17 de agosto de 2026</p>
+      <p>Última actualización: 29 de agosto de 2026</p>
     </div>
   </header>
 
   <main>
     <section>
-      <h2>Cómo solicitar la eliminación de tu cuenta</h2>
+      <h2>Eliminá tu cuenta desde la app</h2>
       <p>
-        Si querés eliminar tu cuenta de Tracktor y los datos asociados, escribinos
-        desde el email con el que te registraste a
-        <strong><a href="mailto:soporte@tracktor.lat?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta">soporte@tracktor.lat</a></strong>
-        indicando en el asunto "Solicitud de eliminación de cuenta".
+        El titular de la cuenta puede eliminarla directamente desde la aplicación,
+        sin escribirnos:
       </p>
-      <a class="btn" href="mailto:soporte@tracktor.lat?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta">Solicitar eliminación por email</a>
+      <ol class="steps">
+        <li>Abrí la pestaña <strong>Config</strong> en la barra inferior.</li>
+        <li>Entrá en <strong>Mi cuenta</strong>.</li>
+        <li>Bajá hasta la sección <strong>Baja de la cuenta</strong> y tocá <strong>Eliminar cuenta</strong>.</li>
+        <li>Confirmá escribiendo el nombre de tu equipo.</li>
+      </ol>
       <p style="margin-top:16px;">
-        Verificamos tu identidad como titular de la cuenta y procesamos la
-        eliminación dentro de un plazo máximo de <strong>30 días</strong> desde
-        que recibimos tu solicitud.
+        La eliminación se <strong>agenda a 30 días</strong>. Durante esa ventana la
+        app sigue funcionando con normalidad y podés <strong>cancelar la baja</strong>
+        desde esa misma pantalla. Pasados los 30 días, el borrado se ejecuta y no
+        hay forma de recuperar los datos.
+      </p>
+    </section>
+
+    <section>
+      <h2>Qué significa "cuenta" en Tracktor</h2>
+      <p>
+        En Tracktor la cuenta es el <strong>equipo completo</strong>: el titular es
+        el dueño de los datos, crea a sus operadores y administra la flota. Por eso,
+        al eliminar la cuenta se borra el equipo entero y se cancela cualquier plan
+        asociado.
+      </p>
+    </section>
+
+    <section>
+      <h2>Si sos operador</h2>
+      <p>
+        Un usuario con rol operador no puede eliminar la cuenta por su cuenta: no la
+        creó (la crea el titular) y sus registros de trabajo son historial del
+        equipo, no datos personales suyos. Para dar de baja tu acceso, pedíselo al
+        administrador de tu equipo —puede desactivar tu usuario desde
+        <strong>Config → Personal</strong> y dejás de tener acceso de inmediato— o
+        escribinos a <a href="mailto:soporte@tracktor.lat?subject=Baja%20de%20mi%20usuario">soporte@tracktor.lat</a>.
       </p>
     </section>
 
     <section>
       <h2>Qué se elimina</h2>
       <ul>
-        <li>Datos de tu cuenta: nombre, email, teléfono, foto de perfil.</li>
-        <li>Registros operativos que hayas cargado (combustible, mantenimiento, horómetro, hectáreas).</li>
-        <li>Evidencia de campo: fotografías y ubicación GPS asociadas a tus registros.</li>
+        <li>Datos de las cuentas del equipo: nombre, email, teléfono, foto de perfil.</li>
+        <li>Registros operativos cargados: combustible, mantenimiento, horómetro, hectáreas y notas.</li>
+        <li>Evidencia de campo: fotografías y ubicación GPS asociadas a los registros.</li>
+        <li>Máquinas, operadores y datos maestros del equipo.</li>
       </ul>
     </section>
 
     <section>
       <h2>Qué se conserva y por qué</h2>
       <p>
-        Podemos conservar cierta información por un período adicional cuando
-        existe una obligación legal, contable o fiscal de hacerlo (por ejemplo,
-        comprobantes de pago de suscripción), o cuando los datos forman parte de
-        registros de un equipo de trabajo cuyo administrador todavía usa
-        Tracktor activamente. En ese caso, tus datos personales se anonimizan.
+        Podemos conservar cierta información por un período adicional cuando existe
+        una obligación legal, contable o fiscal de hacerlo (por ejemplo,
+        comprobantes de pago de suscripción). En esos casos, los datos personales se
+        anonimizan.
       </p>
+    </section>
+
+    <section>
+      <h2>¿No podés acceder a la app?</h2>
+      <p>
+        Si perdiste el acceso a tu cuenta y querés eliminarla, escribinos desde el
+        email con el que te registraste a
+        <a href="mailto:soporte@tracktor.lat?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta">soporte@tracktor.lat</a>
+        con el asunto "Solicitud de eliminación de cuenta". Verificamos tu identidad
+        como titular y procesamos la baja dentro de un plazo máximo de 30 días.
+      </p>
+      <a class="btn" href="mailto:soporte@tracktor.lat?subject=Solicitud%20de%20eliminaci%C3%B3n%20de%20cuenta">Solicitar eliminación por email</a>
     </section>
 
     <section>
