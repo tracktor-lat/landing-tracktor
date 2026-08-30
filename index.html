@@ -45,13 +45,19 @@
         <img src="assets/logo-foreground-dark-icon.png" alt="TrackTor" class="brand__logo" width="719" height="472" />
         <span class="brand__name">TrackTor</span>
       </div>
-      <nav class="nav__links">
+      <nav class="nav__links" id="navLinks">
         <a href="#solution" class="nav__link">Producto</a>
         <a href="#results" class="nav__link">Beneficios</a>
         <a href="#how" class="nav__link">Cómo funciona</a>
         <a href="#problem" class="nav__link">El problema</a>
       </nav>
-      <button class="btn btn--blue btn--sm" data-cta="nav">Solicitar demo</button>
+      <div class="nav__actions">
+        <button class="btn btn--blue btn--sm" data-cta="nav">Solicitar demo</button>
+        <button class="nav__toggle" id="navToggle" type="button"
+                aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 

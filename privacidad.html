@@ -77,7 +77,10 @@
     strong { color: var(--navy-dark); }
     a { color: var(--navy); }
     .muted { color: var(--text-secondary); font-size: 13.5px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    /* La tabla scrollea dentro de su propio contenedor: sin esto sus 3 columnas
+       de texto empujan el ancho de toda la página en móvil. */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 8px; }
+    table { width: 100%; min-width: 520px; border-collapse: collapse; }
     th, td { text-align: left; padding: 8px 6px; font-size: 14px; border-bottom: 1px solid rgba(45,52,54,0.06); vertical-align: top; }
     th { color: var(--text-secondary); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.5px; }
   </style>
@@ -106,6 +109,7 @@
     <section>
       <h2>2. Qué datos recopilamos</h2>
       <p>Recopilamos únicamente los datos necesarios para operar el servicio:</p>
+      <div class="table-scroll">
       <table>
         <tr><th>Categoría</th><th>Datos</th><th>Cómo se obtienen</th></tr>
         <tr>
@@ -139,6 +143,7 @@
           <td>Generados automáticamente al usar la app</td>
         </tr>
       </table>
+      </div>
       <p class="muted">
         La ubicación se captura únicamente mientras usás la app para registrar una
         operación — no rastreamos tu ubicación en segundo plano ni cuando la app está cerrada.

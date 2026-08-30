@@ -109,6 +109,44 @@
   })();
 
   /* --------------------------------------------------------------------
+     NAV MÓVIL — panel desplegable de enlaces de sección.
+     -------------------------------------------------------------------- */
+  (function mobileNav() {
+    var toggle = document.getElementById("navToggle");
+    var links = document.getElementById("navLinks");
+    if (!toggle || !links) return;
+
+    function setOpen(open) {
+      links.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+    }
+
+    toggle.addEventListener("click", function () {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    // Al elegir una sección el panel se cierra solo.
+    links.addEventListener("click", function (e) {
+      if (e.target.closest(".nav__link")) setOpen(false);
+    });
+
+    // Tocar fuera del nav lo cierra.
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".nav__inner")) setOpen(false);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+
+    // Al volver a desktop el panel no debe quedar en estado "abierto".
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 860) setOpen(false);
+    });
+  })();
+
+  /* --------------------------------------------------------------------
      MODAL + FLUJO
      -------------------------------------------------------------------- */
   var modal = document.getElementById("modal");

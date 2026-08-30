@@ -103,10 +103,14 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   color: #1b1411;
   box-shadow: 0 8px 24px rgba(244, 194, 13, 0.25);
 }
-.btn--primary:hover,
-.btn--accent:hover {
-  box-shadow: 0 12px 32px rgba(244, 194, 13, 0.42);
-  transform: translateY(-2px);
+/* Los efectos de elevación solo aplican donde hay puntero real: en touch el
+   :hover se queda "pegado" después de tocar. */
+@media (hover: hover) {
+  .btn--primary:hover,
+  .btn--accent:hover {
+    box-shadow: 0 12px 32px rgba(244, 194, 13, 0.42);
+    transform: translateY(-2px);
+  }
 }
 .btn--ghost {
   background: transparent;
@@ -120,9 +124,11 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   color: #1b1411;
   border: none;
 }
-.btn--blue:hover {
-  box-shadow: 0 8px 24px rgba(244, 194, 13, 0.4);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .btn--blue:hover {
+    box-shadow: 0 8px 24px rgba(244, 194, 13, 0.4);
+    transform: translateY(-2px);
+  }
 }
 .btn--lg { padding: 18px 30px; font-size: 16px; }
 .btn--sm { padding: 10px 18px; font-size: 13px; border-radius: 12px; }
@@ -147,6 +153,30 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   transition: color 0.15s ease;
 }
 .nav__link:hover { color: var(--gold); }
+.nav__actions { display: flex; align-items: center; gap: 10px; }
+
+/* Botón hamburguesa — solo visible en móvil (ver bloque responsive). */
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px; height: 44px;
+  padding: 0 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav__toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: #f5f3f0;
+  transition: transform 0.2s ease, opacity 0.15s ease;
+}
+.nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav__toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .brand { display: flex; align-items: center; gap: 10px; }
 .brand__logo { display: block; height: 34px; width: auto; }
 .brand__name {
@@ -195,6 +225,7 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   max-width: 620px;
 }
 .hero__actions { margin-top: 34px; display: flex; gap: 16px; flex-wrap: wrap; }
+.hero__actions .btn { flex: 0 1 auto; }
 .hero__pillars {
   margin-top: 56px;
   display: grid;
@@ -288,11 +319,15 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   align-items: center;
   gap: 60px;
 }
+/* min-width:0 evita que el contenido intrínseco (los mockups) fije un ancho
+   mínimo mayor que la columna y desborde la página en pantallas angostas. */
+.solution__inner > * { min-width: 0; }
 .solution__phones {
   display: flex;
   align-items: flex-end;
   gap: 20px;
   justify-content: center;
+  max-width: 100%;
 }
 .solution__copy .checklist { list-style: none; margin: 22px 0 32px; display: grid; gap: 14px; }
 .checklist li {
@@ -331,7 +366,9 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   overflow: hidden;
 }
 .phone img { display: block; width: 100%; height: auto; border-radius: 26px; }
-.phone--tall { width: 230px; }
+/* flex-shrink habilitado: los mockups se encogen con la pantalla en vez de
+   forzar scroll horizontal. */
+.phone--tall { flex: 0 1 230px; width: 230px; min-width: 0; }
 .phone--offset { transform: translateY(-30px); }
 
 /* ---------------- Cómo funciona ---------------- */
@@ -358,7 +395,9 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   padding: 28px 22px;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
-.how__step:hover { border-color: var(--border-gold); transform: translateY(-3px); }
+@media (hover: hover) {
+  .how__step:hover { border-color: var(--border-gold); transform: translateY(-3px); }
+}
 .how__num {
   display: grid; place-items: center;
   width: 40px; height: 40px;
@@ -485,18 +524,20 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   flex: 1;
   min-width: 0;
   font-family: "Inter", sans-serif;
-  font-size: 13.5px;
+  font-size: 16px; /* evita el zoom automático de iOS al enfocar */
   color: #f5f3f0;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 12px 14px;
+  min-height: 46px;
 }
 .newsletter__form input::placeholder { color: rgba(245, 243, 240, 0.35); }
 .newsletter__form input:focus { outline: none; border-color: var(--gold-deep); }
 .newsletter__form button {
   flex-shrink: 0;
-  width: 44px;
+  width: 46px;
+  min-height: 46px;
   border: none;
   border-radius: 10px;
   background: var(--gold-grad);
@@ -513,6 +554,8 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   display: none;
   align-items: center; justify-content: center;
   padding: 20px;
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
 }
 .modal.is-open { display: flex; }
 .modal__backdrop {
@@ -523,7 +566,11 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 .modal__dialog {
   position: relative;
   width: 100%; max-width: 480px;
-  max-height: 92vh; overflow-y: auto;
+  /* dvh sigue a la barra de direcciones del navegador móvil; vh es el fallback. */
+  max-height: 92vh;
+  max-height: 92dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   background: var(--bg);
   border-radius: var(--r-xl);
   padding: 38px 32px;
@@ -552,7 +599,8 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 .field input {
   width: 100%;
   font-family: "Inter", sans-serif;
-  font-size: 15px; font-weight: 500;
+  /* 16px es el mínimo que evita que iOS Safari haga zoom al enfocar el campo. */
+  font-size: 16px; font-weight: 500;
   color: var(--primary-dark);
   background: #f3f4f6;
   border: 1px solid transparent;
@@ -579,11 +627,14 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   cursor: pointer;
   transition: border-color 0.15s ease, box-shadow 0.2s ease, transform 0.15s ease;
 }
-.plan:hover {
-  border-color: var(--gold-deep);
-  box-shadow: 0 10px 28px rgba(244, 194, 13, 0.15);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .plan:hover {
+    border-color: var(--gold-deep);
+    box-shadow: 0 10px 28px rgba(244, 194, 13, 0.15);
+    transform: translateY(-2px);
+  }
 }
+.plan:active { border-color: var(--gold-deep); }
 .plan__name { font-family: "Inter", sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: var(--secondary); }
 .plan__price { font-family: "Montserrat", sans-serif; margin: 8px 0 4px; color: var(--primary-dark); }
 .plan__price strong { font-size: 30px; font-weight: 900; color: var(--gold-deep); }
@@ -611,16 +662,100 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   .testimonials__grid { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 }
+
+@media (max-width: 860px) {
+  /* --- Navegación móvil: los enlaces pasan a un panel desplegable --- */
+  .nav__toggle { display: flex; }
+  .nav__links {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 6px 24px 14px;
+    background: #0f0e0e;
+    border-bottom: 1px solid var(--border-dark);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+    /* Oculto por defecto sin display:none, para poder animarlo. */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  }
+  .nav__links.is-open { visibility: visible; opacity: 1; transform: none; }
+  .nav__link {
+    padding: 15px 2px;           /* área táctil cómoda */
+    font-size: 15px;
+    color: rgba(245, 243, 240, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .nav__links .nav__link:last-child { border-bottom: none; }
+  .nav { position: sticky; }
+  .nav__inner { position: relative; }
+  .btn--sm { min-height: 44px; }
+}
+
 @media (max-width: 640px) {
-  .nav__links { display: none; }
-  .hero__pillars { grid-template-columns: 1fr 1fr; }
-  .problem__grid { grid-template-columns: 1fr; }
-  .problem__value { grid-template-columns: 1fr; text-align: center; padding: 28px 24px; }
+  /* Menos aire vertical: en móvil el desktop padding alarga mucho el scroll. */
+  .hero { padding: 48px 0 44px; }
+  .problem { padding: 56px 0 48px; }
+  .solution { padding: 48px 0 56px; }
+  .how { padding: 56px 0; }
+  .results { padding: 48px 0; }
+  .testimonials { padding: 16px 0 56px; }
+  .closer { padding: 56px 0; }
+  .footer { padding: 44px 0 24px; }
+
+  /* El degradado del hero es horizontal en desktop; en móvil el texto queda
+     sobre la parte clara de la foto, así que se vuelve vertical. */
+  .hero::before {
+    background: linear-gradient(
+      180deg,
+      rgba(15, 14, 14, 0.88) 0%,
+      rgba(15, 14, 14, 0.82) 55%,
+      rgba(15, 14, 14, 0.72) 100%
+    );
+  }
+  .hero__subtitle { max-width: none; }
+  .hero__actions { margin-top: 26px; gap: 12px; }
+  .hero__actions .btn { flex: 1 1 100%; }   /* CTA a ancho completo */
+  .hero__pillars { margin-top: 36px; gap: 16px; }
+
+  .problem__grid { grid-template-columns: 1fr; gap: 24px; }
+  .problem__head { margin-bottom: 32px; }
+  .problem__value {
+    margin-top: 32px;
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 28px 22px;
+    gap: 18px;
+  }
   .problem__value-block:last-child { text-align: center; align-items: center; }
+  .problem__value-block { align-items: center; }
+  .problem__value-amount { justify-content: center; }
   .problem__value-block:last-child .problem__value-amount { justify-content: center; }
+
   .how__grid { grid-template-columns: 1fr; }
-  .results__grid { grid-template-columns: 1fr 1fr; }
-  .closer__inner { flex-direction: column; align-items: flex-start; text-align: left; }
-  .footer__grid { grid-template-columns: 1fr; }
-  .modal__dialog { padding: 30px 22px; }
+  .how__step { padding: 22px 20px; }
+  .results__grid { grid-template-columns: 1fr 1fr; gap: 26px; }
+
+  .closer__inner { flex-direction: column; align-items: stretch; text-align: left; gap: 24px; }
+  .closer__inner .btn { width: 100%; }
+
+  .footer__grid { grid-template-columns: 1fr; gap: 24px; }
+  /* Enlaces del footer con altura táctil real (antes 20px). */
+  .footer__col a { padding: 12px 0; margin-bottom: 0; }
+
+  .modal { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+  .modal__dialog { padding: 30px 20px; border-radius: var(--r-lg); }
+  .modal__title { font-size: 20px; }
+  .plan { padding: 18px; }
+}
+
+@media (max-width: 380px) {
+  .container { padding: 0 18px; }
+  .brand__name { font-size: 17px; }
+  .btn--sm { padding: 10px 14px; font-size: 12.5px; }
+  .hero__pillars { grid-template-columns: 1fr; gap: 14px; }
+  .results__grid { grid-template-columns: 1fr; gap: 22px; }
 }
