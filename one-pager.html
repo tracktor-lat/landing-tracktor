@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TrackTor — One Pager</title>
+<meta name="description" content="Resumen ejecutivo de TrackTor: el problema, la solución, el modelo de negocio y la tracción actual." />
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f9fafb; --surface:#ffffff;
+    --primary-dark:#1b1919; --primary:#2d3436; --secondary:#636e72;
+    --dark:#0f0e0e; --dark-surface:#1b1919;
+    --gold:#f4c20d; --gold-deep:#d4af37; --gold-soft:rgba(244,194,13,.12);
+    --green:#00b894;
+    --border-soft:rgba(45,52,54,.1);
+    --r-md:14px; --r-lg:18px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--primary);
+    background:#e8e9eb;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand__name,.stat__value{font-family:'Montserrat',system-ui,sans-serif;}
+
+  .toolbar{
+    max-width:840px;margin:16px auto 0;padding:0 12px;
+    display:flex;justify-content:flex-end;
+  }
+  .toolbar button{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:13px;
+    background:var(--dark-surface);color:#fff;border:none;
+    padding:10px 18px;border-radius:10px;cursor:pointer;
+  }
+  .toolbar button:hover{background:var(--primary-dark);}
+
+  .page{
+    width:210mm;
+    margin:16px auto 40px;
+    background:var(--surface);
+    box-shadow:0 10px 40px rgba(0,0,0,.15);
+    padding:14mm 16mm 12mm;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  /* ===== HEADER ===== */
+  .header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-bottom:10px;border-bottom:2px solid var(--dark-surface);
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand img{width:34px;height:auto;}
+  .brand__name{font-size:20px;font-weight:800;color:var(--dark);letter-spacing:.2px;}
+  .brand__tag{font-size:11px;color:var(--secondary);font-weight:500;margin-top:1px;}
+  .header__right{text-align:right;}
+  .header__right .url{font-weight:700;color:var(--gold-deep);font-size:13px;}
+  .header__right .loc{font-size:11px;color:var(--secondary);}
+
+  .hero{
+    display:flex;align-items:baseline;justify-content:space-between;gap:16px;
+    margin-top:2px;
+  }
+  .hero h1{
+    font-size:19px;font-weight:800;color:var(--dark);margin:0;line-height:1.25;
+    max-width:70%;
+  }
+  .hero h1 em{color:var(--gold-deep);font-style:normal;}
+  .badge{
+    flex-shrink:0;font-size:10.5px;font-weight:700;color:#fff;background:var(--dark-surface);
+    padding:5px 10px;border-radius:20px;white-space:nowrap;
+  }
+
+  /* ===== SECTION LABEL ===== */
+  .lbl{
+    font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--gold-deep);
+    text-transform:uppercase;margin:0 0 4px;
+  }
+
+  /* ===== PROBLEM / STATS BAND ===== */
+  .stats-band{
+    display:grid;grid-template-columns:1.3fr 1fr;gap:10px;
+    background:var(--dark-surface);border-radius:var(--r-lg);
+    padding:14px 18px;color:#fff;
+  }
+  .stats-band p{margin:0;font-size:11.5px;line-height:1.5;color:#d8d5d0;}
+  .stats-band strong{color:#fff;}
+  .stats-row{display:flex;gap:10px;align-items:center;justify-content:flex-end;}
+  .stat{text-align:center;}
+  .stat__value{font-size:26px;font-weight:900;color:var(--gold);line-height:1;}
+  .stat__label{font-size:9.5px;color:#c9c6c0;margin-top:3px;max-width:82px;line-height:1.25;}
+  .stat--gold{color:var(--gold);}
+  .stat-sep{color:#635f57;font-size:16px;font-weight:700;}
+  .stats-foot{
+    margin:6px 2px 0;font-size:11px;color:var(--secondary);text-align:right;
+  }
+  .stats-foot strong{color:var(--dark);}
+
+  /* ===== 2-COL: SOLUCION + COMO FUNCIONA ===== */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .card{
+    border:1px solid var(--border-soft);border-radius:var(--r-md);
+    padding:16px 18px;background:var(--bg);
+  }
+  .card h2{font-size:13px;margin:0 0 6px;color:var(--dark);font-weight:800;}
+  .checklist{list-style:none;margin:0;padding:0;font-size:11px;line-height:1.5;color:var(--primary);}
+  .checklist li{display:flex;gap:6px;margin-bottom:4px;}
+  .checklist li:last-child{margin-bottom:0;}
+  .checklist__icon{color:var(--green);font-weight:800;flex-shrink:0;}
+
+  .steps{list-style:none;margin:0;padding:0;counter-reset:step;font-size:11px;color:var(--primary);}
+  .steps li{display:flex;gap:8px;margin-bottom:5px;line-height:1.4;}
+  .steps li:last-child{margin-bottom:0;}
+  .steps__num{
+    counter-increment:step;flex-shrink:0;
+    width:17px;height:17px;border-radius:50%;background:var(--gold-soft);
+    color:var(--gold-deep);font-weight:800;font-size:9.5px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .steps__num::before{content: counter(step);}
+
+  /* ===== PRICING ===== */
+  .pricing h2{font-size:13px;margin:0 0 8px;color:var(--dark);font-weight:800;}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .plan{
+    border:1px solid var(--border-soft);border-radius:var(--r-md);
+    padding:10px 12px;background:var(--bg);position:relative;
+  }
+  .plan--pro{border-color:var(--gold-deep);background:var(--gold-soft);}
+  .plan__badge{
+    position:absolute;top:-8px;right:10px;background:var(--gold-deep);color:#fff;
+    font-size:8.5px;font-weight:800;padding:2px 7px;border-radius:20px;letter-spacing:.03em;
+  }
+  .plan__name{font-size:11px;font-weight:800;color:var(--dark);display:block;}
+  .plan__price{font-size:16px;font-weight:900;color:var(--dark);margin:3px 0;}
+  .plan__price span{font-size:9.5px;font-weight:500;color:var(--secondary);}
+  .plan__detail{font-size:9.5px;color:var(--secondary);margin:0;line-height:1.35;}
+
+  /* ===== TRACCION ===== */
+  .traction{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+    text-align:center;
+  }
+  .traction .card{padding:16px 8px;}
+  .traction .stat__value{color:var(--dark);font-size:26px;}
+  .traction .stat__label{color:var(--secondary);margin:0 auto;}
+
+  /* ===== MERCADO ===== */
+  .market{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .market .card{text-align:center;padding:16px 10px;}
+  .market .stat__value{font-size:22px;color:var(--dark);}
+  .market .stat__label{color:var(--secondary);}
+
+  /* ===== FOOTER / CTA ===== */
+  .cta{
+    background:var(--dark-surface);border-radius:var(--r-lg);
+    padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#fff;
+  }
+  .cta h3{margin:0 0 3px;font-size:14px;font-weight:800;}
+  .cta p{margin:0;font-size:10.5px;color:#cfcbc3;}
+  .cta__right{text-align:right;flex-shrink:0;}
+  .cta__url{font-size:16px;font-weight:900;color:var(--gold);}
+  .cta__team{font-size:9.5px;color:#a8a49c;margin-top:2px;}
+
+  @media print{
+    body{background:#fff;}
+    .toolbar{display:none;}
+    .page{box-shadow:none;margin:0;zoom:0.86;}
+    @page{size:A4;margin:0;}
+  }
+  @media (max-width:860px){
+    .page{width:100%;padding:6vw;}
+    .grid2,.plans,.traction,.market{grid-template-columns:1fr 1fr;}
+    .hero h1{max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <button onclick="window.print()">Imprimir / Guardar PDF</button>
+  </div>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="brand">
+        <img src="assets/logo-foreground-dark-icon.png" alt="TrackTor" />
+        <div>
+          <div class="brand__name">TrackTor</div>
+          <div class="brand__tag">Control operativo en origen para el agro</div>
+        </div>
+      </div>
+      <div class="header__right">
+        <div class="url">tracktor.lat</div>
+        <div class="loc">Santa Cruz, Bolivia</div>
+      </div>
+    </div>
+
+    <!-- HERO / PROMESA -->
+    <div class="hero">
+      <h1>El combustible es tu costo #1. <em>Es hora de controlarlo.</em></h1>
+      <span class="badge">En producción desde jul. 2026</span>
+    </div>
+
+    <!-- EL PROBLEMA -->
+    <div>
+      <p class="lbl">El problema</p>
+      <div class="stats-band">
+        <p>
+          En una empresa agropecuaria mediana o grande, el combustible ya representa el
+          <strong>35% de los costos operativos — y sigue en alza.</strong> Sin visibilidad en el
+          momento, hasta un 10% de ese gasto se pierde por fugas, desvíos y horas mal
+          registradas que nadie audita a tiempo.
+        </p>
+        <div class="stats-row">
+          <div class="stat"><div class="stat__value">35%</div><div class="stat__label">de tus costos operativos es combustible</div></div>
+          <div class="stat-sep">→</div>
+          <div class="stat"><div class="stat__value stat--gold">10%</div><div class="stat__label">de eso se pierde por ineficiencias</div></div>
+        </div>
+      </div>
+      <p class="stats-foot">≈ <strong>4,000 Bs/mes por máquina</strong> en pérdidas evitables · El 80% de los productores entrevistados validó este dolor.</p>
+    </div>
+
+    <!-- SOLUCION + COMO FUNCIONA -->
+    <div class="grid2">
+      <div class="card">
+        <h2>La solución</h2>
+        <ul class="checklist">
+          <li><span class="checklist__icon">✓</span> Controla el costo de combustible y las horas de cada máquina o vehículo, sin conexión o por voz con IA.</li>
+          <li><span class="checklist__icon">✓</span> Cada registro lleva foto tomada dentro de la app, con GPS y hora — imposible de falsificar.</li>
+          <li><span class="checklist__icon">✓</span> Horómetro validado contra el registro anterior: inflar horas se vuelve estructuralmente imposible.</li>
+          <li><span class="checklist__icon">✓</span> Dashboard consolidado y alertas de desvío el mismo día, sin cierre de mes.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Cómo funciona</h2>
+        <ol class="steps">
+          <li><span class="steps__num"></span> El operador abre turno: horómetro, hectáreas y diésel con foto, sin conexión.</li>
+          <li><span class="steps__num"></span> Se valida en origen: GPS, hora y consistencia contra el registro anterior.</li>
+          <li><span class="steps__num"></span> Se consolida en el dashboard del dueño, listo para revisar cuando quiera.</li>
+          <li><span class="steps__num"></span> Costo real por hectárea y alertas de desvío, el mismo día.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- MODELO DE NEGOCIO -->
+    <div class="pricing">
+      <h2>Modelo de negocio — se cobra por máquina, no por empresa</h2>
+      <div class="plans">
+        <div class="plan">
+          <span class="plan__name">Free</span>
+          <div class="plan__price">$0<span> /mes</span></div>
+          <p class="plan__detail">Hasta 2 máquinas y 2 operadores. Sin fotos ni dictado por voz. 30 días de historial.</p>
+        </div>
+        <div class="plan plan--pro">
+          <span class="plan__badge">MÁS ELEGIDO</span>
+          <span class="plan__name">Pro</span>
+          <div class="plan__price">$49<span> /mes</span></div>
+          <p class="plan__detail">Hasta 10 máquinas y 10 operadores. Fotos y dictado por voz IA. 1 año de historial.</p>
+        </div>
+        <div class="plan">
+          <span class="plan__name">Max</span>
+          <div class="plan__price">$99<span> /mes</span></div>
+          <p class="plan__detail">Máquinas y operadores ilimitados. Fotos y voz IA. Historial completo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRACCION -->
+    <div>
+      <p class="lbl">Así estamos hoy (12 días en producción)</p>
+      <div class="traction">
+        <div class="card"><div class="stat__value">2</div><div class="stat__label">clientes activos</div></div>
+        <div class="card"><div class="stat__value">13</div><div class="stat__label">máquinas gestionadas</div></div>
+        <div class="card"><div class="stat__value">8</div><div class="stat__label">operadores registrando</div></div>
+        <div class="card"><div class="stat__value">182</div><div class="stat__label">registros de campo/semana</div></div>
+      </div>
+    </div>
+
+    <!-- MERCADO -->
+    <div>
+      <p class="lbl">Oportunidad de mercado</p>
+      <div class="market">
+        <div class="card"><div class="stat__value">$7M</div><div class="stat__label">TAM · USD/año, Bolivia</div></div>
+        <div class="card"><div class="stat__value">$5M</div><div class="stat__label">SAM · USD/año, Santa Cruz</div></div>
+        <div class="card"><div class="stat__value">$35.6K</div><div class="stat__label">SOM · 30 clientes en plan Max</div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <div>
+        <h3>Controlá tu costo #1 y tus operaciones de maquinaria, desde el primer día.</h3>
+        <p>Estamos abriendo cupos para nuevos productores en Santa Cruz.</p>
+      </div>
+      <div class="cta__right">
+        <div class="cta__url">tracktor.lat</div>
+        <div class="cta__team">Juan Camilo (CEO) · Iblin (CMO) · Germán (CTO)</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
