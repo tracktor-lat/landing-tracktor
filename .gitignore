@@ -2,3 +2,6 @@ node_modules/
 .env
 npm-debug.log*
 .DS_Store
+
+# PDF generado por generate-pdf.js
+*.pdf
