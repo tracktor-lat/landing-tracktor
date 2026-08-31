@@ -1,318 +1,1796 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>TrackTor — One Pager</title>
-<meta name="description" content="Resumen ejecutivo de TrackTor: el problema, la solución, el modelo de negocio y la tracción actual." />
-<link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+
+<title>TrackTor — Control operativo en origen</title>
+
+<meta
+  name="description"
+  content="TrackTor controla combustible y horas de maquinaria desde el origen."
+/>
+
+<link
+  rel="icon"
+  href="assets/favicon-32.png"
+  sizes="32x32"
+  type="image/png"
+/>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap"
+  rel="stylesheet"
+/>
+
 <style>
-  :root{
-    --bg:#f9fafb; --surface:#ffffff;
-    --primary-dark:#1b1919; --primary:#2d3436; --secondary:#636e72;
-    --dark:#0f0e0e; --dark-surface:#1b1919;
-    --gold:#f4c20d; --gold-deep:#d4af37; --gold-soft:rgba(244,194,13,.12);
-    --green:#00b894;
-    --border-soft:rgba(45,52,54,.1);
-    --r-md:14px; --r-lg:18px;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{
-    font-family:'Inter',system-ui,sans-serif;
-    color:var(--primary);
-    background:#e8e9eb;
-    -webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,.brand__name,.stat__value{font-family:'Montserrat',system-ui,sans-serif;}
 
-  .toolbar{
-    max-width:840px;margin:16px auto 0;padding:0 12px;
-    display:flex;justify-content:flex-end;
-  }
-  .toolbar button{
-    font-family:'Inter',sans-serif;font-weight:600;font-size:13px;
-    background:var(--dark-surface);color:#fff;border:none;
-    padding:10px 18px;border-radius:10px;cursor:pointer;
-  }
-  .toolbar button:hover{background:var(--primary-dark);}
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-  .page{
-    width:210mm;
-    margin:16px auto 40px;
-    background:var(--surface);
-    box-shadow:0 10px 40px rgba(0,0,0,.15);
-    padding:14mm 16mm 12mm;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+:root {
+  --bg: #f7f7f5;
+  --surface: #ffffff;
+
+  --dark: #151515;
+  --dark-2: #232323;
+
+  --text: #303030;
+  --muted: #747474;
+
+  --gold: #d4a900;
+  --gold-bright: #f4c20d;
+  --gold-soft: #fff7d6;
+
+  --green: #00a884;
+
+  --border: #e5e5e2;
+
+  --radius: 16px;
+  --radius-lg: 20px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #e3e4e6;
+
+  color: var(--text);
+
+  font-family: "Inter", system-ui, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.brand-name,
+.big-stat-number,
+.traction-number,
+.price-main {
+  font-family: "Montserrat", system-ui, sans-serif;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar {
+  width: 210mm;
+
+  margin: 16px auto 0;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.toolbar button {
+  border: 0;
+
+  border-radius: 10px;
+
+  padding: 10px 18px;
+
+  background: var(--dark);
+  color: white;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  background: #000;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+
+  margin: 16px auto 40px;
+
+  padding: 12mm 15mm 11mm;
+
+  background: var(--surface);
+
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.16);
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-bottom: 10px;
+
+  border-bottom: 2px solid var(--dark);
+}
+
+.brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.brand img {
+  width: 35px;
+
+  height: auto;
+}
+
+.brand-name {
+  color: var(--dark);
+
+  font-size: 20px;
+
+  font-weight: 900;
+}
+
+.brand-tag {
+  margin-top: 2px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+  font-weight: 500;
+}
+
+.header-right {
+  text-align: right;
+}
+
+.header-url {
+  color: var(--gold);
+
+  font-size: 13px;
+
+  font-weight: 800;
+}
+
+.header-location {
+  margin-top: 2px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 2px 0;
+}
+
+.hero-copy {
+  max-width: 73%;
+}
+
+.hero h1 {
+  margin: 0;
+
+  color: var(--dark);
+
+  font-size: 25px;
+
+  font-weight: 900;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.5px;
+}
+
+.hero h1 span {
+  color: var(--gold);
+}
+
+.hero-sub {
+  margin: 7px 0 0;
+
+  color: var(--muted);
+
+  font-size: 11.5px;
+
+  line-height: 1.45;
+}
+
+.beta-badge {
+  flex-shrink: 0;
+
+  padding: 7px 11px;
+
+  border-radius: 30px;
+
+  background: var(--dark);
+
+  color: white;
+
+  font-size: 9.5px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   SECTION LABEL
+========================================================= */
+
+.section-label {
+  margin: 0 0 5px;
+
+  color: var(--gold);
+
+  font-size: 9.5px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PROBLEM
+========================================================= */
+
+.problem {
+  display: grid;
+
+  grid-template-columns: 1.1fr 0.9fr;
+
+  gap: 12px;
+
+  padding: 15px 18px;
+
+  border-radius: var(--radius-lg);
+
+  background: var(--dark);
+
+  color: white;
+}
+
+.problem-copy {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.problem-title {
+  margin: 0 0 5px;
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 800;
+}
+
+.problem-text {
+  margin: 0;
+
+  color: #d4d4d4;
+
+  font-size: 10.5px;
+
+  line-height: 1.45;
+}
+
+.problem-stats {
+  display: grid;
+
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.big-stat {
+  text-align: center;
+}
+
+.big-stat-number {
+  color: var(--gold-bright);
+
+  font-size: 30px;
+
+  font-weight: 900;
+
+  line-height: 1;
+}
+
+.big-stat-label {
+  margin-top: 4px;
+
+  color: #d0d0d0;
+
+  font-size: 9px;
+
+  line-height: 1.25;
+}
+
+.stat-plus {
+  color: #777;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   SOLUTION
+========================================================= */
+
+.solution {
+  display: grid;
+
+  grid-template-columns: 0.95fr 1.05fr;
+
+  gap: 12px;
+}
+
+.solution-main {
+  padding: 15px 17px;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background: var(--bg);
+}
+
+.solution-main h2 {
+  margin: 0 0 5px;
+
+  color: var(--dark);
+
+  font-size: 16px;
+
+  font-weight: 900;
+}
+
+.solution-main p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 10.5px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.features {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 8px;
+}
+
+.feature {
+  padding: 10px 9px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 13px;
+
+  background: white;
+}
+
+.feature-icon {
+  width: 22px;
+
+  height: 22px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: var(--gold);
+}
+
+.feature-icon svg {
+  width: 20px;
+
+  height: 20px;
+
+  stroke: currentColor;
+
+  stroke-width: 1.8;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  fill: none;
+}
+
+.feature-title {
+  margin-top: 6px;
+
+  color: var(--dark);
+
+  font-size: 9.5px;
+
+  font-weight: 800;
+}
+
+.feature-text {
+  margin-top: 2px;
+
+  color: var(--muted);
+
+  font-size: 8.5px;
+
+  line-height: 1.25;
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.how {
+  padding: 13px 16px;
+
+  border-radius: var(--radius);
+
+  background: var(--gold-soft);
+
+  border: 1px solid rgba(212, 169, 0, 0.2);
+}
+
+.how-title {
+  margin: 0 0 8px;
+
+  color: var(--dark);
+
+  font-size: 13px;
+
+  font-weight: 900;
+}
+
+.steps {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 10px;
+}
+
+.step {
+  display: flex;
+
+  gap: 7px;
+
+  align-items: flex-start;
+}
+
+.step-number {
+  flex-shrink: 0;
+
+  width: 19px;
+
+  height: 19px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--dark);
+
+  color: var(--gold-bright);
+
+  font-size: 9px;
+
+  font-weight: 900;
+}
+
+.step-title {
+  color: var(--dark);
+
+  font-size: 9.5px;
+
+  font-weight: 800;
+}
+
+.step-text {
+  margin-top: 2px;
+
+  color: #686868;
+
+  font-size: 8.5px;
+
+  line-height: 1.25;
+}
+
+
+/* =========================================================
+   TRACTION
+========================================================= */
+
+.traction {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+}
+
+.traction-box {
+  padding: 13px 16px;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius);
+
+  background: white;
+}
+
+.traction-number {
+  color: var(--dark);
+
+  font-size: 24px;
+
+  font-weight: 900;
+
+  line-height: 1;
+}
+
+.traction-label {
+  margin-top: 4px;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+  line-height: 1.3;
+}
+
+.companies {
+  margin-top: 7px;
+
+  color: var(--dark);
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PRICING
+========================================================= */
+
+.pricing {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 13px 17px;
+
+  border-radius: var(--radius);
+
+  background: var(--dark);
+
+  color: white;
+}
+
+.pricing-copy {
+  flex: 1;
+}
+
+.pricing-title {
+  margin: 0;
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 900;
+}
+
+.pricing-sub {
+  margin: 3px 0 0;
+
+  color: #bdbdbd;
+
+  font-size: 9.5px;
+}
+
+.price {
+  flex-shrink: 0;
+
+  text-align: right;
+}
+
+.price-main {
+  color: var(--gold-bright);
+
+  font-size: 25px;
+
+  font-weight: 900;
+
+  line-height: 1;
+}
+
+.price-unit {
+  color: #bdbdbd;
+
+  font-size: 9px;
+}
+
+.price-free {
+  margin-top: 3px;
+
+  color: white;
+
+  font-size: 8.5px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta {
+  margin-top: auto;
+
+  padding: 17px 18px;
+
+  border-radius: var(--radius-lg);
+
+  background: var(--dark-2);
+
+  color: white;
+}
+
+.cta-top {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.cta-title {
+  margin: 0;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 900;
+}
+
+.cta-sub {
+  margin: 3px 0 0;
+
+  color: #c7c7c7;
+
+  font-size: 9.5px;
+}
+
+
+/* =========================================================
+   DOWNLOAD BUTTONS
+========================================================= */
+
+.downloads {
+  display: flex;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+}
+
+.download-button {
+  min-width: 125px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 8px 11px;
+
+  border-radius: 10px;
+
+  background: white;
+
+  color: var(--dark);
+
+  text-decoration: none;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  transition: transform 0.15s ease;
+}
+
+.download-button:hover {
+  transform: translateY(-1px);
+}
+
+.download-icon {
+  width: 24px;
+
+  height: 24px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: var(--dark);
+}
+
+.download-icon svg {
+  width: 22px;
+
+  height: 22px;
+
+  stroke: currentColor;
+
+  stroke-width: 1.8;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+
+  fill: none;
+}
+
+.download-info {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.download-small {
+  color: #777;
+
+  font-size: 7.5px;
+
+  line-height: 1;
+}
+
+.download-name {
+  margin-top: 2px;
+
+  color: var(--dark);
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   CTA BOTTOM
+========================================================= */
+
+.cta-bottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 12px;
+
+  padding-top: 9px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cta-note {
+  color: #9e9e9e;
+
+  font-size: 8.5px;
+}
+
+.cta-url {
+  color: var(--gold-bright);
+
+  font-size: 12px;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+  body {
+    background: white;
   }
 
-  /* ===== HEADER ===== */
-  .header{
-    display:flex;align-items:center;justify-content:space-between;
-    padding-bottom:10px;border-bottom:2px solid var(--dark-surface);
-  }
-  .brand{display:flex;align-items:center;gap:10px;}
-  .brand img{width:34px;height:auto;}
-  .brand__name{font-size:20px;font-weight:800;color:var(--dark);letter-spacing:.2px;}
-  .brand__tag{font-size:11px;color:var(--secondary);font-weight:500;margin-top:1px;}
-  .header__right{text-align:right;}
-  .header__right .url{font-weight:700;color:var(--gold-deep);font-size:13px;}
-  .header__right .loc{font-size:11px;color:var(--secondary);}
-
-  .hero{
-    display:flex;align-items:baseline;justify-content:space-between;gap:16px;
-    margin-top:2px;
-  }
-  .hero h1{
-    font-size:19px;font-weight:800;color:var(--dark);margin:0;line-height:1.25;
-    max-width:70%;
-  }
-  .hero h1 em{color:var(--gold-deep);font-style:normal;}
-  .badge{
-    flex-shrink:0;font-size:10.5px;font-weight:700;color:#fff;background:var(--dark-surface);
-    padding:5px 10px;border-radius:20px;white-space:nowrap;
+  .toolbar {
+    display: none;
   }
 
-  /* ===== SECTION LABEL ===== */
-  .lbl{
-    font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--gold-deep);
-    text-transform:uppercase;margin:0 0 4px;
+  .page {
+    width: 210mm;
+
+    min-height: 297mm;
+
+    margin: 0;
+
+    box-shadow: none;
+
+    padding: 11mm 15mm 10mm;
+
+    page-break-after: avoid;
   }
 
-  /* ===== PROBLEM / STATS BAND ===== */
-  .stats-band{
-    display:grid;grid-template-columns:1.3fr 1fr;gap:10px;
-    background:var(--dark-surface);border-radius:var(--r-lg);
-    padding:14px 18px;color:#fff;
-  }
-  .stats-band p{margin:0;font-size:11.5px;line-height:1.5;color:#d8d5d0;}
-  .stats-band strong{color:#fff;}
-  .stats-row{display:flex;gap:10px;align-items:center;justify-content:flex-end;}
-  .stat{text-align:center;}
-  .stat__value{font-size:26px;font-weight:900;color:var(--gold);line-height:1;}
-  .stat__label{font-size:9.5px;color:#c9c6c0;margin-top:3px;max-width:82px;line-height:1.25;}
-  .stat--gold{color:var(--gold);}
-  .stat-sep{color:#635f57;font-size:16px;font-weight:700;}
-  .stats-foot{
-    margin:6px 2px 0;font-size:11px;color:var(--secondary);text-align:right;
-  }
-  .stats-foot strong{color:var(--dark);}
+  @page {
+    size: A4;
 
-  /* ===== 2-COL: SOLUCION + COMO FUNCIONA ===== */
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-  .card{
-    border:1px solid var(--border-soft);border-radius:var(--r-md);
-    padding:16px 18px;background:var(--bg);
+    margin: 0;
   }
-  .card h2{font-size:13px;margin:0 0 6px;color:var(--dark);font-weight:800;}
-  .checklist{list-style:none;margin:0;padding:0;font-size:11px;line-height:1.5;color:var(--primary);}
-  .checklist li{display:flex;gap:6px;margin-bottom:4px;}
-  .checklist li:last-child{margin-bottom:0;}
-  .checklist__icon{color:var(--green);font-weight:800;flex-shrink:0;}
 
-  .steps{list-style:none;margin:0;padding:0;counter-reset:step;font-size:11px;color:var(--primary);}
-  .steps li{display:flex;gap:8px;margin-bottom:5px;line-height:1.4;}
-  .steps li:last-child{margin-bottom:0;}
-  .steps__num{
-    counter-increment:step;flex-shrink:0;
-    width:17px;height:17px;border-radius:50%;background:var(--gold-soft);
-    color:var(--gold-deep);font-weight:800;font-size:9.5px;
-    display:flex;align-items:center;justify-content:center;
+  a {
+    color: inherit;
   }
-  .steps__num::before{content: counter(step);}
+}
 
-  /* ===== PRICING ===== */
-  .pricing h2{font-size:13px;margin:0 0 8px;color:var(--dark);font-weight:800;}
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-  .plan{
-    border:1px solid var(--border-soft);border-radius:var(--r-md);
-    padding:10px 12px;background:var(--bg);position:relative;
-  }
-  .plan--pro{border-color:var(--gold-deep);background:var(--gold-soft);}
-  .plan__badge{
-    position:absolute;top:-8px;right:10px;background:var(--gold-deep);color:#fff;
-    font-size:8.5px;font-weight:800;padding:2px 7px;border-radius:20px;letter-spacing:.03em;
-  }
-  .plan__name{font-size:11px;font-weight:800;color:var(--dark);display:block;}
-  .plan__price{font-size:16px;font-weight:900;color:var(--dark);margin:3px 0;}
-  .plan__price span{font-size:9.5px;font-weight:500;color:var(--secondary);}
-  .plan__detail{font-size:9.5px;color:var(--secondary);margin:0;line-height:1.35;}
 
-  /* ===== TRACCION ===== */
-  .traction{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:10px;
-    text-align:center;
-  }
-  .traction .card{padding:16px 8px;}
-  .traction .stat__value{color:var(--dark);font-size:26px;}
-  .traction .stat__label{color:var(--secondary);margin:0 auto;}
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-  /* ===== MERCADO ===== */
-  .market{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-  .market .card{text-align:center;padding:16px 10px;}
-  .market .stat__value{font-size:22px;color:var(--dark);}
-  .market .stat__label{color:var(--secondary);}
+@media (max-width: 860px) {
 
-  /* ===== FOOTER / CTA ===== */
-  .cta{
-    background:var(--dark-surface);border-radius:var(--r-lg);
-    padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#fff;
-  }
-  .cta h3{margin:0 0 3px;font-size:14px;font-weight:800;}
-  .cta p{margin:0;font-size:10.5px;color:#cfcbc3;}
-  .cta .cta__beta{margin-top:6px;font-size:9.5px;color:#a8a49c;line-height:1.5;}
-  .cta .cta__beta a{color:var(--gold);text-decoration:none;}
-  .cta__right{text-align:right;flex-shrink:0;}
-  .cta__url{font-size:16px;font-weight:900;color:var(--gold);}
-  .cta__team{font-size:9.5px;color:#a8a49c;margin-top:2px;}
+  .toolbar {
+    width: 100%;
 
-  @media print{
-    body{background:#fff;}
-    .toolbar{display:none;}
-    .page{box-shadow:none;margin:0;zoom:0.86;}
-    @page{size:A4;margin:0;}
+    padding: 0 12px;
   }
-  @media (max-width:860px){
-    .page{width:100%;padding:6vw;}
-    .grid2,.plans,.traction,.market{grid-template-columns:1fr 1fr;}
-    .hero h1{max-width:100%;}
+
+  .page {
+    width: 100%;
+
+    min-height: auto;
+
+    margin: 12px auto;
+
+    padding: 6vw;
   }
+
+  .hero,
+  .cta-top,
+  .pricing {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .problem,
+  .solution,
+  .traction {
+    grid-template-columns: 1fr;
+  }
+
+  .features,
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .downloads {
+    width: 100%;
+  }
+
+  .download-button {
+    flex: 1;
+  }
+
+  .price {
+    text-align: left;
+  }
+}
+
 </style>
 </head>
+
+
 <body>
 
-  <div class="toolbar">
-    <button onclick="window.print()">Imprimir / Guardar PDF</button>
-  </div>
 
-  <div class="page">
+<!-- =======================================================
+     TOOLBAR
+======================================================= -->
 
-    <!-- HEADER -->
-    <div class="header">
-      <div class="brand">
-        <img src="assets/logo-foreground-dark-icon.png" alt="TrackTor" />
-        <div>
-          <div class="brand__name">TrackTor</div>
-          <div class="brand__tag">Control operativo en origen para el agro</div>
-        </div>
-      </div>
-      <div class="header__right">
-        <div class="url">tracktor.lat</div>
-        <div class="loc">Santa Cruz, Bolivia</div>
-      </div>
-    </div>
+<div class="toolbar">
 
-    <!-- HERO / PROMESA -->
-    <div class="hero">
-      <h1>El combustible es tu costo #1. <em>Es hora de controlarlo.</em></h1>
-      <span class="badge">En beta · apps en revisión en App Store y Google Play</span>
-    </div>
+  <button onclick="window.print()">
+    Imprimir / Guardar PDF
+  </button>
 
-    <!-- EL PROBLEMA -->
-    <div>
-      <p class="lbl">El problema</p>
-      <div class="stats-band">
-        <p>
-          En una empresa agropecuaria mediana o grande, el combustible ya representa el
-          <strong>35% de los costos operativos — y sigue en alza.</strong> Sin visibilidad en el
-          momento, <strong>hasta un 7% de ese diésel</strong> y un <strong>3% de las horas</strong>
-          se pierden por fugas, desvíos y registros que nadie audita a tiempo.
-        </p>
-        <div class="stats-row">
-          <div class="stat"><div class="stat__value">7%</div><div class="stat__label">del diésel despachado se pierde sin auditoría</div></div>
-          <div class="stat-sep">+</div>
-          <div class="stat"><div class="stat__value stat--gold">3%</div><div class="stat__label">de las horas quedan mal registradas</div></div>
-        </div>
-      </div>
-      <p class="stats-foot">≈ <strong>USD 1.300–3.600/año por máquina</strong> en pérdidas evitables de diésel · El 80% de los productores entrevistados validó este dolor.</p>
-    </div>
+</div>
 
-    <!-- SOLUCION + COMO FUNCIONA -->
-    <div class="grid2">
-      <div class="card">
-        <h2>La solución</h2>
-        <ul class="checklist">
-          <li><span class="checklist__icon">✓</span> Controla el costo de combustible y las horas de cada máquina o vehículo, sin conexión o por voz con IA.</li>
-          <li><span class="checklist__icon">✓</span> Cada registro lleva foto tomada dentro de la app, con GPS y hora — imposible de falsificar.</li>
-          <li><span class="checklist__icon">✓</span> Horómetro validado contra el registro anterior: inflar horas se vuelve estructuralmente imposible.</li>
-          <li><span class="checklist__icon">✓</span> Dashboard consolidado y alertas de desvío el mismo día, sin cierre de mes.</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h2>Cómo funciona</h2>
-        <ol class="steps">
-          <li><span class="steps__num"></span> El operador abre turno: horómetro, hectáreas y diésel con foto, sin conexión.</li>
-          <li><span class="steps__num"></span> Se valida en origen: GPS, hora y consistencia contra el registro anterior.</li>
-          <li><span class="steps__num"></span> Se consolida en el dashboard del dueño, listo para revisar cuando quiera.</li>
-          <li><span class="steps__num"></span> Costo real por hectárea y alertas de desvío, el mismo día.</li>
-        </ol>
-      </div>
-    </div>
 
-    <!-- MODELO DE NEGOCIO -->
-    <div class="pricing">
-      <h2>Modelo de negocio — se cobra por máquina, no por empresa</h2>
-      <div class="plans">
-        <div class="plan">
-          <span class="plan__name">Primeras 2 máquinas</span>
-          <div class="plan__price">Gratis</div>
-          <p class="plan__detail">Sin tarjeta. Todas las funciones: fotos, dictado por voz IA e historial completo. Operadores ilimitados.</p>
-        </div>
-        <div class="plan plan--pro">
-          <span class="plan__badge">DESDE LA 3ª</span>
-          <span class="plan__name">Por máquina</span>
-          <div class="plan__price">USD 5.99<span> /máquina al mes</span></div>
-          <p class="plan__detail">Mismas funciones. Sumás y quitás cupos cuando quieras. Los implementos no cuentan.</p>
-        </div>
-        <div class="plan">
-          <span class="plan__name">Ejemplo — 6 máquinas</span>
-          <div class="plan__price">USD 24<span> /mes</span></div>
-          <p class="plan__detail">2 gratis + 4 cupos × USD 5.99. Operadores ilimitados incluidos.</p>
-        </div>
-      </div>
-    </div>
+<!-- =======================================================
+     ONE PAGER
+======================================================= -->
 
-    <!-- TRACCION -->
-    <div>
-      <p class="lbl">Así estamos hoy — en beta, pre-revenue</p>
-      <div class="traction">
-        <div class="card"><div class="stat__value">3</div><div class="stat__label">equipos en beta: Círculo H, Fumipla, Estancias Valdez</div></div>
-        <div class="card"><div class="stat__value">80%</div><div class="stat__label">de productores entrevistados validó el dolor</div></div>
-        <div class="card"><div class="stat__value">Sep 2026</div><div class="stat__label">cierre de beta y primeras conversiones a pago</div></div>
-      </div>
-      <p class="stats-foot">Pre-revenue. Apps móviles en revisión para App Store y Google Play.</p>
-    </div>
+<main class="page">
 
-    <!-- MERCADO -->
-    <div>
-      <p class="lbl">Oportunidad de mercado</p>
-      <div class="market">
-        <div class="card"><div class="stat__value">$179.7M</div><div class="stat__label">TAM · USD/año, LATAM (2,5M máquinas × USD 5.99/mes)</div></div>
-        <div class="card"><div class="stat__value">$2.51M</div><div class="stat__label">SAM · USD/año, Bolivia (35.000 máquinas agrícolas)</div></div>
-        <div class="card"><div class="stat__value">$30K</div><div class="stat__label">SOM · ARR a 12 meses (500 máquinas en Santa Cruz)</div></div>
-      </div>
-    </div>
 
-    <!-- CTA -->
-    <div class="cta">
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="header">
+
+    <div class="brand">
+
+      <img
+        src="assets/logo-foreground-dark-icon.png"
+        alt="TrackTor"
+      />
+
       <div>
-        <h3>Controlá tu costo #1 y tus operaciones de maquinaria, desde el primer día.</h3>
-        <p>Estamos abriendo cupos para nuevos productores en Santa Cruz.</p>
-        <p class="cta__beta">
-          Probá la beta &mdash; iOS: <a href="https://testflight.apple.com/join/FdZwEEea">testflight.apple.com/join/FdZwEEea</a>
-          &nbsp;·&nbsp; Android: escribí a <a href="mailto:soporte@tracktor.lat">soporte@tracktor.lat</a> con tu Gmail
-        </p>
+
+        <div class="brand-name">
+          TrackTor
+        </div>
+
+        <div class="brand-tag">
+          Control operativo en origen para el agro
+        </div>
+
       </div>
-      <div class="cta__right">
-        <div class="cta__url">tracktor.lat</div>
-        <div class="cta__team">Juan Camilo (CEO) · Iblin (CMO) · Germán (CTO)</div>
-      </div>
+
     </div>
 
-  </div>
+
+    <div class="header-right">
+
+      <div class="header-url">
+        tracktor.lat
+      </div>
+
+      <div class="header-location">
+        Santa Cruz, Bolivia
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+
+  <section class="hero">
+
+    <div class="hero-copy">
+
+      <h1>
+        El combustible es tu costo #1.
+        <span>Es hora de controlarlo.</span>
+      </h1>
+
+      <p class="hero-sub">
+        TrackTor registra y valida combustible y horas de maquinaria
+        directamente desde el origen.
+      </p>
+
+    </div>
+
+
+    <div class="beta-badge">
+      EN BETA
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       PROBLEMA
+  ====================================================== -->
+
+  <section>
+
+    <p class="section-label">
+      El problema
+    </p>
+
+
+    <div class="problem">
+
+
+      <div class="problem-copy">
+
+        <h2 class="problem-title">
+          Sin visibilidad en origen, el costo se acumula.
+        </h2>
+
+        <p class="problem-text">
+          Los registros manuales dificultan detectar fugas de diésel,
+          desvíos y horas mal registradas antes del cierre de mes.
+        </p>
+
+      </div>
+
+
+      <div class="problem-stats">
+
+
+        <div class="big-stat">
+
+          <div class="big-stat-number">
+            7%
+          </div>
+
+          <div class="big-stat-label">
+            del diésel despachado puede perderse sin auditoría
+          </div>
+
+        </div>
+
+
+        <div class="stat-plus">
+          +
+        </div>
+
+
+        <div class="big-stat">
+
+          <div class="big-stat-number">
+            3%
+          </div>
+
+          <div class="big-stat-label">
+            de las horas pueden quedar mal registradas
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SOLUCIÓN
+  ====================================================== -->
+
+  <section>
+
+    <p class="section-label">
+      La solución
+    </p>
+
+
+    <div class="solution">
+
+
+      <div class="solution-main">
+
+        <h2>
+          Control desde el origen.
+        </h2>
+
+        <p>
+          Cada registro queda asociado a evidencia y validaciones
+          para que el dueño pueda saber qué ocurrió, cuándo y dónde.
+        </p>
+
+      </div>
+
+
+      <div class="features">
+
+
+        <!-- FOTO -->
+
+        <div class="feature">
+
+          <div class="feature-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <rect
+                x="3"
+                y="5"
+                width="18"
+                height="16"
+                rx="2"
+              ></rect>
+
+              <path
+                d="M8 5l1.5-2h5L16 5"
+              ></path>
+
+              <circle
+                cx="12"
+                cy="13"
+                r="4"
+              ></circle>
+
+            </svg>
+
+          </div>
+
+
+          <div class="feature-title">
+            Foto
+          </div>
+
+          <div class="feature-text">
+            Evidencia del registro.
+          </div>
+
+        </div>
+
+
+        <!-- GPS -->
+
+        <div class="feature">
+
+          <div class="feature-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <path
+                d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"
+              ></path>
+
+              <circle
+                cx="12"
+                cy="10"
+                r="2.5"
+              ></circle>
+
+            </svg>
+
+          </div>
+
+
+          <div class="feature-title">
+            GPS
+          </div>
+
+          <div class="feature-text">
+            Ubicación en origen.
+          </div>
+
+        </div>
+
+
+        <!-- HORÓMETRO -->
+
+        <div class="feature">
+
+          <div class="feature-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <circle
+                cx="12"
+                cy="12"
+                r="8.5"
+              ></circle>
+
+              <path
+                d="M12 7v5l3 2"
+              ></path>
+
+            </svg>
+
+          </div>
+
+
+          <div class="feature-title">
+            Horómetro
+          </div>
+
+          <div class="feature-text">
+            Validación contra historial.
+          </div>
+
+        </div>
+
+
+        <!-- IA -->
+
+        <div class="feature">
+
+          <div class="feature-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <path
+                d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3Z"
+              ></path>
+
+              <path
+                d="M5 11a7 7 0 0 0 14 0"
+              ></path>
+
+              <path
+                d="M12 18v3"
+              ></path>
+
+              <path
+                d="M9 21h6"
+              ></path>
+
+            </svg>
+
+          </div>
+
+
+          <div class="feature-title">
+            IA por voz
+          </div>
+
+          <div class="feature-text">
+            Registra sin escribir.
+          </div>
+
+        </div>
+
+
+        <!-- DASHBOARD -->
+
+        <div class="feature">
+
+          <div class="feature-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <path d="M4 19V9"></path>
+
+              <path d="M10 19V5"></path>
+
+              <path d="M16 19v-7"></path>
+
+              <path d="M22 19V3"></path>
+
+            </svg>
+
+          </div>
+
+
+          <div class="feature-title">
+            Dashboard
+          </div>
+
+          <div class="feature-text">
+            Todo consolidado.
+          </div>
+
+        </div>
+
+
+        <!-- ALERTAS -->
+
+        <div class="feature">
+
+          <div class="feature-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <path
+                d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"
+              ></path>
+
+              <path
+                d="M10 21h4"
+              ></path>
+
+            </svg>
+
+          </div>
+
+
+          <div class="feature-title">
+            Alertas
+          </div>
+
+          <div class="feature-text">
+            Detecta desvíos rápido.
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       COMO FUNCIONA
+  ====================================================== -->
+
+  <section class="how">
+
+    <h2 class="how-title">
+      Así funciona
+    </h2>
+
+
+    <div class="steps">
+
+
+      <div class="step">
+
+        <div class="step-number">
+          1
+        </div>
+
+        <div>
+
+          <div class="step-title">
+            Registra
+          </div>
+
+          <div class="step-text">
+            El operador carga combustible y horómetro.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          2
+        </div>
+
+        <div>
+
+          <div class="step-title">
+            Valida
+          </div>
+
+          <div class="step-text">
+            Foto, GPS, hora y consistencia.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          3
+        </div>
+
+        <div>
+
+          <div class="step-title">
+            Consolida
+          </div>
+
+          <div class="step-text">
+            La información llega al dashboard.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="step">
+
+        <div class="step-number">
+          4
+        </div>
+
+        <div>
+
+          <div class="step-title">
+            Detecta
+          </div>
+
+          <div class="step-text">
+            Alertas de desvíos y costos.
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       TRACCIÓN
+  ====================================================== -->
+
+  <section>
+
+    <p class="section-label">
+      Ya lo estamos probando
+    </p>
+
+
+    <div class="traction">
+
+
+      <div class="traction-box">
+
+        <div class="traction-number">
+          3
+        </div>
+
+        <div class="traction-label">
+          empresas agropecuarias actualmente en beta
+        </div>
+
+        <div class="companies">
+          Círculo H · Fumipla · Estancias Valdez
+        </div>
+
+      </div>
+
+
+      <div class="traction-box">
+
+        <div class="traction-number">
+          80%
+        </div>
+
+        <div class="traction-label">
+          de los productores entrevistados validó el problema
+        </div>
+
+        <div class="companies">
+          Beta activa · Pre-revenue
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       PRICING
+  ====================================================== -->
+
+  <section class="pricing">
+
+
+    <div class="pricing-copy">
+
+      <h2 class="pricing-title">
+        Simple: se cobra por máquina.
+      </h2>
+
+      <p class="pricing-sub">
+        Operadores ilimitados · Sin tarjeta · Sumá o quitá máquinas cuando quieras
+      </p>
+
+    </div>
+
+
+    <div class="price">
+
+      <div class="price-main">
+        USD 5.99
+      </div>
+
+      <div class="price-unit">
+        / máquina / mes
+      </div>
+
+      <div class="price-free">
+        Las primeras 2 máquinas son gratis
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+  <!-- =====================================================
+       CTA
+  ====================================================== -->
+
+  <section class="cta">
+
+
+    <div class="cta-top">
+
+
+      <div>
+
+        <h2 class="cta-title">
+          Probá TrackTor gratis.
+        </h2>
+
+        <p class="cta-sub">
+          Estamos abriendo cupos para nuevos productores en Santa Cruz.
+        </p>
+
+      </div>
+
+
+      <div class="downloads">
+
+
+        <!-- iOS -->
+
+        <a
+          class="download-button"
+          href="https://testflight.apple.com/join/FdZwEEea"
+          target="_blank"
+          rel="noopener"
+        >
+
+          <div class="download-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <path
+                d="M15.3 7.1c.8-1 1.3-2.1 1.4-3.3-1.2.1-2.5.8-3.3 1.6-.7.7-1.4 1.9-1.3 3 1.3.1 2.5-.6 3.2-1.3Z"
+                fill="currentColor"
+                stroke="none"
+              ></path>
+
+              <path
+                d="M16.7 12.3c0-2 1.6-3 1.7-3.1-.9-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.5-.7-2.5-.7-1.3 0-2.5.8-3.2 1.9-1.4 2.4-.4 6 .9 8 .7 1 1.4 2.1 2.5 2.1 1 0 1.4-.6 2.7-.6 1.3 0 1.6.6 2.7.6 1.1 0 1.8-1 2.5-2 .8-1.2 1.1-2.4 1.1-2.5-.1 0-2.5-1-2.5-2.8Z"
+                fill="currentColor"
+                stroke="none"
+              ></path>
+
+            </svg>
+
+          </div>
+
+
+          <div class="download-info">
+
+            <div class="download-small">
+              DISPONIBLE EN
+            </div>
+
+            <div class="download-name">
+              TestFlight · iOS
+            </div>
+
+          </div>
+
+        </a>
+
+
+        <!-- ANDROID -->
+
+        <a
+          class="download-button"
+          href="mailto:devs@tracktor.lat?subject=Quiero%20probar%20TrackTor%20en%20Android"
+        >
+
+          <div class="download-icon">
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+
+              <path
+                d="M7 9h10v9a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9Z"
+              ></path>
+
+              <path
+                d="M9 9 7 5"
+              ></path>
+
+              <path
+                d="m15 9 2-4"
+              ></path>
+
+              <path
+                d="M9 5.5a4 4 0 0 1 6 0"
+              ></path>
+
+              <circle
+                cx="10"
+                cy="12"
+                r=".7"
+                fill="currentColor"
+                stroke="none"
+              ></circle>
+
+              <circle
+                cx="14"
+                cy="12"
+                r=".7"
+                fill="currentColor"
+                stroke="none"
+              ></circle>
+
+            </svg>
+
+          </div>
+
+
+          <div class="download-info">
+
+            <div class="download-small">
+              SOLICITAR ACCESO
+            </div>
+
+            <div class="download-name">
+              Android
+            </div>
+
+          </div>
+
+        </a>
+
+
+      </div>
+
+    </div>
+
+
+    <div class="cta-bottom">
+
+      <div class="cta-note">
+        iOS: acceso mediante TestFlight · Android: escribinos con tu Gmail
+      </div>
+
+      <div class="cta-url">
+        tracktor.lat
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
 
 </body>
 </html>
+```
