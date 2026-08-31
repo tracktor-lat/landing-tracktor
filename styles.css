@@ -434,6 +434,41 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 .results__item p { font-size: 13.5px; color: var(--secondary); max-width: 180px; margin: 0 auto; }
 
 /* ---------------- Testimonios ---------------- */
+.beta { padding: 64px 0; background: var(--surface); }
+.beta__head { text-align: center; max-width: 620px; margin: 0 auto 40px; }
+.beta__head .speed-line::after { margin-left: auto; margin-right: auto; }
+.beta__title {
+  font-size: clamp(22px, 3.2vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin-bottom: 10px;
+  color: var(--primary-dark);
+}
+.beta__note { font-size: 14.5px; color: var(--secondary); }
+.beta__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.beta__card {
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--r-lg);
+  padding: 28px 26px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.beta__card h3 { font-size: 17px; font-weight: 700; color: var(--primary-dark); }
+.beta__card p { font-size: 14px; color: var(--secondary); line-height: 1.5; min-height: 42px; }
+.beta__card .btn { margin-top: 4px; }
+.beta__sublink { font-size: 12.5px; color: var(--secondary); text-decoration: underline; }
+.beta__sublink:hover { color: var(--gold-deep); }
+
 .testimonials { padding: 20px 0 80px; background: var(--bg); }
 .testimonials__head { text-align: center; max-width: 640px; margin: 0 auto 40px; }
 .testimonials__head .speed-line::after { margin-left: auto; margin-right: auto; }
@@ -659,6 +694,7 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   .solution__phones { order: -1; }
   .how__grid { grid-template-columns: repeat(2, 1fr); }
   .results__grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .beta__grid { grid-template-columns: 1fr; }
   .testimonials__grid { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 }
