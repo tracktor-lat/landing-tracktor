@@ -4,7 +4,7 @@ const { chromium } = require('playwright');
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
-  await page.goto('file://' + process.cwd() + '/tracktor-one-pager.html', {
+  await page.goto('file://' + process.cwd() + '/one-pager.html', {
     waitUntil: 'networkidle'
   });
 
