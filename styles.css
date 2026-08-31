@@ -466,8 +466,6 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 .beta__card h3 { font-size: 17px; font-weight: 700; color: var(--primary-dark); }
 .beta__card p { font-size: 14px; color: var(--secondary); line-height: 1.5; min-height: 42px; }
 .beta__card .btn { margin-top: 4px; }
-.beta__sublink { font-size: 12.5px; color: var(--secondary); text-decoration: underline; }
-.beta__sublink:hover { color: var(--gold-deep); }
 
 .testimonials { padding: 20px 0 80px; background: var(--bg); }
 .testimonials__head { text-align: center; max-width: 640px; margin: 0 auto 40px; }
