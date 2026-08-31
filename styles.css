@@ -420,7 +420,7 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 .results__note { margin-top: 10px; font-size: 12.5px; color: var(--secondary); font-style: italic; }
 .results__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   text-align: center;
 }
