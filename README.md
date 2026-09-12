@@ -20,7 +20,8 @@ producto. No es el lanzamiento ni una versión del app.
 
 `page_view` (con `unique`), `scroll_depth` (25/50/75/100), `cta_click`,
 `form_open`, `form_submit`, `form_validation_error`, `pricing_view`,
-`plan_select` (con el id del plan), `confirm_view`.
+`plan_select` (con el id del plan), `confirm_view`,
+`store_click` (con `store`: `ios` = App Store, `ios_testflight`, `android`).
 
 Los eventos se loguean en consola y se envían a `dataLayer`/`gtag` si existen.
 

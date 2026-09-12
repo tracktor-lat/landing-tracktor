@@ -188,6 +188,14 @@
     });
   });
 
+  /* ---- Descargas y beta (App Store, TestFlight, WhatsApp Android) ----
+     Son enlaces externos: no abren el modal, solo dejan el evento. */
+  document.querySelectorAll("[data-store]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      track("store_click", { store: link.getAttribute("data-store") });
+    });
+  });
+
   /* ---- Cerrar modal ---- */
   modal.querySelectorAll("[data-close]").forEach(function (el) {
     el.addEventListener("click", closeModal);

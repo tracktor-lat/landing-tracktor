@@ -49,7 +49,7 @@
         <a href="#solution" class="nav__link">Producto</a>
         <a href="#how" class="nav__link">Cómo funciona</a>
         <a href="#problem" class="nav__link">El problema</a>
-        <a href="#beta" class="nav__link">Probá la beta</a>
+        <a href="#beta" class="nav__link">Descargá la app</a>
       </nav>
       <div class="nav__actions">
         <button class="btn btn--blue btn--sm" data-cta="nav">Solicitar demo</button>
@@ -72,8 +72,20 @@
       </p>
       <div class="hero__actions">
         <button class="btn btn--primary btn--lg" data-cta="hero">Solicitar demo</button>
+        <!-- Descarga directa: la app iOS ya está publicada (no usa data-cta,
+             ese atributo abre el modal de demo). -->
+        <a class="store-badge" href="https://apps.apple.com/bo/app/tracktor/id6781363801"
+           target="_blank" rel="noopener" data-store="ios"
+           aria-label="Descargar TrackTor en la App Store">
+          <img src="assets/app-store-badge-es.svg" alt="Descárgalo en el App Store"
+               width="120" height="40" />
+        </a>
         <a href="#how" class="btn btn--ghost btn--lg">Conocer más →</a>
       </div>
+      <p class="hero__store-note">
+        <span class="hero__store-dot"></span>
+        Ya disponible para iPhone · Descarga gratis
+      </p>
       <div class="hero__pillars">
         <div class="pillar">
           <span class="pillar__icon">
@@ -228,8 +240,8 @@
           <p>De los productores entrevistados validó este dolor</p>
         </div>
         <div class="results__item">
-          <div class="results__value">En revisión</div>
-          <p>Apps para App Store y Google Play</p>
+          <div class="results__value">Ya en iOS</div>
+          <p>Publicada en la App Store · Android en beta</p>
         </div>
       </div>
     </div>
@@ -239,20 +251,29 @@
   <section id="beta" class="beta">
     <div class="container">
       <div class="beta__head">
-        <span class="section-header speed-line">PROBÁ LA BETA</span>
-        <h2 class="beta__title">Instalá TrackTor hoy, antes de las tiendas.</h2>
-        <p class="beta__note">Las apps están en revisión en App Store y Google Play. Mientras tanto, sumate a la beta: te damos el acceso y te acompañamos en la instalación.</p>
+        <span class="section-header speed-line">DESCARGÁ LA APP</span>
+        <h2 class="beta__title">TrackTor ya está en la App Store.</h2>
+        <p class="beta__note">Descargala gratis en tu iPhone y empezá a registrar hoy mismo. En Android seguimos en beta: escribinos y te sumamos.</p>
       </div>
       <div class="beta__grid">
         <div class="beta__card">
+          <span class="beta__tag beta__tag--live">Ya disponible</span>
           <h3>iPhone</h3>
-          <p>Instalá TestFlight y unite con un toque. Acceso inmediato.</p>
-          <a class="btn btn--primary btn--lg" href="https://testflight.apple.com/join/FdZwEEea" target="_blank" rel="noopener">Unirme por TestFlight →</a>
+          <p>Descargala gratis desde la App Store. Las primeras 2 máquinas no se pagan.</p>
+          <a class="store-badge store-badge--lg" href="https://apps.apple.com/bo/app/tracktor/id6781363801"
+             target="_blank" rel="noopener" data-store="ios"
+             aria-label="Descargar TrackTor en la App Store">
+            <img src="assets/app-store-badge-es.svg" alt="Descárgalo en el App Store"
+                 width="120" height="40" />
+          </a>
+          <a class="beta__alt" href="https://testflight.apple.com/join/FdZwEEea"
+             target="_blank" rel="noopener" data-store="ios_testflight">¿Sos tester? Unite por TestFlight →</a>
         </div>
         <div class="beta__card">
+          <span class="beta__tag">En beta</span>
           <h3>Android</h3>
           <p>Escribinos por WhatsApp con tu correo de Google y te sumamos a la beta.</p>
-          <a class="btn btn--primary btn--lg" href="https://wa.me/59173620224?text=Hola%2C%20quiero%20probar%20la%20beta%20de%20Tracktor%20en%20Android.%20Mi%20correo%20de%20Google%20para%20el%20acceso%20es%3A%20" target="_blank" rel="noopener">Escribinos por WhatsApp →</a>
+          <a class="btn btn--primary btn--lg" href="https://wa.me/59173620224?text=Hola%2C%20quiero%20probar%20la%20beta%20de%20Tracktor%20en%20Android.%20Mi%20correo%20de%20Google%20para%20el%20acceso%20es%3A%20" target="_blank" rel="noopener" data-store="android">Escribinos por WhatsApp →</a>
         </div>
       </div>
     </div>
@@ -292,6 +313,7 @@
         <h4>Producto</h4>
         <a href="#solution">Funciones</a>
         <a href="#results">Beneficios</a>
+        <a href="https://apps.apple.com/bo/app/tracktor/id6781363801" target="_blank" rel="noopener" data-store="ios">Descargar para iPhone</a>
       </div>
       <div class="footer__col">
         <h4>Empresa</h4>
