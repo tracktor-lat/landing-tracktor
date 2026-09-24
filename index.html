@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TrackTor — Control total, máximo rendimiento.</title>
-  <meta name="description" content="TrackTor digitaliza la operación de tus maquinarias en el origen. Registro asistido con evidencia fotográfica y GPS, sin depender de Excel ni WhatsApp, y reportes claros para decidir mejor." />
+  <title>Tracktor — Control total, máximo rendimiento.</title>
+  <meta name="description" content="Tracktor digitaliza la operación de tus maquinarias en el origen. Registro asistido con evidencia fotográfica y GPS, sin depender de Excel ni WhatsApp, y reportes claros para decidir mejor." />
   <link rel="canonical" href="https://tracktor.lat/" />
 
   <!-- Favicons e íconos -->
@@ -12,22 +12,24 @@
   <link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#F5A623" />
+  <meta name="theme-color" content="#ffffff" />
 
   <!-- Open Graph (previews en WhatsApp / redes) -->
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="TrackTor" />
+  <meta property="og:site_name" content="Tracktor" />
   <meta property="og:url" content="https://tracktor.lat/" />
-  <meta property="og:title" content="TrackTor — Control total, máximo rendimiento." />
+  <meta property="og:title" content="Tracktor — Control total, máximo rendimiento." />
   <meta property="og:description" content="Plataforma móvil para el registro verificado, control y análisis de la operación agrícola, sin depender de Excel ni WhatsApp." />
   <meta property="og:image" content="https://tracktor.lat/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="es_BO" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="TrackTor — Control total, máximo rendimiento." />
+  <meta name="twitter:title" content="Tracktor — Control total, máximo rendimiento." />
   <meta name="twitter:description" content="Monitoreo en tiempo real de toda tu maquinaria, sin depender de Excel ni WhatsApp." />
   <meta name="twitter:image" content="https://tracktor.lat/assets/og-image.jpg" />
 
-  <!-- Tipografía TrackTor: Montserrat (títulos/KPIs) + Inter (cuerpo) -->
+  <!-- Tipografía de Tracktor: Montserrat (títulos/KPIs) + Inter (cuerpo) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
@@ -41,10 +43,9 @@
   <!-- ============ NAV ============ -->
   <header class="nav">
     <div class="container nav__inner">
-      <div class="brand">
-        <img src="assets/logo-foreground-dark-icon.png" alt="TrackTor" class="brand__logo" width="719" height="472" />
-        <span class="brand__name">TrackTor</span>
-      </div>
+      <a href="#hero" class="brand" aria-label="Tracktor, inicio">
+        <img src="assets/logo-fondo-claro.png" alt="Tracktor" class="brand__logo" width="800" height="148" />
+      </a>
       <nav class="nav__links" id="navLinks">
         <a href="#solution" class="nav__link">Producto</a>
         <a href="#how" class="nav__link">Cómo funciona</a>
@@ -52,7 +53,7 @@
         <a href="#beta" class="nav__link">Descargá la app</a>
       </nav>
       <div class="nav__actions">
-        <button class="btn btn--blue btn--sm" data-cta="nav">Solicitar demo</button>
+        <button class="btn btn--primary btn--sm" data-cta="nav">Solicitar demo</button>
         <button class="nav__toggle" id="navToggle" type="button"
                 aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
           <span></span><span></span><span></span>
@@ -71,12 +72,12 @@
         depender de Excel ni WhatsApp.
       </p>
       <div class="hero__actions">
-        <button class="btn btn--primary btn--lg" data-cta="hero">Solicitar demo</button>
+        <button class="btn btn--accent btn--lg" data-cta="hero">Solicitar demo</button>
         <!-- Descarga directa: la app iOS ya está publicada (no usa data-cta,
              ese atributo abre el modal de demo). -->
         <a class="store-badge" href="https://apps.apple.com/bo/app/tracktor/id6781363801"
            target="_blank" rel="noopener" data-store="ios"
-           aria-label="Descargar TrackTor en la App Store">
+           aria-label="Descargar Tracktor en la App Store">
           <img src="assets/app-store-badge-es.svg" alt="Descárgalo en el App Store"
                width="120" height="40" />
         </a>
@@ -88,27 +89,15 @@
       </p>
       <div class="hero__pillars">
         <div class="pillar">
-          <span class="pillar__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M6 9l6-6 6 6"/><path d="M5 21h14"/></svg>
-          </span>
           <div><strong>Registra</strong><span>Datos en origen</span></div>
         </div>
         <div class="pillar">
-          <span class="pillar__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg>
-          </span>
           <div><strong>Controla</strong><span>Tu operación</span></div>
         </div>
         <div class="pillar">
-          <span class="pillar__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 9 9"/></svg>
-          </span>
           <div><strong>Analiza</strong><span>Lo que importa</span></div>
         </div>
         <div class="pillar">
-          <span class="pillar__icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
-          </span>
           <div><strong>Decide</strong><span>Mejores resultados</span></div>
         </div>
       </div>
@@ -119,35 +108,23 @@
   <section id="problem" class="problem">
     <div class="container">
       <div class="problem__head">
-        <span class="section-header speed-line">EL PROBLEMA</span>
+        <span class="section-header">EL PROBLEMA</span>
         <h2 class="problem__title">Tomar decisiones sin datos<br />te cuesta dinero.</h2>
       </div>
       <div class="problem__grid">
         <div class="problem__item">
-          <div class="problem__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-          </div>
           <h3>No sabés en qué está trabajando tu maquinaria</h3>
           <p>Sin visibilidad real de la operación en el momento en que ocurre.</p>
         </div>
         <div class="problem__item">
-          <div class="problem__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 8 2 13a10 10 0 0 0 20 0c0-5-4.48-11-10-11z"/></svg>
-          </div>
           <h3>Pérdidas por consumos excesivos y desvíos</h3>
           <p>Litros de combustible que salen del tanque y no aparecen en ningún reporte confiable.</p>
         </div>
         <div class="problem__item">
-          <div class="problem__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
-          </div>
           <h3>Información manual, incompleta y poco confiable</h3>
           <p>Planillas y fotos sueltas por chat que nadie cruza con la realidad del campo.</p>
         </div>
         <div class="problem__item">
-          <div class="problem__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
           <h3>Reportes que llegan tarde o nunca</h3>
           <p>Te enteras de lo que pasó en el campo cuando ya no hay nada que corregir.</p>
         </div>
@@ -171,15 +148,15 @@
     <div class="container solution__inner">
       <div class="solution__phones">
         <figure class="phone phone--tall">
-          <img src="assets/screenshots/report.webp" alt="Reportes de gasto y consumo en la app TrackTor" loading="lazy" width="1170" height="2532" />
+          <img src="assets/screenshots/report.webp" alt="Reportes de gasto y consumo en la app Tracktor" loading="lazy" width="1170" height="2532" />
         </figure>
         <figure class="phone phone--tall phone--offset">
-          <img src="assets/screenshots/history.webp" alt="Historial de trabajo en la app TrackTor" loading="lazy" width="1170" height="2532" />
+          <img src="assets/screenshots/history.webp" alt="Historial de trabajo en la app Tracktor" loading="lazy" width="1170" height="2532" />
         </figure>
       </div>
       <div class="solution__copy">
-        <span class="section-header speed-line">LA SOLUCIÓN</span>
-        <h2 class="solution__title">TrackTor conecta tu operación y te da el control.</h2>
+        <span class="section-header">LA SOLUCIÓN</span>
+        <h2 class="solution__title">Tracktor conecta tu operación y te da el control.</h2>
         <ul class="checklist">
           <li><span class="checklist__icon">✓</span> Visibilidad de toda tu maquinaria, centralizada en un dashboard.</li>
           <li><span class="checklist__icon">✓</span> Registro offline-first con evidencia fotográfica y GPS, con dictado por voz asistido por IA — sin hardware, sin Excel, sin WhatsApp.</li>
@@ -195,7 +172,7 @@
   <section id="how" class="how">
     <div class="container">
       <div class="how__head">
-        <span class="section-header speed-line">CÓMO FUNCIONA</span>
+        <span class="section-header">CÓMO FUNCIONA</span>
         <h2 class="how__title">Simple. Verificado. Sin hardware.</h2>
       </div>
       <div class="how__grid">
@@ -227,8 +204,8 @@
   <section id="results" class="results">
     <div class="container">
       <div class="results__head">
-        <span class="section-header speed-line">ASÍ ESTAMOS HOY</span>
-        <p class="results__note">TrackTor está en beta. Estos son nuestros números reales, sin adornos.</p>
+        <span class="section-header">ASÍ ESTAMOS HOY</span>
+        <p class="results__note">Tracktor está en beta. Estos son nuestros números reales, sin adornos.</p>
       </div>
       <div class="results__grid">
         <div class="results__item">
@@ -251,8 +228,8 @@
   <section id="beta" class="beta">
     <div class="container">
       <div class="beta__head">
-        <span class="section-header speed-line">DESCARGÁ LA APP</span>
-        <h2 class="beta__title">TrackTor ya está en la App Store.</h2>
+        <span class="section-header">DESCARGÁ LA APP</span>
+        <h2 class="beta__title">Tracktor ya está en la App Store.</h2>
         <p class="beta__note">Descargala gratis en tu iPhone y empezá a registrar hoy mismo. En Android seguimos en beta: escribinos y te sumamos.</p>
       </div>
       <div class="beta__grid">
@@ -262,7 +239,7 @@
           <p>Descargala gratis desde la App Store. Las primeras 2 máquinas no se pagan.</p>
           <a class="store-badge store-badge--lg" href="https://apps.apple.com/bo/app/tracktor/id6781363801"
              target="_blank" rel="noopener" data-store="ios"
-             aria-label="Descargar TrackTor en la App Store">
+             aria-label="Descargar Tracktor en la App Store">
             <img src="assets/app-store-badge-es.svg" alt="Descárgalo en el App Store"
                  width="120" height="40" />
           </a>
@@ -283,8 +260,8 @@
   <section id="testimonials" class="testimonials">
     <div class="container">
       <div class="testimonials__head">
-        <span class="section-header speed-line">SÉ DE LOS PRIMEROS</span>
-        <p class="testimonials__note">Estamos sumando a los primeros productores de Santa Cruz que están probando TrackTor en su operación. Muy pronto, sus casos reales van a estar acá.</p>
+        <span class="section-header">SÉ DE LOS PRIMEROS</span>
+        <p class="testimonials__note">Estamos sumando a los primeros productores de Santa Cruz que están probando Tracktor en su operación. Muy pronto, sus casos reales van a estar acá.</p>
       </div>
     </div>
   </section>
@@ -294,7 +271,7 @@
     <div class="container closer__inner">
       <div>
         <h2 class="closer__title">Tu campo. Conectado. Bajo control.</h2>
-        <p class="closer__sub">Solicitá una demo personalizada y descubrí todo lo que TrackTor puede hacer por tu operación.</p>
+        <p class="closer__sub">Solicitá una demo personalizada y descubrí todo lo que Tracktor puede hacer por tu operación.</p>
       </div>
       <button class="btn btn--accent btn--lg" data-cta="closer">Solicitar demo ahora →</button>
     </div>
@@ -303,10 +280,7 @@
   <footer class="footer">
     <div class="container footer__grid">
       <div class="footer__brand">
-        <div class="brand">
-          <img src="assets/logo-foreground-dark-icon.png" alt="TrackTor" class="footer__logo" />
-          <span class="brand__name">TrackTor</span>
-        </div>
+        <img src="assets/logo-fondo-oscuro.png" alt="Tracktor" class="footer__logo" width="800" height="148" loading="lazy" />
         <span class="footer__tagline">Control operativo en origen para el agro.</span>
       </div>
       <div class="footer__col">
@@ -337,7 +311,7 @@
       </div>
     </div>
     <div class="container">
-      <p class="footer__note">© 2026 TrackTor. Todos los derechos reservados. · Santa Cruz, Bolivia</p>
+      <p class="footer__note">© 2026 Tracktor. Todos los derechos reservados. · Santa Cruz, Bolivia</p>
     </div>
   </footer>
 
@@ -409,7 +383,7 @@
       <!-- PASO 3: Confirmación -->
       <div class="step step--confirm" data-step="confirm" hidden>
         <div class="confirm__check">✓</div>
-        <h2 class="modal__title">¡Listo! Ya sos parte de TrackTor.</h2>
+        <h2 class="modal__title">¡Listo! Ya sos parte de Tracktor.</h2>
         <p class="modal__lead">
           Ya estamos trabajando con productores en Santa Cruz. Revisamos tu perfil y te
           contactamos en un plazo de <strong>3 días hábiles</strong> para activar

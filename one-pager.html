@@ -4,11 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>TrackTor — Control operativo en origen</title>
+<title>Tracktor — Control operativo en origen</title>
 
 <meta
   name="description"
-  content="TrackTor controla combustible y horas de maquinaria desde el origen."
+  content="Tracktor controla combustible y horas de maquinaria desde el origen."
 />
 
 <link
@@ -30,22 +30,25 @@
 ========================================================= */
 
 :root {
-  --bg: #f7f7f5;
+  /* Mismos valores que la app y el Dashboard (ver styles.css). */
+  --bg: #f9fafb;
   --surface: #ffffff;
 
-  --dark: #151515;
-  --dark-2: #232323;
+  --dark: #1b1919;
+  --dark-2: #1a2f4c;
 
-  --text: #303030;
-  --muted: #747474;
+  --text: #2d3436;
+  --muted: #636e72;
 
-  --gold: #d4a900;
-  --gold-bright: #f4c20d;
-  --gold-soft: #fff7d6;
+  /* Amarillo del logo sobre oscuro; sobre blanco, el ámbar oscuro de la app
+     (tertiary), que se lee. */
+  --gold: #b37100;
+  --gold-bright: #fdc82d;
+  --gold-soft: #fff6d9;
 
-  --green: #00a884;
+  --green: #16a34a;
 
-  --border: #e5e5e2;
+  --border: #e7e9eb;
 
   --radius: 16px;
   --radius-lg: 20px;
@@ -173,9 +176,11 @@ h3,
 }
 
 .brand img {
-  width: 35px;
+  display: block;
 
-  height: auto;
+  height: 24px;
+
+  width: auto;
 }
 
 .brand-name {
@@ -187,7 +192,7 @@ h3,
 }
 
 .brand-tag {
-  margin-top: 2px;
+  margin-top: 6px;
 
   color: var(--muted);
 
@@ -932,16 +937,12 @@ h3,
 
     <div class="brand">
 
-      <img
-        src="assets/logo-foreground-light-icon.png"
-        alt="TrackTor"
-      />
-
       <div>
 
-        <div class="brand-name">
-          TrackTor
-        </div>
+        <img
+          src="assets/logo-fondo-claro.png"
+          alt="Tracktor"
+        />
 
         <div class="brand-tag">
           Control operativo en origen para el agro
@@ -981,7 +982,7 @@ h3,
       </h1>
 
       <p class="hero-sub">
-        TrackTor registra y valida combustible y horas de maquinaria
+        Tracktor registra y valida combustible y horas de maquinaria
         directamente desde el origen.
       </p>
 
@@ -1494,7 +1495,7 @@ h3,
       <div>
 
         <h2 class="cta-title">
-          Probá TrackTor gratis.
+          Probá Tracktor gratis.
         </h2>
 
         <p class="cta-sub">
