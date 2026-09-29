@@ -1,7 +1,7 @@
 /* ========================================================================
-   RCM — Landing de validación (fake door test).
-   Maneja el flujo form → pricing → confirmación e instrumenta TODOS los
-   eventos del brief. No hay resultados pre-cargados ni planes destacados.
+   Tracktor — Landing.
+   Modal de demo (formulario → confirmación), calculadora de precio,
+   navegación móvil y la analítica que alimenta el Apps Script.
    ======================================================================== */
 (function () {
   "use strict";
@@ -45,12 +45,15 @@
     if (window.dataLayer) window.dataLayer.push(data);
     if (typeof window.gtag === "function") window.gtag("event", event, data);
 
-    // 3) Endpoint propio (Sheet/Airtable) vía beacon para no bloquear
+    // 3) Endpoint propio (Sheet/Airtable) vía beacon para no bloquear.
+    //    text/plain y no application/json: este último dispara un preflight
+    //    CORS que Apps Script no responde y el navegador descarta el beacon.
+    //    El script igual lo parsea con JSON.parse(e.postData.contents).
     if (ANALYTICS_ENDPOINT) {
       try {
         navigator.sendBeacon(
           ANALYTICS_ENDPOINT,
-          new Blob([JSON.stringify(data)], { type: "application/json" })
+          new Blob([JSON.stringify(data)], { type: "text/plain;charset=UTF-8" })
         );
       } catch (e) {
         /* noop */
@@ -147,16 +150,14 @@
   })();
 
   /* --------------------------------------------------------------------
-     MODAL + FLUJO
+     MODAL: SOLICITAR DEMO (formulario → confirmación)
      -------------------------------------------------------------------- */
   var modal = document.getElementById("modal");
   var steps = {
     form: modal.querySelector('[data-step="form"]'),
-    pricing: modal.querySelector('[data-step="pricing"]'),
     confirm: modal.querySelector('[data-step="confirm"]'),
   };
   var form = document.getElementById("leadForm");
-  var leadData = null;
 
   function showStep(name) {
     Object.keys(steps).forEach(function (k) {
@@ -181,18 +182,23 @@
     document.body.style.overflow = "";
   }
 
-  /* ---- CTAs principales ---- */
+  /* ---- CTAs de demo ---- */
   document.querySelectorAll("[data-cta]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       openModal(btn.getAttribute("data-cta"));
     });
   });
 
-  /* ---- Descargas y beta (App Store, TestFlight, WhatsApp Android) ----
+  /* ---- Tiendas (App Store, Android por WhatsApp) e ingreso al Dashboard ----
      Son enlaces externos: no abren el modal, solo dejan el evento. */
   document.querySelectorAll("[data-store]").forEach(function (link) {
     link.addEventListener("click", function () {
       track("store_click", { store: link.getAttribute("data-store") });
+    });
+  });
+  document.querySelectorAll("[data-login]").forEach(function (link) {
+    link.addEventListener("click", function () {
+      track("login_click", { source: link.getAttribute("data-login") });
     });
   });
 
@@ -204,9 +210,7 @@
     if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
 
-  /* --------------------------------------------------------------------
-     PASO 1: Formulario de lead (4 campos)
-     -------------------------------------------------------------------- */
+  /* ---- Formulario de lead ---- */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var inputs = form.querySelectorAll("input");
@@ -222,7 +226,7 @@
       return;
     }
 
-    leadData = {
+    var leadData = {
       nombre: form.nombre.value.trim(),
       empresa: form.empresa.value.trim(),
       ubicacion: form.ubicacion.value.trim(),
@@ -232,37 +236,10 @@
 
     track("form_submit", leadData);
     submitLead(leadData);
-
-    renderSeatEstimate(leadData.maquinarias);
-    showStep("pricing");
-    track("pricing_view");
+    form.reset();
+    showStep("confirm");
+    track("confirm_view");
   });
-
-  /* Máquinas incluidas sin costo y precio por máquina adicional.
-     Deben coincidir con FREE_MACHINES / MACHINE_SEAT_PRICE_USD del backend. */
-  var FREE_MACHINES = 2;
-  var SEAT_PRICE_USD = 5.99;
-
-  /* Traduce las máquinas declaradas en el paso 1 a lo que pagaría por mes, para
-     que el precio deje de ser abstracto justo antes de elegir. */
-  function renderSeatEstimate(maquinarias) {
-    var target = modal.querySelector("[data-seat-estimate]");
-    if (!target) return;
-
-    var count = parseInt(maquinarias, 10);
-    if (!isFinite(count) || count <= 0) return; // deja el copy por defecto
-
-    var billable = Math.max(0, count - FREE_MACHINES);
-    if (billable === 0) {
-      target.textContent =
-        "Con " + count + " máquina(s) entrás en el plan gratuito: USD 0 al mes.";
-      return;
-    }
-    target.textContent =
-      "Con " + count + " máquinas pagarías USD " +
-      (billable * SEAT_PRICE_USD).toFixed(2) + " al mes (" +
-      FREE_MACHINES + " gratis + " + billable + " a USD " + SEAT_PRICE_USD.toFixed(2) + ").";
-  }
 
   function submitLead(data) {
     var record = Object.assign({ type: "lead", sid: sessionId, ts: new Date().toISOString() }, data);
@@ -281,29 +258,47 @@
   }
 
   /* --------------------------------------------------------------------
-     PASO 2: Test de pricing (sin plan destacado, sin resultado esperado)
+     CALCULADORA DE PRECIO
+     Deben coincidir con FREE_MACHINES / MACHINE_SEAT_PRICE_USD del backend.
      -------------------------------------------------------------------- */
-  modal.querySelectorAll(".plan").forEach(function (plan) {
-    plan.addEventListener("click", function () {
-      var planId = plan.getAttribute("data-plan");
-      track("plan_select", { plan: planId, lead: leadData });
+  (function priceCalc() {
+    var FREE_MACHINES = 2;
+    var SEAT_PRICE_USD = 5.99;
+    var input = document.getElementById("calcInput");
+    var result = document.getElementById("calcResult");
+    if (!input || !result) return;
 
-      // Registrar elección junto al lead (no es checkout real — fase preventa)
-      if (FORM_ENDPOINT) {
-        fetch(FORM_ENDPOINT, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(
-            Object.assign({ type: "plan_select", plan: planId, sid: sessionId, ts: new Date().toISOString() }, leadData || {})
-          ),
-        }).catch(function () {});
+    function render() {
+      var count = parseInt(input.value, 10);
+      if (!isFinite(count) || count < 1) {
+        result.textContent = "";
+        return;
       }
+      var billable = Math.max(0, count - FREE_MACHINES);
+      if (billable === 0) {
+        result.innerHTML = "<strong>USD 0 al mes</strong>Tus " +
+          (count === 1 ? "máquina entra" : count + " máquinas entran") + " en el plan gratis.";
+        return;
+      }
+      result.innerHTML = "<strong>USD " + (billable * SEAT_PRICE_USD).toFixed(2) + " al mes</strong>" +
+        FREE_MACHINES + " gratis + " + billable + (billable === 1 ? " licencia" : " licencias") +
+        " de USD " + SEAT_PRICE_USD.toFixed(2) + ".";
+    }
 
-      showStep("confirm");
-      track("confirm_view", { plan: planId });
+    document.querySelectorAll("[data-calc]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var next = (parseInt(input.value, 10) || 0) + parseInt(btn.getAttribute("data-calc"), 10);
+        input.value = Math.min(500, Math.max(1, next));
+        render();
+      });
     });
-  });
+    input.addEventListener("input", render);
+    // Un solo evento por visita: alcanza para saber si la calculadora se usa.
+    input.addEventListener("change", function () {
+      track("price_calc", { machines: input.value });
+    });
+    render();
+  })();
 
   /* --------------------------------------------------------------------
      NEWSLETTER (footer) — solo analítica, no dispara la preventa.

@@ -2,18 +2,26 @@
    Tracktor — Landing.
 
    Hereda el sistema visual de la app (Reportes y Suscripción son el canon) y
-   del Dashboard: fondo claro con cards blancas, un solo hero con el degradado
-   azul marino por bloque, jerarquía por tipografía y opacidad, sin íconos
-   decorativos. El amarillo del logo queda para el botón principal y algún
-   destacado puntual. Los valores salen de `app-rcm/lib/core/theme/app_colors.dart`
-   y de `panel-rcm/src/app/globals.css`.
+   del Dashboard: fondo claro con cards blancas, el degradado azul marino para
+   los bloques destacados, jerarquía por tipografía y opacidad, sin íconos
+   decorativos. El amarillo del logo queda para el botón principal y la cifra
+   clave. Los valores salen de `app-tracktor/lib/core/theme/app_colors.dart`
+   y de `dashboard-tracktor/src/app/globals.css`.
+
+   Ritmo: toda sección usa .section-head (rótulo + título + bajada) y alterna
+   fondo --ground / --surface, así ninguna necesita estilos de título propios.
+
+   Toque campestre: neutrales cálidos (lino y tierra en vez de gris frío), una
+   textura de surcos casi invisible en las secciones claras, fotos de campo
+   que se ven de verdad y paneles de vidrio (translúcidos con desenfoque)
+   encima de ellas.
    ======================================================================== */
 :root {
   /* Neutrales */
-  --ground: #f9fafb;
-  --surface: #ffffff;
-  --input: #f3f4f6;
-  --ink: #1b1919;        /* primaryDark: títulos, KPIs */
+  --ground: #f4efe4;     /* lino */
+  --surface: #fbf8f1;    /* paja clara */
+  --input: #efe9dc;
+  --ink: #1b1919;        /* primaryDark: títulos, cifras */
   --ink-soft: #2d3436;   /* primary: texto y botones */
   --ink-muted: #636e72;  /* secondary: texto de apoyo */
 
@@ -28,10 +36,10 @@
 
   /* Derivados por opacidad: la jerarquía es el mismo color más o menos
      presente, nunca un gris distinto. */
-  --hairline: rgba(45, 52, 54, 0.06);
-  --card-border: rgba(45, 52, 54, 0.08);
+  --hairline: rgba(74, 58, 38, 0.08);
+  --card-border: rgba(74, 58, 38, 0.1);
   --on-dark: rgba(255, 255, 255, 0.92);
-  --on-dark-muted: rgba(255, 255, 255, 0.55);
+  --on-dark-muted: rgba(255, 255, 255, 0.62);
   --on-dark-faint: rgba(255, 255, 255, 0.4);
   --on-dark-line: rgba(255, 255, 255, 0.1);
 
@@ -43,15 +51,32 @@
   --r-pill: 8px;
 
   /* Sombras casi nulas */
-  --shadow-card: 0 6px 12px rgba(45, 52, 54, 0.04);
+  --shadow-card: 0 8px 24px rgba(74, 58, 38, 0.06);
   --shadow-hero: 0 8px 16px rgba(27, 25, 25, 0.1);
+
+  /* Vidrio: claro sobre fondos de lino, oscuro sobre fotos. */
+  --glass-light: rgba(255, 253, 247, 0.62);
+  --glass-light-border: rgba(255, 255, 255, 0.7);
+  --glass-dark: rgba(14, 16, 12, 0.38);
+  --glass-dark-border: rgba(255, 255, 255, 0.16);
+  --glass-blur: blur(18px) saturate(150%);
+
+  /* Surcos: líneas diagonales muy tenues, color tierra. */
+  --furrows: repeating-linear-gradient(
+    118deg,
+    rgba(92, 70, 40, 0.035) 0 1px,
+    transparent 1px 28px
+  );
+
+  /* Aire vertical de sección: uno solo para toda la página. */
+  --section-y: 96px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
 
-section[id] { scroll-margin-top: 80px; }
+section[id] { scroll-margin-top: 66px; }
 
 body {
   font-family: "Inter", system-ui, sans-serif;
@@ -65,8 +90,8 @@ body {
 
 h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 
-/* Header de sección en MAYÚSCULAS: el patrón distintivo de Reportes. */
-.eyebrow,
+/* ---------------- Encabezado de sección ----------------
+   Rótulo en MAYÚSCULAS (el patrón de Reportes) + título + bajada opcional. */
 .section-header {
   display: inline-block;
   font-family: "Inter", sans-serif;
@@ -76,13 +101,43 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   text-transform: uppercase;
   color: var(--ink-muted);
 }
+.section-header--on-dark { color: var(--accent); }
 
-/* Card blanca de la app. */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--card-border);
-  border-radius: var(--r-card);
-  box-shadow: var(--shadow-card);
+.section-head { max-width: 680px; margin-bottom: 44px; }
+.section-head--center { margin-left: auto; margin-right: auto; text-align: center; }
+.section-title {
+  margin-top: 12px;
+  font-size: clamp(26px, 3.6vw, 38px);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  color: var(--ink);
+}
+.section-lead { margin-top: 14px; font-size: 16.5px; color: var(--ink-muted); }
+
+/* Lista con guion: reemplaza a los checks (sin íconos). */
+.points { list-style: none; display: grid; gap: 12px; }
+.points li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.points li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.72em;
+  width: 10px; height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
+/* Paneles de vidrio. -webkit- para Safari, que todavía lo necesita. */
+.glass-light, .causes__item, .steps__item, .download__card, .duo__side {
+  background: var(--glass-light);
+  border: 1px solid var(--glass-light-border);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }
 
 /* ---------------- Botones ---------------- */
@@ -98,40 +153,35 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   padding: 16px 24px;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 .btn:active { transform: scale(0.98); }
 
 /* Principal sobre fondo claro: carbón, como en la app y el Dashboard. */
-.btn--primary {
-  background: var(--ink-soft);
-  color: #fff;
-}
-/* Principal sobre fondo oscuro (foto del hero, cierre): el amarillo del logo. */
-.btn--accent {
-  background: var(--accent);
-  color: var(--ink);
-}
+.btn--primary { background: var(--ink-soft); color: #fff; }
+/* Principal sobre fondo oscuro o destacado: el amarillo del logo. */
+.btn--accent { background: var(--accent); color: var(--ink); }
 /* Los efectos de elevación solo aplican donde hay puntero real: en touch el
    :hover se queda "pegado" después de tocar. */
 @media (hover: hover) {
   .btn--primary:hover { background: var(--ink); transform: translateY(-1px); }
   .btn--accent:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); transform: translateY(-1px); }
+  .btn--ghost:hover { border-color: rgba(255, 255, 255, 0.7); }
 }
 .btn--ghost {
   background: transparent;
   color: var(--on-dark);
   border: 1.5px solid rgba(255, 255, 255, 0.3);
 }
-.btn--ghost:hover { border-color: rgba(255, 255, 255, 0.7); }
 
 .btn--lg { padding: 18px 30px; font-size: 16px; }
 .btn--sm { padding: 10px 18px; font-size: 13px; border-radius: 12px; }
 .btn--block { width: 100%; }
 
-/* ---------------- Badge de tienda (App Store) ----------------
-   Arte oficial de Apple: no se re-colorea ni se deforma, solo se escala.
-   La altura del badge iguala la de .btn--lg para que la fila quede pareja. */
+/* ---------------- Tiendas ----------------
+   App Store: arte oficial de Apple, no se re-colorea ni se deforma.
+   Google Play: botón propio de texto (la app está en prueba cerrada, no hay
+   ficha pública que enlazar) con la misma forma y altura que el badge. */
 .store-badge {
   display: inline-flex;
   align-items: center;
@@ -141,9 +191,28 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 }
 .store-badge img { display: block; height: 56px; width: auto; }
 .store-badge--lg img { height: 60px; }
-.store-badge:active { transform: scale(0.98); }
+
+.store-btn {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 56px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 1px solid #a6a6a6;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  line-height: 1.1;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.store-btn small { font-size: 10.5px; font-weight: 600; color: rgba(255, 255, 255, 0.72); }
+.store-btn strong { font-family: "Inter", sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.2px; }
+.store-btn--light { height: 60px; }
+
+.store-badge:active, .store-btn:active { transform: scale(0.98); }
 @media (hover: hover) {
-  .store-badge:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2); }
+  .store-badge:hover, .store-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2); }
 }
 
 /* ---------------- Nav ---------------- */
@@ -151,20 +220,23 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--surface);
+  background: rgba(251, 248, 241, 0.72);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--hairline);
 }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 66px; }
-.nav__links { display: flex; align-items: center; gap: 24px; }
+.nav__links { display: flex; align-items: center; gap: 26px; }
 .nav__link {
-  font-family: "Inter", sans-serif;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--ink-muted);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 .nav__link:hover { color: var(--ink); }
+/* "Ingresar" es para quien ya es cliente: separado de las secciones. */
+.nav__link--login { color: var(--ink); padding-left: 26px; border-left: 1px solid var(--card-border); }
 .nav__actions { display: flex; align-items: center; gap: 10px; }
 
 /* Botón hamburguesa — solo visible en móvil (ver bloque responsive). */
@@ -196,7 +268,7 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 72px 0 64px;
+  padding: 112px 0 104px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -207,305 +279,351 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   position: absolute; inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(12, 15, 22, 0.92) 0%,
-    rgba(12, 15, 22, 0.76) 40%,
-    rgba(12, 15, 22, 0.25) 75%,
-    rgba(12, 15, 22, 0) 100%
+    rgba(12, 15, 22, 0.94) 0%,
+    rgba(12, 15, 22, 0.8) 42%,
+    rgba(12, 15, 22, 0.3) 78%,
+    rgba(12, 15, 22, 0.1) 100%
   );
   z-index: 0;
 }
-.hero__inner { position: relative; z-index: 1; max-width: 720px; }
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 640px) 1fr;
+  gap: 40px;
+  align-items: end;
+}
+.hero__content { min-width: 0; }
 .hero__title {
-  margin: 18px 0 22px;
-  font-size: clamp(32px, 5.2vw, 52px);
+  margin: 16px 0 22px;
+  font-size: clamp(38px, 6vw, 64px);
   font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: -0.5px;
+  line-height: 1.05;
+  letter-spacing: -1px;
   color: #fff;
 }
 .hero__title em { font-style: normal; color: var(--accent); }
-.hero__subtitle {
-  font-size: clamp(16px, 2vw, 19px);
-  color: var(--on-dark-muted);
-  max-width: 620px;
-}
-.hero__actions { margin-top: 34px; display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-.hero__actions .btn { flex: 0 1 auto; }
-/* Refuerza que la app ya está publicada, justo debajo del badge. */
-.hero__store-note {
-  margin-top: 14px;
+.hero__subtitle { font-size: clamp(16px, 2vw, 19px); color: var(--on-dark-muted); }
+.hero__actions {
+  margin-top: 36px;
   display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  font-size: 13.5px;
+  max-width: none;
+}
+.hero__actions .btn { height: 56px; padding-top: 0; padding-bottom: 0; }
+.hero__note { margin-top: 18px; font-size: 13.5px; color: var(--on-dark-faint); }
+/* Botón de demo del hero: vidrio en vez de solo borde. */
+.hero .btn--ghost {
+  background: rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Alerta de ejemplo: vidrio oscuro flotando sobre el campo. */
+.hero__alert {
+  justify-self: end;
+  width: 100%;
+  max-width: 300px;
+  padding: 22px 22px 18px;
+  border-radius: var(--r-card);
+  background: var(--glass-dark);
+  border: 1px solid var(--glass-dark-border);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+}
+.hero__alert-label {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.hero__alert-machine {
+  display: block;
+  margin-top: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: #fff;
+}
+.hero__alert-figure {
+  margin-top: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.05;
+  color: #fff;
+}
+.hero__alert-figure span {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
   font-weight: 500;
+  letter-spacing: 0;
   color: var(--on-dark-muted);
 }
-.hero__store-dot {
-  width: 8px; height: 8px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2);
-}
-/* Cuatro verbos del producto: rótulo en mayúsculas y bajada, separados por
-   una línea fina. Sin íconos: la jerarquía la da la tipografía. */
-.hero__pillars {
-  margin-top: 56px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}
-.pillar {
+.hero__alert-meta {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-top: 14px;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 12px;
   border-top: 1px solid var(--on-dark-line);
+  font-size: 12px;
+  color: var(--on-dark-faint);
 }
-.pillar div { display: flex; flex-direction: column; gap: 2px; }
-.pillar strong { font-size: 11px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: #fff; }
-.pillar span { font-size: 12.5px; color: var(--on-dark-muted); }
 
 /* ---------------- Problema ---------------- */
-.problem { padding: 88px 0 64px; background: var(--ground); }
-.problem__head { max-width: 620px; margin-bottom: 36px; }
-.problem__title {
-  margin: 12px 0 0;
-  font-size: clamp(24px, 3.5vw, 34px);
-  font-weight: 900;
-  letter-spacing: -0.4px;
-  line-height: 1.2;
-  color: var(--ink);
+.problem { padding: var(--section-y) 0; background: var(--furrows), var(--ground); }
+
+/* Las dos cifras: el bloque destacado con el degradado de marca. */
+/* Cifras sobre la foto de la cosecha: la tierra se ve a través del vidrio. */
+.figures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 14px;
+  background:
+    linear-gradient(135deg, rgba(27, 25, 25, 0.55) 0%, rgba(26, 47, 76, 0.35) 100%),
+    url("assets/campo-surcos.webp") center / cover no-repeat;
+  border-radius: var(--r-hero);
+  box-shadow: var(--shadow-hero);
+  color: #fff;
 }
-.problem__grid {
+.figures__item {
+  padding: 36px 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: var(--r-card);
+  background: rgba(14, 16, 12, 0.3);
+  border: 1px solid var(--glass-dark-border);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  backdrop-filter: blur(10px) saturate(150%);
+}
+.figures__item strong {
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(48px, 7vw, 76px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+}
+.figures__accent { color: var(--accent); }
+.figures__item span { font-size: 15.5px; color: var(--on-dark-muted); max-width: 340px; }
+
+.causes {
+  margin-top: 16px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
-.problem__item {
-  background: var(--surface);
-  border: 1px solid var(--card-border);
+.causes__item {
   border-radius: var(--r-card);
   box-shadow: var(--shadow-card);
   padding: 24px 22px;
 }
-.problem__item h3 { font-size: 15px; font-weight: 800; margin-bottom: 8px; color: var(--ink); line-height: 1.35; }
-.problem__item p { font-size: 13.5px; color: var(--ink-muted); line-height: 1.5; }
+.causes__item h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--ink); }
+.causes__item p { font-size: 14px; color: var(--ink-muted); }
 
-/* El hero de la sección: el degradado de marca, como el resumen de Reportes. */
-.problem__value {
-  margin-top: 24px;
+.problem__why {
+  margin-top: 36px;
+  max-width: 640px;
+  font-size: 16px;
+  color: var(--ink-soft);
+  padding-left: 18px;
+  border-left: 3px solid var(--accent);
+}
+
+/* ---------------- Solución: operador y dueño ---------------- */
+/* Horizonte: el lino se calienta hacia abajo, como el cielo al atardecer. */
+.solution {
+  padding: var(--section-y) 0;
+  background: linear-gradient(180deg, var(--surface) 0%, #f3e6c8 100%);
+}
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.duo__side {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
+  grid-template-columns: 200px 1fr;
   gap: 28px;
-  padding: 32px 40px;
-  background: var(--premium);
+  align-items: center;
+  padding: 32px;
   border-radius: var(--r-hero);
-  box-shadow: var(--shadow-hero);
+  box-shadow: var(--shadow-card);
 }
-.problem__value-block { display: flex; flex-direction: column; gap: 6px; }
-.problem__value-block:last-child { text-align: right; align-items: flex-end; }
-.problem__value-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-}
-.problem__value-amount {
-  font-family: "Montserrat", sans-serif;
-  font-size: clamp(30px, 3.4vw, 40px);
+.duo__side > * { min-width: 0; }
+.duo__copy h3 {
+  margin: 10px 0 18px;
+  font-size: 21px;
   font-weight: 900;
-  letter-spacing: -0.5px;
-  color: #fff;
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-.problem__value-block:last-child .problem__value-amount { justify-content: flex-end; }
-.problem__value-amount span {
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0;
-  color: rgba(255, 255, 255, 0.45);
-}
-.problem__value-multiplier {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Montserrat", sans-serif;
-  font-size: 26px;
-  font-weight: 900;
-  color: rgba(255, 255, 255, 0.35);
-  white-space: nowrap;
-}
-.problem__value-multiplier span {
-  font-family: "Inter", sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.45);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* ---------------- Solución ---------------- */
-.solution { padding: 72px 0 88px; background: var(--surface); }
-.solution__inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 60px;
-}
-/* min-width:0 evita que el contenido intrínseco (los mockups) fije un ancho
-   mínimo mayor que la columna y desborde la página en pantallas angostas. */
-.solution__inner > * { min-width: 0; }
-.solution__phones {
-  display: flex;
-  align-items: flex-end;
-  gap: 20px;
-  justify-content: center;
-  max-width: 100%;
-}
-.solution__copy .checklist { list-style: none; margin: 22px 0 32px; display: grid; gap: 14px; }
-.checklist li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 15px;
-  color: var(--ink-soft);
-  font-weight: 500;
-}
-.checklist__icon {
-  flex-shrink: 0;
-  width: 22px; height: 22px;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  background: rgba(45, 52, 54, 0.06);
-  color: var(--ink-soft);
-  font-size: 12px;
-  font-weight: 900;
-}
-.solution__title {
-  margin: 12px 0 8px;
-  font-size: clamp(24px, 3.5vw, 32px);
-  font-weight: 900;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.3px;
   line-height: 1.2;
   color: var(--ink);
 }
+.duo__copy .points li { font-size: 14.5px; }
+
 .phone {
   margin: 0;
-  border-radius: 34px;
+  border-radius: 30px;
   background: var(--ink);
-  padding: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 7px;
   box-shadow: 0 20px 40px rgba(27, 25, 25, 0.14);
-  overflow: hidden;
 }
-.phone img { display: block; width: 100%; height: auto; border-radius: 26px; }
-/* flex-shrink habilitado: los mockups se encogen con la pantalla en vez de
-   forzar scroll horizontal. */
-.phone--tall { flex: 0 1 230px; width: 230px; min-width: 0; }
-.phone--offset { transform: translateY(-30px); }
+.phone img { display: block; width: 100%; height: auto; border-radius: 24px; }
 
 /* ---------------- Cómo funciona ---------------- */
-.how { padding: 80px 0; background: var(--ground); }
-.how__head { text-align: center; max-width: 600px; margin: 0 auto 40px; }
-.how__title {
-  margin: 12px 0 0;
-  font-size: clamp(24px, 3.5vw, 34px);
-  font-weight: 900;
-  letter-spacing: -0.4px;
-  color: var(--ink);
-}
-.how__grid {
+.how { padding: var(--section-y) 0; background: var(--furrows), var(--ground); }
+.how .section-head { max-width: 860px; }
+.how .section-title { font-size: clamp(24px, 3.2vw, 34px); }
+.steps {
+  list-style: none;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
-.how__step {
-  background: var(--surface);
-  border: 1px solid var(--card-border);
+.steps__item {
   border-radius: var(--r-card);
   box-shadow: var(--shadow-card);
-  padding: 26px 22px;
+  padding: 28px 26px;
 }
-/* "PASO 1": rótulo de sección, no una ficha de color. */
-.how__num {
+.steps__num {
   display: block;
   margin-bottom: 14px;
-  font-family: "Inter", sans-serif;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 1.8px;
   text-transform: uppercase;
   color: var(--ink-muted);
 }
-.how__num::before { content: "Paso "; }
-.how__step h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--ink); }
-.how__step p { font-size: 14px; color: var(--ink-muted); line-height: 1.5; }
+.steps__item h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--ink); }
+.steps__item p { font-size: 14.5px; color: var(--ink-muted); }
+.how__foot { margin-top: 28px; text-align: center; font-size: 14px; color: var(--ink-muted); }
 
-/* ---------------- Resultados ---------------- */
-.results { padding: 64px 0; background: var(--surface); }
-.results__head { text-align: center; max-width: 640px; margin: 0 auto 36px; }
-.results__note { margin-top: 10px; font-size: 13px; color: var(--ink-muted); }
-.results__grid {
+/* ---------------- Precio ---------------- */
+/* Precio sobre el campo al atardecer: texto claro y tarjeta de vidrio. */
+.pricing {
+  position: relative;
+  padding: var(--section-y) 0;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+.pricing::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(12, 15, 22, 0.86) 0%, rgba(12, 15, 22, 0.55) 55%, rgba(12, 15, 22, 0.35) 100%);
+}
+.pricing .container { position: relative; }
+.pricing .section-header { color: var(--accent); }
+.pricing .section-title { color: #fff; }
+.pricing .section-lead { color: var(--on-dark-muted); }
+.pricing .points li { color: var(--on-dark); }
+.pricing__inner {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  text-align: center;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: center;
 }
-.results__item { padding: 8px 20px; }
-.results__item + .results__item { border-left: 1px solid var(--hairline); }
-.results__value {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 900;
-  font-size: clamp(28px, 4vw, 38px);
-  letter-spacing: -0.5px;
-  color: var(--ink);
-  margin-bottom: 6px;
-}
-.results__item p { font-size: 13.5px; color: var(--ink-muted); max-width: 200px; margin: 0 auto; }
+.pricing__inner > * { min-width: 0; }
+.pricing__copy .section-head { margin-bottom: 28px; }
+.pricing__copy .section-lead { margin-bottom: 26px; }
 
-/* ---------------- Descargá la app ---------------- */
-.beta { padding: 72px 0 56px; background: var(--ground); }
-.beta__head { text-align: center; max-width: 620px; margin: 0 auto 36px; }
-.beta__title {
-  margin-top: 12px;
-  font-size: clamp(22px, 3.2vw, 30px);
-  font-weight: 900;
-  letter-spacing: -0.4px;
-  margin-bottom: 10px;
-  color: var(--ink);
+.price-card {
+  padding: 36px 34px;
+  background: var(--glass-dark);
+  border: 1px solid var(--glass-dark-border);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border-radius: var(--r-hero);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+  color: #fff;
 }
-.beta__note { font-size: 14.5px; color: var(--ink-muted); }
-.beta__grid {
+.price-card__label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.price-card__amount {
+  margin-top: 12px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 46px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.price-card__amount span {
+  display: block;
+  margin-top: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--on-dark-muted);
+}
+.price-card__sub { font-size: 13px; color: var(--on-dark-faint); margin-top: 2px; }
+
+.calc { display: block; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--on-dark-line); }
+.calc > span { display: block; font-size: 13px; font-weight: 600; color: var(--on-dark-muted); margin-bottom: 10px; }
+.calc__row { display: flex; gap: 8px; }
+.calc__row input {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  height: 52px;
+  -moz-appearance: textfield;
+}
+.calc__row input::-webkit-outer-spin-button,
+.calc__row input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.calc__row input:focus { outline: none; border-color: rgba(255, 255, 255, 0.45); }
+.calc__step {
+  width: 52px; height: 52px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.calc__step:hover { background: rgba(255, 255, 255, 0.12); }
+.calc__result { margin: 16px 0 24px; min-height: 48px; font-size: 14.5px; color: var(--on-dark-muted); }
+.calc__result strong { display: block; font-family: "Montserrat", sans-serif; font-size: 22px; font-weight: 900; color: #fff; }
+
+/* ---------------- Descarga ---------------- */
+.download { padding: var(--section-y) 0; background: var(--furrows), var(--ground); }
+.download__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   max-width: 760px;
   margin: 0 auto;
 }
-.beta__card {
-  background: var(--surface);
-  border: 1px solid var(--card-border);
+.download__card {
   border-radius: var(--r-card);
   box-shadow: var(--shadow-card);
-  padding: 28px 26px;
+  padding: 30px 26px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 12px;
 }
-.beta__card h3 { font-size: 17px; font-weight: 800; color: var(--ink); }
-.beta__card p { font-size: 14px; color: var(--ink-muted); line-height: 1.5; min-height: 42px; }
-.beta__card .btn { margin-top: 4px; }
-/* Estado de cada plataforma: iOS publicado vs Android todavía en beta. */
-.beta__tag {
-  font-family: "Inter", sans-serif;
+.download__card h3 { font-size: 19px; font-weight: 800; color: var(--ink); }
+.download__card p { font-size: 14px; color: var(--ink-muted); flex: 1; }
+.tag {
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
@@ -515,59 +633,76 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   background: rgba(45, 52, 54, 0.06);
   color: var(--ink-soft);
 }
-.beta__tag--live {
-  background: rgba(22, 163, 74, 0.12);
-  color: #15803d;
-}
-/* Salida secundaria para testers: no compite con la descarga de la tienda. */
-.beta__alt {
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--ink-muted);
-  text-decoration: none;
-  border-bottom: 1px solid var(--card-border);
-  padding-bottom: 2px;
-}
-.beta__alt:hover { color: var(--ink); border-bottom-color: var(--ink-muted); }
+.tag--live { background: rgba(22, 163, 74, 0.12); color: #15803d; }
 
-.testimonials { padding: 8px 0 80px; background: var(--ground); }
-.testimonials__head { text-align: center; max-width: 640px; margin: 0 auto; }
-.testimonials__note { margin-top: 10px; font-size: 13px; color: var(--ink-muted); }
+/* ---------------- Preguntas ---------------- */
+.faq { padding: var(--section-y) 0; background: var(--surface); }
+.faq__inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 56px; align-items: start; }
+.faq__list { border-top: 1px solid var(--card-border); }
+.faq details { border-bottom: 1px solid var(--card-border); }
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.faq summary::-webkit-details-marker { display: none; }
+/* Indicador de abierto/cerrado con tipografía, no con un ícono. */
+.faq summary::after {
+  content: "+";
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+.faq details[open] summary::after { content: "−"; }
+.faq details p { padding: 0 32px 22px 0; font-size: 15px; color: var(--ink-muted); }
 
 /* ---------------- Cierre ---------------- */
 .closer {
   position: relative;
   overflow: hidden;
-  padding: 72px 0;
+  padding: 88px 0;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   color: #fff;
 }
-/* El degradado de marca sobre la foto. */
+/* Velo suave: la cosecha tiene que verse; el contraste lo da el vidrio. */
+.closer { padding: 140px 0; }
 .closer::before {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(27, 25, 25, 0.92) 0%, rgba(26, 47, 76, 0.82) 100%);
+  background: linear-gradient(180deg, rgba(12, 15, 22, 0.15) 0%, rgba(12, 15, 22, 0.45) 100%);
   z-index: 0;
 }
+.closer .container { position: relative; z-index: 1; }
 .closer__inner {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
   flex-wrap: wrap;
+  padding: 36px 40px;
+  border-radius: var(--r-hero);
+  background: var(--glass-dark);
+  border: 1px solid var(--glass-dark-border);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
 }
-.closer__title { font-size: clamp(24px, 3.6vw, 34px); font-weight: 900; letter-spacing: -0.4px; margin-bottom: 10px; }
-.closer__sub { color: var(--on-dark-muted); font-size: 15.5px; max-width: 480px; }
+.closer__title { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -0.6px; margin-bottom: 10px; }
+.closer__sub { color: var(--on-dark); font-size: 16px; max-width: 480px; }
 
 /* ---------------- Footer ---------------- */
-.footer { background: var(--night); padding: 56px 0 28px; color: var(--on-dark); }
+.footer { background: #15130f; padding: 56px 0 28px; color: var(--on-dark); }
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr 1.4fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1.5fr;
   gap: 32px;
   padding-bottom: 32px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -614,14 +749,15 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 .newsletter__form input:focus { outline: none; border-color: rgba(255, 255, 255, 0.45); }
 .newsletter__form button {
   flex-shrink: 0;
-  width: 46px;
+  padding: 0 16px;
   min-height: 46px;
   border: none;
   border-radius: 10px;
   background: var(--accent);
   color: var(--ink);
+  font-family: "Montserrat", sans-serif;
   font-weight: 800;
-  font-size: 16px;
+  font-size: 13px;
   cursor: pointer;
 }
 .footer__note { font-size: 12px; color: rgba(255, 255, 255, 0.3); padding-bottom: 4px; }
@@ -668,6 +804,7 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 .modal__lead { font-size: 14px; color: var(--ink-muted); margin-bottom: 24px; }
 
 .field { display: block; margin-bottom: 16px; }
+.field-row { display: grid; grid-template-columns: 1fr 1.6fr; gap: 12px; }
 .field > span {
   display: block;
   font-size: 10px;
@@ -691,53 +828,20 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 .field input::placeholder { color: rgba(99, 110, 114, 0.45); }
-.field input:focus {
-  outline: none;
-  border-color: var(--ink-soft);
-  background: #fff;
-}
+.field input:focus { outline: none; border-color: var(--ink-soft); background: #fff; }
 .field input.invalid { border-color: var(--error); background: rgba(214, 48, 49, 0.04); }
 
-.plans { display: grid; gap: 12px; }
-.plan {
-  text-align: left;
-  font: inherit;
-  background: var(--ground);
-  border: 1px solid var(--card-border);
-  border-radius: var(--r-card);
-  padding: 22px;
-  cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
-}
-@media (hover: hover) {
-  .plan:hover { border-color: rgba(45, 52, 54, 0.3); background: var(--surface); }
-}
-.plan:active { border-color: var(--ink-soft); }
-.plan__name { font-family: "Inter", sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-muted); }
-.plan__price { font-family: "Montserrat", sans-serif; margin: 8px 0 4px; color: var(--ink); }
-.plan__price strong { font-size: 30px; font-weight: 900; letter-spacing: -0.5px; color: var(--ink); }
-.plan__price span { font-size: 14px; color: var(--ink-muted); margin-left: 4px; }
-.plan__detail { font-size: 14px; color: var(--ink-muted); margin-bottom: 14px; }
-.plan__select { font-size: 13px; font-weight: 800; color: var(--ink-soft); }
-
-.step--confirm { text-align: center; padding: 12px 0; }
-.confirm__check {
-  width: 64px; height: 64px; margin: 0 auto 8px;
-  display: grid; place-items: center;
-  font-size: 32px; color: var(--green);
-  background: rgba(22, 163, 74, 0.12);
-  border-radius: 50%;
-}
+.step--confirm { padding: 12px 0; }
 
 /* ---------------- Responsive ---------------- */
-@media (max-width: 900px) {
-  .hero__pillars { grid-template-columns: repeat(2, 1fr); }
-  .problem__grid { grid-template-columns: repeat(2, 1fr); }
-  .solution__inner { grid-template-columns: 1fr; gap: 40px; }
-  .solution__phones { order: -1; }
-  .how__grid { grid-template-columns: repeat(2, 1fr); }
-  .beta__grid { grid-template-columns: 1fr; }
+@media (max-width: 960px) {
+  .hero__inner { grid-template-columns: 1fr; }
+  .hero__alert { justify-self: start; }
+  .causes { grid-template-columns: repeat(2, 1fr); }
+  .duo { grid-template-columns: 1fr; }
+  .pricing__inner, .faq__inner { grid-template-columns: 1fr; gap: 36px; }
   .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__brand, .footer__newsletter { grid-column: 1 / -1; }
 }
 
 @media (max-width: 860px) {
@@ -766,75 +870,58 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
     color: var(--ink-soft);
     border-bottom: 1px solid var(--hairline);
   }
-  .nav__links .nav__link:last-child { border-bottom: none; }
-  .nav { position: sticky; }
+  .nav__link--login { padding-left: 2px; border-left: none; border-bottom: none; }
   .nav__inner { position: relative; }
   .btn--sm { min-height: 44px; }
+  .steps { grid-template-columns: 1fr; gap: 12px; }
 }
 
 @media (max-width: 640px) {
-  /* Menos aire vertical: en móvil el desktop padding alarga mucho el scroll. */
-  .hero { padding: 48px 0 44px; }
-  .problem { padding: 56px 0 48px; }
-  .solution { padding: 48px 0 56px; }
-  .how { padding: 56px 0; }
-  .results { padding: 48px 0; }
-  .beta { padding: 56px 0 40px; }
-  .testimonials { padding: 8px 0 56px; }
-  .closer { padding: 56px 0; }
-  .footer { padding: 44px 0 24px; }
+  :root { --section-y: 64px; }
+  .container { padding: 0 16px; }
+  .section-head { margin-bottom: 32px; }
 
+  .hero { padding: 64px 0 56px; }
   /* El degradado del hero es horizontal en desktop; en móvil el texto queda
      sobre la parte clara de la foto, así que se vuelve vertical. */
   .hero::before {
     background: linear-gradient(
       180deg,
-      rgba(12, 15, 22, 0.88) 0%,
-      rgba(12, 15, 22, 0.82) 55%,
-      rgba(12, 15, 22, 0.72) 100%
+      rgba(12, 15, 22, 0.9) 0%,
+      rgba(12, 15, 22, 0.84) 55%,
+      rgba(12, 15, 22, 0.74) 100%
     );
   }
-  .hero__subtitle { max-width: none; }
-  .hero__actions { margin-top: 26px; gap: 12px; }
-  .hero__actions .btn { flex: 1 1 100%; }   /* CTA a ancho completo */
-  .hero__pillars { margin-top: 36px; gap: 16px; }
+  .hero__actions { margin-top: 28px; }
+  .hero__actions .btn { flex: 1 1 100%; }
 
-  .problem__grid { grid-template-columns: 1fr; gap: 12px; }
-  .problem__head { margin-bottom: 28px; }
-  .problem__value {
-    margin-top: 16px;
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 28px 22px;
-    gap: 18px;
-  }
-  .problem__value-block:last-child { text-align: center; align-items: center; }
-  .problem__value-block { align-items: center; }
-  .problem__value-amount { justify-content: center; }
-  .problem__value-block:last-child .problem__value-amount { justify-content: center; }
+  .figures { grid-template-columns: 1fr; padding: 10px; gap: 10px; }
+  .figures__item { padding: 26px 22px; }
+  .pricing::before { background: rgba(12, 15, 22, 0.72); }
+  .causes { grid-template-columns: 1fr; gap: 12px; }
 
-  .how__grid { grid-template-columns: 1fr; gap: 12px; }
-  .how__step { padding: 22px 20px; }
-  .results__grid { grid-template-columns: 1fr; gap: 0; }
-  .results__item { padding: 18px 0; }
-  .results__item + .results__item { border-left: none; border-top: 1px solid var(--hairline); }
+  .duo__side { grid-template-columns: 1fr; padding: 24px 20px; gap: 24px; }
+  .duo__side .phone { width: 200px; margin: 0 auto; }
 
-  .closer__inner { flex-direction: column; align-items: stretch; text-align: left; gap: 24px; }
+  .price-card { padding: 28px 22px; }
+  .download__grid { grid-template-columns: 1fr; }
+
+  .closer { padding: 88px 0; }
+  .closer__inner { flex-direction: column; align-items: stretch; gap: 24px; padding: 28px 22px; }
   .closer__inner .btn { width: 100%; }
 
+  .footer { padding: 44px 0 24px; }
   .footer__grid { grid-template-columns: 1fr; gap: 24px; }
-  /* Enlaces del footer con altura táctil real (antes 20px). */
-  .footer__col a { padding: 12px 0; margin-bottom: 0; }
+  /* Enlaces del footer con altura táctil real. */
+  .footer__col a { padding: 10px 0; margin-bottom: 0; }
 
   .modal { padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
   .modal__dialog { padding: 30px 20px; border-radius: var(--r-card); }
   .modal__title { font-size: 20px; }
-  .plan { padding: 18px; }
 }
 
 @media (max-width: 380px) {
-  .container { padding: 0 18px; }
   .brand__logo { height: 22px; }
   .btn--sm { padding: 10px 14px; font-size: 12.5px; }
-  .hero__pillars { grid-template-columns: 1fr; gap: 14px; }
+  .field-row { grid-template-columns: 1fr; gap: 0; }
 }

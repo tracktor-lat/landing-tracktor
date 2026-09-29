@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- repo: tracktor-lat/landing-tracktor v3 -->
+  <!-- repo: tracktor-lat/landing-tracktor v4 -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tracktor — Control total, máximo rendimiento.</title>
-  <meta name="description" content="Tracktor digitaliza la operación de tus maquinarias en el origen. Registro asistido con evidencia fotográfica y GPS, sin depender de Excel ni WhatsApp, y reportes claros para decidir mejor." />
-  <link rel="canonical" href="https://tracktor.lat/" />
+  <title>Tracktor — Dejá de perder diésel en tu flota agrícola</title>
+  <meta name="description" content="Entre 5% y 15% del diésel de una flota agrícola se pierde por mala gestión. Tracktor ordena el registro de cada máquina con IA y te avisa del desvío el mismo día." />
+  <link rel="canonical" href="https://www.tracktor.lat/" />
 
   <!-- Favicons e íconos -->
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="icon" href="assets/favicon-16.png" sizes="16x16" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#fbf8f1" />
 
   <!-- Open Graph (previews en WhatsApp / redes) -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Tracktor" />
-  <meta property="og:url" content="https://tracktor.lat/" />
-  <meta property="og:title" content="Tracktor — Control total, máximo rendimiento." />
-  <meta property="og:description" content="Plataforma móvil para el registro verificado, control y análisis de la operación agrícola, sin depender de Excel ni WhatsApp." />
-  <meta property="og:image" content="https://tracktor.lat/assets/og-image.jpg" />
+  <meta property="og:url" content="https://www.tracktor.lat/" />
+  <meta property="og:title" content="Tracktor — Dejá de perder diésel en tu flota agrícola" />
+  <meta property="og:description" content="Entre 5% y 15% del diésel se pierde por mala gestión. Tracktor te avisa del desvío el mismo día." />
+  <meta property="og:image" content="https://www.tracktor.lat/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="es_BO" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Tracktor — Control total, máximo rendimiento." />
-  <meta name="twitter:description" content="Monitoreo en tiempo real de toda tu maquinaria, sin depender de Excel ni WhatsApp." />
-  <meta name="twitter:image" content="https://tracktor.lat/assets/og-image.jpg" />
+  <meta name="twitter:title" content="Tracktor — Dejá de perder diésel en tu flota agrícola" />
+  <meta name="twitter:description" content="Entre 5% y 15% del diésel se pierde por mala gestión. Tracktor te avisa del desvío el mismo día." />
+  <meta name="twitter:image" content="https://www.tracktor.lat/assets/og-image.jpg" />
 
-  <!-- Tipografía de Tracktor: Montserrat (títulos/KPIs) + Inter (cuerpo) -->
+  <!-- Tipografía de Tracktor: Montserrat (títulos/cifras) + Inter (cuerpo) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
@@ -48,10 +48,11 @@
         <img src="assets/logo-fondo-claro.png" alt="Tracktor" class="brand__logo" width="800" height="148" />
       </a>
       <nav class="nav__links" id="navLinks">
-        <a href="#solution" class="nav__link">Producto</a>
-        <a href="#how" class="nav__link">Cómo funciona</a>
         <a href="#problem" class="nav__link">El problema</a>
-        <a href="#beta" class="nav__link">Descargá la app</a>
+        <a href="#how" class="nav__link">Cómo funciona</a>
+        <a href="#pricing" class="nav__link">Precio</a>
+        <a href="#faq" class="nav__link">Preguntas</a>
+        <a href="https://dash.tracktor.lat" class="nav__link nav__link--login" data-login="nav">Ingresar</a>
       </nav>
       <div class="nav__actions">
         <button class="btn btn--primary btn--sm" data-cta="nav">Solicitar demo</button>
@@ -66,105 +67,131 @@
   <!-- ============ HERO ============ -->
   <section id="hero" class="hero" style="background-image: url('assets/hero-user-tracktor.webp');">
     <div class="container hero__inner">
-      <h1 class="hero__title">Cada operación.<br /><em>Bajo control.</em></h1>
+      <div class="hero__content">
+      <span class="section-header section-header--on-dark">Gestión de flota agrícola con IA</span>
+      <h1 class="hero__title">Tu diésel es caro.<br /><em>Dejá de perderlo.</em></h1>
       <p class="hero__subtitle">
-        Plataforma móvil offline-first para el registro, control y análisis de tu
-        operación agrícola. Registrá sin conexión o dictá por voz con IA — sin
-        depender de Excel ni WhatsApp.
+        Entre 5% y 15% del combustible de una flota agrícola se pierde por mala
+        gestión. Tracktor ordena el registro de cada máquina y te avisa del desvío
+        el mismo día, no a fin de mes.
       </p>
       <div class="hero__actions">
-        <button class="btn btn--accent btn--lg" data-cta="hero">Solicitar demo</button>
-        <!-- Descarga directa: la app iOS ya está publicada (no usa data-cta,
-             ese atributo abre el modal de demo). -->
+        <!-- Enlaces de tienda: llevan data-store, no data-cta (ese abre el modal). -->
         <a class="store-badge" href="https://apps.apple.com/bo/app/tracktor/id6781363801"
            target="_blank" rel="noopener" data-store="ios"
            aria-label="Descargar Tracktor en la App Store">
           <img src="assets/app-store-badge-es.svg" alt="Descárgalo en el App Store"
                width="120" height="40" />
         </a>
-        <a href="#how" class="btn btn--ghost btn--lg">Conocer más →</a>
+        <!-- Android está en prueba cerrada: el ingreso es por WhatsApp. -->
+        <a class="store-btn" href="https://wa.me/59173620224?text=Hola%2C%20quiero%20probar%20Tracktor%20en%20Android.%20Mi%20correo%20de%20Google%20es%3A%20"
+           target="_blank" rel="noopener" data-store="android">
+          <small>Android · en prueba</small>
+          <strong>Google Play</strong>
+        </a>
+        <button class="btn btn--ghost btn--lg" data-cta="hero">Solicitar demo</button>
       </div>
-      <p class="hero__store-note">
-        <span class="hero__store-dot"></span>
-        Ya disponible para iPhone · Descarga gratis
-      </p>
-      <div class="hero__pillars">
-        <div class="pillar">
-          <div><strong>Registra</strong><span>Datos en origen</span></div>
-        </div>
-        <div class="pillar">
-          <div><strong>Controla</strong><span>Tu operación</span></div>
-        </div>
-        <div class="pillar">
-          <div><strong>Analiza</strong><span>Lo que importa</span></div>
-        </div>
-        <div class="pillar">
-          <div><strong>Decide</strong><span>Mejores resultados</span></div>
-        </div>
+      <p class="hero__note">Gratis hasta 2 máquinas. Sin tarjeta, sin instalar nada en la maquinaria.</p>
       </div>
+
+      <!-- Ejemplo ilustrativo de una alerta del Dashboard, en vidrio sobre la foto. -->
+      <aside class="hero__alert" aria-label="Ejemplo de alerta de desvío">
+        <span class="hero__alert-label">Alerta de desvío · ejemplo</span>
+        <strong class="hero__alert-machine">Valtra 1780</strong>
+        <p class="hero__alert-figure">+18%<span>de consumo sobre su media</span></p>
+        <div class="hero__alert-meta">
+          <span>Hoy, 16:40</span>
+          <span>Lote Norte</span>
+        </div>
+      </aside>
     </div>
   </section>
 
   <!-- ============ EL PROBLEMA ============ -->
   <section id="problem" class="problem">
     <div class="container">
-      <div class="problem__head">
-        <span class="section-header">EL PROBLEMA</span>
-        <h2 class="problem__title">Tomar decisiones sin datos<br />te cuesta dinero.</h2>
+      <div class="section-head">
+        <span class="section-header">El problema</span>
+        <h2 class="section-title">El combustible es tu mayor costo. Y una parte se pierde sin que lo veas.</h2>
       </div>
-      <div class="problem__grid">
-        <div class="problem__item">
-          <h3>No sabés en qué está trabajando tu maquinaria</h3>
-          <p>Sin visibilidad real de la operación en el momento en que ocurre.</p>
+
+      <div class="figures">
+        <div class="figures__item">
+          <strong>35%</strong>
+          <span>de los costos operativos de una empresa agrícola es combustible.</span>
         </div>
-        <div class="problem__item">
-          <h3>Pérdidas por consumos excesivos y desvíos</h3>
-          <p>Litros de combustible que salen del tanque y no aparecen en ningún reporte confiable.</p>
-        </div>
-        <div class="problem__item">
-          <h3>Información manual, incompleta y poco confiable</h3>
-          <p>Planillas y fotos sueltas por chat que nadie cruza con la realidad del campo.</p>
-        </div>
-        <div class="problem__item">
-          <h3>Reportes que llegan tarde o nunca</h3>
-          <p>Te enteras de lo que pasó en el campo cuando ya no hay nada que corregir.</p>
+        <div class="figures__item">
+          <strong class="figures__accent">5–15%</strong>
+          <span>de ese diésel se pierde por mala gestión. En promedio, uno de cada diez litros.</span>
         </div>
       </div>
-      <div class="problem__value">
-        <div class="problem__value-block">
-          <span class="problem__value-label">Podés estar perdiendo hasta</span>
-          <strong class="problem__value-amount">15%<span>del diésel despachado</span></strong>
+
+      <div class="causes">
+        <div class="causes__item">
+          <h3>Desvíos</h3>
+          <p>Litros que salen del tanque y no llegan a ninguna máquina.</p>
         </div>
-        <div class="problem__value-multiplier">+<span>sin auditoría</span></div>
-        <div class="problem__value-block">
-          <span class="problem__value-label">y hasta</span>
-          <strong class="problem__value-amount problem__value-amount--gold">3%<span>de horas mal registradas</span></strong>
+        <div class="causes__item">
+          <h3>Registros con errores</h3>
+          <p>Planillas a mano y cifras que nadie cruza con la realidad del campo.</p>
+        </div>
+        <div class="causes__item">
+          <h3>Horas que no se trabajaron</h3>
+          <p>Jornadas infladas y manejo ineficiente que queman diésel de más.</p>
+        </div>
+        <div class="causes__item">
+          <h3>Fallas sin detectar</h3>
+          <p>Una máquina que consume de más avisa antes de romperse. Si nadie mira, no se ve.</p>
         </div>
       </div>
+
+      <p class="problem__why">
+        Hoy no lo ves porque el dato llega por WhatsApp y se pasa a Excel días después,
+        cuando ya no hay nada que corregir.
+      </p>
     </div>
   </section>
 
   <!-- ============ LA SOLUCIÓN ============ -->
   <section id="solution" class="solution">
-    <div class="container solution__inner">
-      <div class="solution__phones">
-        <figure class="phone phone--tall">
-          <img src="assets/screenshots/report.webp" alt="Reportes de gasto y consumo en la app Tracktor" loading="lazy" width="1170" height="2532" />
-        </figure>
-        <figure class="phone phone--tall phone--offset">
-          <img src="assets/screenshots/history.webp" alt="Historial de trabajo en la app Tracktor" loading="lazy" width="1170" height="2532" />
-        </figure>
+    <div class="container">
+      <div class="section-head section-head--center">
+        <span class="section-header">La solución</span>
+        <h2 class="section-title">Un mismo dato, dos miradas.</h2>
+        <p class="section-lead">El operador registra en el campo. Vos ves el resultado desde donde estés.</p>
       </div>
-      <div class="solution__copy">
-        <span class="section-header">LA SOLUCIÓN</span>
-        <h2 class="solution__title">Tracktor conecta tu operación y te da el control.</h2>
-        <ul class="checklist">
-          <li><span class="checklist__icon">✓</span> Visibilidad de toda tu maquinaria, centralizada en un dashboard.</li>
-          <li><span class="checklist__icon">✓</span> Registro offline-first con evidencia fotográfica y GPS, con dictado por voz asistido por IA — sin hardware, sin Excel, sin WhatsApp.</li>
-          <li><span class="checklist__icon">✓</span> Reportes claros para tomar mejores decisiones.</li>
-          <li><span class="checklist__icon">✓</span> Más eficiencia, menos pérdidas, más rentabilidad.</li>
-        </ul>
-        <button class="btn btn--primary btn--lg" data-cta="solution">Solicitar demo</button>
+
+      <div class="duo">
+        <article class="duo__side">
+          <figure class="phone">
+            <img src="assets/screenshots/history.webp" alt="Historial de trabajo de una máquina en la app Tracktor" loading="lazy" width="1170" height="2532" />
+          </figure>
+          <div class="duo__copy">
+            <span class="section-header">En el campo · el operador</span>
+            <h3>Registra en segundos, con o sin señal.</h3>
+            <ul class="points">
+              <li>Carga de diésel, horómetro, hectáreas y servicios en dos toques.</li>
+              <li>Dictado por voz con IA que completa el formulario por él.</li>
+              <li>Foto tomada dentro de la app, con GPS y hora. No se puede usar una de la galería.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="duo__side">
+          <!-- Cuando haya captura del Dashboard, va acá en un marco de navegador. -->
+          <figure class="phone">
+            <img src="assets/screenshots/report.webp" alt="Reporte de gasto y consumo por máquina en Tracktor" loading="lazy" width="1170" height="2532" />
+          </figure>
+          <div class="duo__copy">
+            <span class="section-header">En la oficina · el dueño</span>
+            <h3>Ve a dónde se va cada litro.</h3>
+            <ul class="points">
+              <li>Consumo real por máquina y por operador, de tanque lleno a tanque lleno.</li>
+              <li>Costo por hectárea y por hora, con diésel y mantenimiento juntos.</li>
+              <li>Alertas cuando una máquina o un operador se sale de su consumo normal.</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -172,109 +199,144 @@
   <!-- ============ CÓMO FUNCIONA ============ -->
   <section id="how" class="how">
     <div class="container">
-      <div class="how__head">
-        <span class="section-header">CÓMO FUNCIONA</span>
-        <h2 class="how__title">Simple. Verificado. Sin hardware.</h2>
+      <div class="section-head section-head--center">
+        <span class="section-header">Cómo funciona</span>
+        <h2 class="section-title">Otros registran lo que el operador dice.<br />Tracktor verifica lo que hizo.</h2>
       </div>
-      <div class="how__grid">
-        <div class="how__step">
-          <span class="how__num">1</span>
-          <h3>El operador abre turno</h3>
-          <p>Registra horómetro, hectáreas y diésel con una foto tomada en el momento, sin necesidad de conexión — o dicta por voz cuando hay internet.</p>
-        </div>
-        <div class="how__step">
-          <span class="how__num">2</span>
-          <h3>Validamos el dato en origen</h3>
-          <p>GPS, hora y consistencia contra el registro anterior — sin instalar ningún dispositivo.</p>
-        </div>
-        <div class="how__step">
-          <span class="how__num">3</span>
-          <h3>Se consolida en tu dashboard</h3>
-          <p>Toda la operación, centralizada y lista para revisar cuando quieras.</p>
-        </div>
-        <div class="how__step">
-          <span class="how__num">4</span>
-          <h3>Tomás mejores decisiones</h3>
-          <p>Costo real por hectárea y alertas de desvío de diésel, el mismo día.</p>
-        </div>
+      <ol class="steps">
+        <li class="steps__item">
+          <span class="steps__num">Paso 1</span>
+          <h3>El operador registra</h3>
+          <p>Cada carga y cada jornada queda asignada a su máquina, con foto, GPS y hora. Si no hay señal, se guarda en el celular y se envía después.</p>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num">Paso 2</span>
+          <h3>Tracktor cruza los datos</h3>
+          <p>Litros contra horas trabajadas, horómetro contra el registro anterior. Lo que no cierra, queda marcado.</p>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num">Paso 3</span>
+          <h3>Vos actuás el mismo día</h3>
+          <p>El desvío aparece en tu Dashboard mientras todavía se puede corregir.</p>
+        </li>
+      </ol>
+      <p class="how__foot">Sin sensores ni hardware en las máquinas. Solo el celular del operador.</p>
+    </div>
+  </section>
+
+  <!-- ============ PRECIO ============ -->
+  <section id="pricing" class="pricing" style="background-image: url('assets/campo-atardecer.webp');">
+    <div class="container pricing__inner">
+      <div class="pricing__copy">
+        <span class="section-header">Precio</span>
+        <h2 class="section-title">Pagás por máquina, no por persona.</h2>
+        <p class="section-lead">Cada licencia gestiona una máquina. Los operadores son ilimitados y los implementos no consumen licencia.</p>
+        <ul class="points">
+          <li>Las primeras 2 máquinas son gratis, para siempre.</li>
+          <li>Todas las funciones incluidas desde el primer día.</li>
+          <li>Dictado con IA desde la primera licencia: 300 dictados al mes por licencia.</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <span class="price-card__label">Licencia de máquina</span>
+        <div class="price-card__amount">USD 5.99<span>por máquina al mes</span></div>
+        <p class="price-card__sub">desde la tercera máquina</p>
+
+        <label class="calc">
+          <span>¿Cuántas máquinas tenés?</span>
+          <div class="calc__row">
+            <button type="button" class="calc__step" data-calc="-1" aria-label="Una máquina menos">−</button>
+            <input type="number" id="calcInput" value="5" min="1" max="500" inputmode="numeric" />
+            <button type="button" class="calc__step" data-calc="1" aria-label="Una máquina más">+</button>
+          </div>
+        </label>
+        <p class="calc__result" id="calcResult" aria-live="polite"></p>
+
+        <a class="btn btn--accent btn--block btn--lg" href="#download">Empezá gratis</a>
       </div>
     </div>
   </section>
 
-  <!-- ============ TRACCIÓN REAL ============ -->
-  <section id="results" class="results">
+  <!-- ============ DESCARGA ============ -->
+  <section id="download" class="download">
     <div class="container">
-      <div class="results__head">
-        <span class="section-header">ASÍ ESTAMOS HOY</span>
-        <p class="results__note">Tracktor está en beta. Estos son nuestros números reales, sin adornos.</p>
+      <div class="section-head section-head--center">
+        <span class="section-header">Descargá la app</span>
+        <h2 class="section-title">Empezá hoy con tus primeras 2 máquinas.</h2>
       </div>
-      <div class="results__grid">
-        <div class="results__item">
-          <div class="results__value">3</div>
-          <p>Equipos en beta probando en campo</p>
-        </div>
-        <div class="results__item">
-          <div class="results__value">80%</div>
-          <p>De los productores entrevistados validó este dolor</p>
-        </div>
-        <div class="results__item">
-          <div class="results__value">Ya en iOS</div>
-          <p>Publicada en la App Store · Android en beta</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROBÁ LA BETA ============ -->
-  <section id="beta" class="beta">
-    <div class="container">
-      <div class="beta__head">
-        <span class="section-header">DESCARGÁ LA APP</span>
-        <h2 class="beta__title">Tracktor ya está en la App Store.</h2>
-        <p class="beta__note">Descargala gratis en tu iPhone y empezá a registrar hoy mismo. En Android seguimos en beta: escribinos y te sumamos.</p>
-      </div>
-      <div class="beta__grid">
-        <div class="beta__card">
-          <span class="beta__tag beta__tag--live">Ya disponible</span>
+      <div class="download__grid">
+        <div class="download__card">
+          <span class="tag tag--live">Disponible</span>
           <h3>iPhone</h3>
-          <p>Descargala gratis desde la App Store. Las primeras 2 máquinas no se pagan.</p>
+          <p>Descargala gratis desde la App Store.</p>
           <a class="store-badge store-badge--lg" href="https://apps.apple.com/bo/app/tracktor/id6781363801"
              target="_blank" rel="noopener" data-store="ios"
              aria-label="Descargar Tracktor en la App Store">
             <img src="assets/app-store-badge-es.svg" alt="Descárgalo en el App Store"
                  width="120" height="40" />
           </a>
-          <a class="beta__alt" href="https://testflight.apple.com/join/FdZwEEea"
-             target="_blank" rel="noopener" data-store="ios_testflight">¿Sos tester? Unite por TestFlight →</a>
         </div>
-        <div class="beta__card">
-          <span class="beta__tag">En beta</span>
+        <div class="download__card">
+          <span class="tag">En prueba</span>
           <h3>Android</h3>
-          <p>Escribinos por WhatsApp con tu correo de Google y te sumamos a la beta.</p>
-          <a class="btn btn--primary btn--lg" href="https://wa.me/59173620224?text=Hola%2C%20quiero%20probar%20la%20beta%20de%20Tracktor%20en%20Android.%20Mi%20correo%20de%20Google%20para%20el%20acceso%20es%3A%20" target="_blank" rel="noopener" data-store="android">Escribinos por WhatsApp →</a>
+          <p>Estamos en prueba cerrada en Google Play. Escribinos con tu correo de Google y te sumamos.</p>
+          <a class="store-btn store-btn--light" href="https://wa.me/59173620224?text=Hola%2C%20quiero%20probar%20Tracktor%20en%20Android.%20Mi%20correo%20de%20Google%20es%3A%20"
+             target="_blank" rel="noopener" data-store="android">
+            <small>Pedí acceso por WhatsApp</small>
+            <strong>Google Play</strong>
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PRÓXIMOS CASOS ============ -->
-  <section id="testimonials" class="testimonials">
-    <div class="container">
-      <div class="testimonials__head">
-        <span class="section-header">SÉ DE LOS PRIMEROS</span>
-        <p class="testimonials__note">Estamos sumando a los primeros productores de Santa Cruz que están probando Tracktor en su operación. Muy pronto, sus casos reales van a estar acá.</p>
+  <!-- ============ PREGUNTAS ============ -->
+  <section id="faq" class="faq">
+    <div class="container faq__inner">
+      <div class="section-head">
+        <span class="section-header">Preguntas frecuentes</span>
+        <h2 class="section-title">Lo que nos preguntan los productores.</h2>
+      </div>
+      <div class="faq__list">
+        <details>
+          <summary>¿Funciona donde no hay señal?</summary>
+          <p>Sí. Todo registro se guarda primero en el celular y se envía solo cuando vuelve la conexión. Lo único que necesita internet es el dictado con IA.</p>
+        </details>
+        <details>
+          <summary>¿Qué impide que el operador invente un dato?</summary>
+          <p>La foto se toma dentro de la app, con GPS y hora del dispositivo. El horómetro se valida contra el registro anterior y los litros se cruzan con las horas trabajadas.</p>
+        </details>
+        <details>
+          <summary>¿Hay que instalar algo en las máquinas?</summary>
+          <p>No. Tracktor funciona con el celular del operador, sin sensores ni hardware.</p>
+        </details>
+        <details>
+          <summary>¿Puedo verlo desde la computadora?</summary>
+          <p>Sí. El dueño o administrador entra al Dashboard web desde cualquier navegador para ver consumos, costos y alertas.</p>
+        </details>
+        <details>
+          <summary>¿Cómo se paga?</summary>
+          <p>Con tarjeta, mes a mes. Sumás o quitás licencias cuando lo necesitás, sin contratos.</p>
+        </details>
+        <details>
+          <summary>¿Para qué sirve la demo?</summary>
+          <p>Te mostramos Tracktor con tu operación, te ayudamos a cargar tus máquinas y operadores, y acompañamos las primeras semanas.</p>
+        </details>
       </div>
     </div>
   </section>
 
   <!-- ============ CTA FINAL ============ -->
   <section id="closer" class="closer" style="background-image: url('assets/foot-dron.webp');">
-    <div class="container closer__inner">
+    <div class="container">
+      <div class="closer__inner">
       <div>
-        <h2 class="closer__title">Tu campo. Conectado. Bajo control.</h2>
-        <p class="closer__sub">Solicitá una demo personalizada y descubrí todo lo que Tracktor puede hacer por tu operación.</p>
+        <h2 class="closer__title">Cada litro cuenta.</h2>
+        <p class="closer__sub">Te acompañamos a ponerlo en marcha en tu operación, máquina por máquina.</p>
       </div>
-      <button class="btn btn--accent btn--lg" data-cta="closer">Solicitar demo ahora →</button>
+      <button class="btn btn--accent btn--lg" data-cta="closer">Solicitar demo</button>
+      </div>
     </div>
   </section>
 
@@ -282,51 +344,51 @@
     <div class="container footer__grid">
       <div class="footer__brand">
         <img src="assets/logo-fondo-oscuro.png" alt="Tracktor" class="footer__logo" width="800" height="148" loading="lazy" />
-        <span class="footer__tagline">Control operativo en origen para el agro.</span>
+        <span class="footer__tagline">Gestión de flota agrícola con IA.</span>
       </div>
       <div class="footer__col">
         <h4>Producto</h4>
-        <a href="#solution">Funciones</a>
-        <a href="#results">Beneficios</a>
-        <a href="https://apps.apple.com/bo/app/tracktor/id6781363801" target="_blank" rel="noopener" data-store="ios">Descargar para iPhone</a>
+        <a href="#how">Cómo funciona</a>
+        <a href="#pricing">Precio</a>
+        <a href="#download">Descargar</a>
+        <a href="https://dash.tracktor.lat" data-login="footer">Ingresar al Dashboard</a>
       </div>
       <div class="footer__col">
-        <h4>Empresa</h4>
-        <a href="#problem">El problema</a>
-        <a href="#how">Cómo funciona</a>
+        <h4>Ayuda</h4>
+        <a href="#faq">Preguntas frecuentes</a>
+        <a href="/soporte.html">Soporte</a>
+        <a href="https://wa.me/59173620224" target="_blank" rel="noopener">WhatsApp</a>
       </div>
       <div class="footer__col">
         <h4>Legal</h4>
         <a href="/privacidad.html">Privacidad</a>
         <a href="/terminos.html">Términos</a>
-        <a href="/soporte.html">Soporte</a>
         <a href="/eliminar-cuenta.html">Eliminar cuenta</a>
       </div>
       <div class="footer__col footer__newsletter">
-        <h4>Newsletter</h4>
-        <p>Recibí novedades y consejos para mejorar tu operación.</p>
+        <h4>Novedades</h4>
+        <p>Consejos para cuidar el diésel de tu flota, una vez al mes.</p>
         <form id="newsletterForm" class="newsletter__form" novalidate>
-          <input type="email" name="email" placeholder="Tu correo electrónico" required />
-          <button type="submit" aria-label="Suscribirme">→</button>
+          <input type="email" name="email" placeholder="Tu correo" required aria-label="Tu correo" />
+          <button type="submit">Anotarme</button>
         </form>
       </div>
     </div>
     <div class="container">
-      <p class="footer__note">© 2026 Tracktor. Todos los derechos reservados. · Santa Cruz, Bolivia</p>
+      <p class="footer__note">© 2026 Tracktor · Santa Cruz, Bolivia</p>
     </div>
   </footer>
 
-  <!-- ============ MODAL: FLUJO ============ -->
+  <!-- ============ MODAL: SOLICITAR DEMO ============ -->
   <div class="modal" id="modal" aria-hidden="true">
     <div class="modal__backdrop" data-close></div>
     <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <button class="modal__close" data-close aria-label="Cerrar">&times;</button>
 
-      <!-- PASO 1: Formulario -->
       <div class="step" data-step="form">
-        <span class="section-header">PASO 1 DE 2 · TUS DATOS</span>
-        <h2 class="modal__title" id="modalTitle">Solicita tu demo</h2>
-        <p class="modal__lead">Cupos limitados para esta campaña. Déjanos tus datos y te contactamos.</p>
+        <span class="section-header">Demo personalizada</span>
+        <h2 class="modal__title" id="modalTitle">Solicitá tu demo</h2>
+        <p class="modal__lead">Dejanos tus datos y te escribimos para coordinar una demo con tu operación.</p>
         <form id="leadForm" novalidate>
           <label class="field">
             <span>Nombre</span>
@@ -337,58 +399,28 @@
             <input type="text" name="empresa" required autocomplete="organization" placeholder="Nombre de la propiedad o empresa" />
           </label>
           <label class="field">
-            <span>Ubicación de la propiedad</span>
+            <span>Ubicación</span>
             <input type="text" name="ubicacion" required placeholder="Ej: Pailón, Santa Cruz" />
           </label>
-          <label class="field">
-            <span>Número de maquinarias</span>
-            <input type="number" name="maquinarias" required min="1" inputmode="numeric" placeholder="Ej: 4" />
-          </label>
-          <label class="field">
-            <span>Número de teléfono</span>
-            <input type="tel" name="telefono" required inputmode="tel" autocomplete="tel" placeholder="Ej: +591 70000000" />
-          </label>
-          <button type="submit" class="btn btn--primary btn--block btn--lg">Continuar</button>
+          <div class="field-row">
+            <label class="field">
+              <span>Máquinas</span>
+              <input type="number" name="maquinarias" required min="1" inputmode="numeric" placeholder="Ej: 6" />
+            </label>
+            <label class="field">
+              <span>Teléfono</span>
+              <input type="tel" name="telefono" required inputmode="tel" autocomplete="tel" placeholder="+591 70000000" />
+            </label>
+          </div>
+          <button type="submit" class="btn btn--primary btn--block btn--lg">Enviar</button>
         </form>
       </div>
 
-      <!-- PASO 2: Pricing -->
-      <div class="step" data-step="pricing" hidden>
-        <span class="section-header">PASO 2 DE 2 · TU PRECIO</span>
-        <h2 class="modal__title">Pagás solo por las máquinas que gestionás.</h2>
-        <p class="modal__lead">
-          Las primeras 2 máquinas son gratis. De la tercera en adelante, USD 5.99 por
-          máquina al mes. Operadores ilimitados y todas las funciones incluidas.
-        </p>
-        <div class="plans">
-          <button class="plan" data-plan="free">
-            <div class="plan__head">
-              <span class="plan__name">Empezar gratis</span>
-            </div>
-            <div class="plan__price"><strong>Gratis</strong><span>/hasta 2 máquinas</span></div>
-            <p class="plan__detail">Sin tarjeta. Todas las funciones incluidas.</p>
-            <span class="plan__select">Empezar gratis →</span>
-          </button>
-          <button class="plan" data-plan="seats">
-            <div class="plan__head">
-              <span class="plan__name">Por máquina</span>
-            </div>
-            <div class="plan__price"><strong>USD 5.99</strong><span>/máquina al mes</span></div>
-            <!-- Precio estimado con las máquinas que declaró en el paso 1 (lo rellena app.js). -->
-            <p class="plan__detail" data-seat-estimate>Sumá las máquinas que necesites, cuando las necesites.</p>
-            <span class="plan__select">Quiero este precio →</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- PASO 3: Confirmación -->
       <div class="step step--confirm" data-step="confirm" hidden>
-        <div class="confirm__check">✓</div>
-        <h2 class="modal__title">¡Listo! Ya sos parte de Tracktor.</h2>
+        <h2 class="modal__title">Listo, recibimos tus datos.</h2>
         <p class="modal__lead">
-          Ya estamos trabajando con productores en Santa Cruz. Revisamos tu perfil y te
-          contactamos en un plazo de <strong>3 días hábiles</strong> para activar
-          tu cuenta y empezar.
+          Te escribimos en un plazo de <strong>3 días hábiles</strong> para coordinar la demo.
+          Mientras tanto, podés descargar la app y cargar tus primeras 2 máquinas gratis.
         </p>
         <button class="btn btn--primary btn--block btn--lg" data-close>Entendido</button>
       </div>

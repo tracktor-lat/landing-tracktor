@@ -1,63 +1,54 @@
-# RCM — Landing de validación (Fake Door Test)
+# Tracktor — Landing
 
-Landing estática y liviana para validar mercado **antes** de seguir construyendo
-producto. No es el lanzamiento ni una versión del app.
+Landing estática de [www.tracktor.lat](https://www.tracktor.lat). Sin build ni
+runtime: Vercel la despliega sola en cada push a `main`.
 
 ## Estructura
 
-- `index.html` — copy y secciones del brief (hero, problema, CTA, modal de flujo).
-- `styles.css` — sistema de diseño extraído del app Flutter (paleta, Montserrat/Inter, tarjetas redondeadas, degradado premium navy).
-- `app.js` — flujo `form → pricing → confirmación` + instrumentación de analítica.
+- `index.html` — la historia de venta: diésel caro que se pierde → cómo Tracktor
+  lo detecta → precio → descarga → preguntas → demo.
+- `styles.css` — sistema visual heredado de la app y el Dashboard (paleta,
+  Montserrat/Inter, cards blancas, degradado azul marino). Sin íconos.
+- `app.js` — modal "Solicitar demo", calculadora de precio, nav móvil y analítica.
+- `apps-script.gs` — Web App de Google que recibe leads y eventos en un Sheet.
+- Páginas sueltas: `privacidad`, `terminos`, `soporte`, `eliminar-cuenta`,
+  `subscription-checkout-success` (retorno del checkout de Polar) y `one-pager`.
 
-## Flujo
+## Mensaje
 
-1. Visitante lee propuesta de valor, cómo funciona y problema.
-2. CTA → formulario de 5 campos (Nombre, Empresa, Ubicación, N° de maquinarias, Teléfono).
-3. Enviar → pantalla de pricing (3 planes: Free / Pro / Max, **ninguno destacado** para no sesgar la elección).
-4. Elige plan → confirmación "estás en fase de piloto/preventa, te contactamos en 3 días". No hay checkout real.
+El problema no es Excel ni WhatsApp: es que el combustible es hasta el 35% del
+costo operativo y entre 5% y 15% se pierde por mala gestión. Tracktor ordena la
+gestión de la flota con IA y avisa del desvío el mismo día. Textos en voseo,
+"licencia de máquina", "online, pero funciona sin señal" (ver `docs/`).
 
-## Eventos instrumentados (ver consola)
+## Precio
+
+2 máquinas gratis; USD 5.99 por licencia/mes desde la 3ª. Los valores de la
+calculadora (`FREE_MACHINES`, `SEAT_PRICE_USD` en `app.js`) deben coincidir con
+el backend.
+
+## Eventos (consola + Apps Script)
 
 `page_view` (con `unique`), `scroll_depth` (25/50/75/100), `cta_click`,
-`form_open`, `form_submit`, `form_validation_error`, `pricing_view`,
-`plan_select` (con el id del plan), `confirm_view`,
-`store_click` (con `store`: `ios` = App Store, `ios_testflight`, `android`).
+`form_open`, `form_submit`, `form_validation_error`, `confirm_view`,
+`store_click` (`ios` | `android`), `login_click`, `price_calc`,
+`newsletter_submit`.
 
-Los eventos se loguean en consola y se envían a `dataLayer`/`gtag` si existen.
+Los eventos viajan por `sendBeacon` como `text/plain` (con `application/json`
+el navegador exige un preflight CORS que Apps Script no responde).
 
-## Conectar la captura de datos
+### Hojas que genera el Apps Script
 
-Abre `app.js` y completa estas constantes (no se necesita base de datos):
+- **Visitantes** — un registro por visita, aunque no dejen el formulario.
+- **Leads** — solicitudes de demo.
+- **Eventos** — funnel.
+- **Resumen** — visitas, únicos, leads y % de conversión.
 
-```js
-var FORM_ENDPOINT = "";      // Google Apps Script (doPost) / Formspree / Airtable
-var ANALYTICS_ENDPOINT = ""; // opcional: hoja aparte para eventos
-```
-
-Opción rápida: un **Google Apps Script** publicado como Web App que recibe el
-POST y agrega una fila al Sheet. Los leads llegan con todos los campos para
-filtrar manualmente el perfil calificado después.
-
-### Hojas que genera el Apps Script (`apps-script.gs`)
-
-- **Visitantes** — un registro por visita (page_view), aunque no dejen el
-  formulario: `sid`, único, referrer, `utm_*`, userAgent, idioma, pantalla, viewport.
-- **Leads** — formularios enviados y elección de plan (conversión).
-- **Eventos** — funnel (scroll_depth, cta_click, form_open, etc.).
-- **Resumen** — métricas en vivo: visitas, visitantes únicos, leads, selección
-  de plan y **% de conversión** (visitantes → leads). Se actualiza en cada visita.
-
-Además, abrir la **URL de la Web App** en el navegador (`doGet`) devuelve esas
-métricas en JSON para un chequeo rápido.
-
-> Tras editar `apps-script.gs` hay que **volver a pegarlo en Apps Script y
-> re-desplegar** la Web App (Implementar → Administrar implementaciones → editar
-> → Nueva versión) para que los cambios apliquen.
+Tras editar `apps-script.gs` hay que pegarlo en Apps Script y re-desplegar la
+Web App (Implementar → Administrar implementaciones → editar → Nueva versión).
 
 ## Probar localmente
 
 ```bash
-cd landing-rcm
-python3 -m http.server 8080
-# abrir http://localhost:8080
+python3 -m http.server 4173
 ```
