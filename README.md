@@ -23,10 +23,18 @@ runtime: Vercel la despliega sola en cada push a `main`.
     rutas absolutas (`/assets/...`) porque puede mostrarse en cualquier path.
 - `vercel.json` — alias sin `.html` (`/privacidad`, `/soporte`, …). Son
   rewrites, no redirecciones: las URLs con `.html` siguen respondiendo igual.
-- `one-pager.html` — la misma historia en una hoja A4 para imprimir, con QR a
-  la home (`utm_source=one-pager`). Mide exactamente 210 × 297 mm: si se le
-  agrega contenido, verificar que no desborde. PDF: botón "Imprimir / Guardar
-  PDF" o `node generate-pdf.js` (antes, `npx playwright install chromium`).
+- `one-pager.html` — la hoja A4 que se reenvía por WhatsApp: primero el
+  problema (cuánto diésel se pierde, a dónde se va, por qué no se ve), después
+  la solución, el precio y un QR a la home (`utm_source=one-pager`). Mide
+  exactamente 210 × 297 mm: si se le agrega contenido, verificar que no
+  desborde. No usar degradados con transparencia ni `backdrop-filter`: el PDF
+  de WebKit los dibuja negros. Por eso sus fotos están en `assets/one-pager/`
+  con el degradado ya aplicado.
+- PDF del one-pager (`Tracktor-One-Pager.pdf`, ignorado por git):
+  - En cualquier Mac, sin descargar nada (WebKit):
+    `swiftc -O generate-pdf.swift -o /tmp/exportar-pdf && /tmp/exportar-pdf "$PWD/one-pager.html" "$PWD/Tracktor-One-Pager.pdf"`
+  - Con Chromium: `npx playwright install chromium` y `node generate-pdf.js`.
+  - A mano: botón "Imprimir / Guardar PDF" de la página.
 
 ## Mensaje
 

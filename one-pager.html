@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Tracktor — One-pager</title>
-<meta name="description" content="Tracktor en una hoja: gestión de flota agrícola con IA para dejar de perder diésel." />
+<meta name="description" content="Tracktor en una hoja: cuánto diésel se pierde en una flota agrícola, por qué no se ve y cómo detectarlo el mismo día." />
 <meta name="robots" content="noindex" />
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,27 +15,34 @@
 /* =========================================================================
    Tracktor — One-pager A4 (imprimible y exportable a PDF).
 
-   Mismo mensaje y estética que la landing: diésel caro que se pierde, fotos
-   de campo, neutrales cálidos y paneles de vidrio. Rutas relativas a
-   propósito: generate-pdf.js la abre como file://.
+   Es la pieza que más se reenvía (WhatsApp), así que tiene que explicarse
+   sola: primero el problema (cuánto diésel se pierde, a dónde se va y por
+   qué no se ve), después la solución, el precio y cómo empezar.
 
-   La hoja mide exactamente 210 × 297 mm. Si se agrega contenido, verificar
+   Rutas relativas a propósito: generate-pdf.js la abre como file://.
+
+   Sin degradados con transparencia ni backdrop-filter: el PDF que genera
+   WebKit (Safari, "Guardar como PDF" en Mac) los dibuja negros y tapan las
+   fotos. Por eso la portada y las cifras usan fotos con el degradado ya
+   aplicado (assets/one-pager/) y el "vidrio" es un velo translúcido liso.
+   La hoja mide exactamente 210 × 297 mm; si se agrega contenido, verificar
    que siga entrando en una sola página (ver README).
    ========================================================================= */
 :root {
   --ground: #f4efe4;
-  --surface: #fbf8f1;
   --ink: #1b1919;
   --ink-soft: #2d3436;
   --ink-muted: #636e72;
   --accent: #fdc82d;
+  --error: #c0392b;
   --earth: #15130f;
-  --card-border: rgba(74, 58, 38, 0.12);
-  --on-dark-muted: rgba(255, 255, 255, 0.66);
-  --on-dark-faint: rgba(255, 255, 255, 0.42);
-  --glass-dark: rgba(14, 16, 12, 0.46);
+  --card: rgba(255, 253, 247, 0.74);
+  --card-border: rgba(255, 255, 255, 0.85);
+  --line: rgba(74, 58, 38, 0.14);
+  --on-dark-muted: rgba(255, 255, 255, 0.68);
+  --on-dark-faint: rgba(255, 255, 255, 0.44);
+  --glass-dark: rgba(14, 16, 12, 0.5);
   --glass-dark-border: rgba(255, 255, 255, 0.18);
-  --glass-blur: blur(14px) saturate(150%);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -95,10 +102,24 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
   text-transform: uppercase;
   color: var(--ink-muted);
 }
+.sheet h2 {
+  margin-top: 3px;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+}
+.card {
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 6px 16px rgba(74, 58, 38, 0.06);
+}
 
 /* Guion amarillo, el mismo de la landing (sin íconos). */
-.dash { list-style: none; display: grid; gap: 4px; }
-.dash li { position: relative; padding-left: 14px; font-size: 11px; line-height: 1.45; color: var(--ink-soft); }
+.dash { list-style: none; display: grid; gap: 7px; }
+.dash li { position: relative; padding-left: 13px; font-size: 11.5px; line-height: 1.42; color: var(--ink-soft); }
 .dash li::before {
   content: "";
   position: absolute;
@@ -107,56 +128,52 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
   border-radius: 2px;
   background: var(--accent);
 }
+.dash strong { color: var(--ink); }
 
 /* ---------------- Portada ---------------- */
 .op-hero {
-  position: relative;
-  padding: 8mm 12mm 8mm;
+  padding: 8mm 12mm 7mm;
   color: #fff;
-  background:
-    linear-gradient(90deg, rgba(12, 15, 22, 0.94) 0%, rgba(12, 15, 22, 0.78) 48%, rgba(12, 15, 22, 0.35) 100%),
-    url("assets/foot-dron.webp") center 60% / cover no-repeat;
+  background: #0c0f16 url("assets/one-pager/portada.jpg") center / cover no-repeat;
 }
 .op-hero__top { display: flex; align-items: center; justify-content: space-between; }
-.op-hero__top img { height: 18px; width: auto; display: block; }
+.op-hero__top img { height: 17px; width: auto; display: block; }
 .op-hero__top span { font-size: 10px; font-weight: 600; color: var(--on-dark-muted); }
 .op-hero__body {
   margin-top: 6mm;
   display: grid;
-  grid-template-columns: 1fr 52mm;
+  grid-template-columns: 1fr 50mm;
   gap: 8mm;
   align-items: end;
 }
 .op-hero .label { color: var(--accent); }
 .op-hero h1 {
-  margin: 6px 0 10px;
-  font-size: 38px;
+  margin: 5px 0 8px;
+  font-size: 36px;
   font-weight: 900;
   line-height: 1.04;
   letter-spacing: -0.8px;
 }
 .op-hero h1 em { font-style: normal; color: var(--accent); }
-.op-hero p { max-width: 118mm; font-size: 12px; line-height: 1.5; color: var(--on-dark-muted); }
+.op-hero p { max-width: 112mm; font-size: 12px; line-height: 1.5; color: var(--on-dark-muted); }
 
 .op-alert {
-  padding: 12px 13px 10px;
-  border-radius: 14px;
+  padding: 11px 12px 9px;
+  border-radius: 12px;
   background: var(--glass-dark);
   border: 1px solid var(--glass-dark-border);
-  -webkit-backdrop-filter: var(--glass-blur);
-  backdrop-filter: var(--glass-blur);
 }
 .op-alert .label { color: var(--accent); font-size: 7.5px; letter-spacing: 1.2px; }
-.op-alert strong { display: block; margin-top: 6px; font-family: "Montserrat", sans-serif; font-size: 12px; font-weight: 800; }
-.op-alert b { display: block; margin-top: 2px; font-family: "Montserrat", sans-serif; font-size: 26px; font-weight: 900; letter-spacing: -0.6px; line-height: 1.05; }
-.op-alert small { display: block; font-size: 9.5px; color: var(--on-dark-muted); }
+.op-alert strong { display: block; margin-top: 5px; font-family: "Montserrat", sans-serif; font-size: 11.5px; font-weight: 800; }
+.op-alert b { display: block; margin-top: 2px; font-family: "Montserrat", sans-serif; font-size: 25px; font-weight: 900; letter-spacing: -0.6px; line-height: 1.05; }
+.op-alert small { display: block; font-size: 9px; color: var(--on-dark-muted); }
 .op-alert__meta {
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
-  padding-top: 6px;
+  margin-top: 7px;
+  padding-top: 5px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 8.5px;
+  font-size: 8px;
   color: var(--on-dark-faint);
 }
 
@@ -167,113 +184,109 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
   flex-direction: column;
   justify-content: space-between;
   gap: 5mm;
-  padding: 7mm 12mm 7mm;
-  /* Surcos tenues, color tierra. */
-  background:
-    repeating-linear-gradient(118deg, rgba(92, 70, 40, 0.035) 0 1px, transparent 1px 22px),
-    var(--ground);
-}
-.op-content h2 {
-  margin-top: 4px;
-  font-size: 17px;
-  font-weight: 900;
-  line-height: 1.2;
-  letter-spacing: -0.3px;
-  color: var(--ink);
+  padding: 7mm 12mm 6mm;
 }
 
-/* Problema: texto + cifras sobre la foto con vidrio. */
-.op-problem { display: grid; grid-template-columns: 1fr 70mm; gap: 7mm; align-items: stretch; }
-.op-problem .dash { margin-top: 8px; }
-.op-problem .dash strong { color: var(--ink); }
+/* El problema: cifras sobre la foto de la cosecha, con vidrio. */
 .op-figures {
+  margin-top: 9px;
   display: grid;
+  grid-template-columns: 1fr 1fr 1.12fr;
   gap: 5px;
   padding: 5px;
   border-radius: 14px;
-  background:
-    linear-gradient(135deg, rgba(27, 25, 25, 0.55) 0%, rgba(26, 47, 76, 0.35) 100%),
-    url("assets/campo-surcos.webp") center / cover no-repeat;
+  background: #1b1919 url("assets/one-pager/cifras.jpg") center / cover no-repeat;
 }
 .op-figures div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 9px 12px;
+  padding: 13px 14px;
   border-radius: 10px;
   color: #fff;
   background: var(--glass-dark);
   border: 1px solid var(--glass-dark-border);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
 }
-.op-figures strong { font-family: "Montserrat", sans-serif; font-size: 30px; font-weight: 900; letter-spacing: -1px; line-height: 1; }
+.op-figures strong { display: block; font-family: "Montserrat", sans-serif; font-size: 35px; font-weight: 900; letter-spacing: -1px; line-height: 1; }
 .op-figures .accent { color: var(--accent); }
-.op-figures span { margin-top: 3px; font-size: 9.5px; line-height: 1.35; color: var(--on-dark-muted); }
+.op-figures span { display: block; margin-top: 6px; font-size: 10.5px; line-height: 1.38; color: var(--on-dark-muted); }
 
-/* Solución: operador y dueño, cada uno con su captura real. */
-.op-duo { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
-.op-duo article {
+.op-why { margin-top: 7px; display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.op-why .card { padding: 13px 15px; }
+.op-why h3 { margin-bottom: 9px; font-size: 14px; font-weight: 900; color: var(--ink); }
+
+/* Línea de tiempo de hoy: solo texto y una línea, sin íconos. */
+.tl { list-style: none; display: grid; gap: 7px; }
+.tl li { padding: 1px 0 1px 10px; border-left: 2px solid var(--line); font-size: 11.5px; line-height: 1.38; color: var(--ink-soft); }
+.tl span { display: block; font-size: 8px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-muted); }
+.tl li:last-child { border-left-color: var(--error); }
+.tl li:last-child span, .tl li:last-child em { color: var(--error); }
+.tl em { font-style: normal; font-weight: 700; }
+.op-why__fix {
+  margin-top: 9px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(253, 200, 45, 0.2);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.op-note { margin-top: 6px; font-size: 8.5px; line-height: 1.35; color: var(--ink-muted); }
+
+/* La solución: capturas reales + tres puntos. */
+.op-solution { display: grid; grid-template-columns: 50mm 1fr; gap: 7mm; align-items: center; }
+.op-phones { display: flex; gap: 3mm; align-items: flex-end; }
+.phone { flex: 1; border-radius: 12px; padding: 3px; background: var(--ink); box-shadow: 0 8px 18px rgba(27, 25, 25, 0.14); }
+.phone img { display: block; width: 100%; height: auto; border-radius: 9px; }
+.phone--up { transform: translateY(-4mm); }
+.op-points { list-style: none; counter-reset: punto; display: grid; gap: 8px; margin-top: 10px; }
+.op-points li { counter-increment: punto; position: relative; padding-left: 22px; font-size: 11.5px; line-height: 1.42; color: var(--ink-soft); }
+.op-points li::before {
+  content: counter(punto);
+  position: absolute;
+  left: 0; top: 0;
+  width: 15px; height: 15px;
   display: grid;
-  grid-template-columns: 23mm 1fr;
-  gap: 5mm;
-  align-items: center;
-  padding: 4mm;
-  border-radius: 14px;
-  background: rgba(255, 253, 247, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 6px 16px rgba(74, 58, 38, 0.06);
-}
-.phone { border-radius: 14px; padding: 3px; background: var(--ink); }
-.phone img { display: block; width: 100%; height: auto; border-radius: 11px; }
-.op-duo h3 { margin: 3px 0 7px; font-size: 13px; font-weight: 900; line-height: 1.25; }
-.op-duo .dash li { font-size: 10.5px; }
-
-/* Cómo funciona + precio. */
-.op-bottom { display: grid; grid-template-columns: 1fr 66mm; gap: 7mm; align-items: stretch; }
-.op-steps { list-style: none; margin-top: 8px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
-.op-steps li {
-  padding: 9px 10px;
-  border-radius: 12px;
-  background: rgba(255, 253, 247, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-}
-.op-steps span { display: block; font-size: 7.5px; font-weight: 800; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-muted); }
-.op-steps strong { display: block; margin: 4px 0 3px; font-family: "Montserrat", sans-serif; font-size: 11px; font-weight: 800; color: var(--ink); }
-.op-steps p { font-size: 9.5px; line-height: 1.4; color: var(--ink-muted); }
-
-.op-price {
-  padding: 11px 13px;
-  border-radius: 14px;
+  place-items: center;
+  border-radius: 5px;
+  background: var(--ink-soft);
   color: #fff;
-  background: linear-gradient(135deg, #1b1919 0%, #1a2f4c 100%);
+  font-family: "Montserrat", sans-serif;
+  font-size: 8.5px;
+  font-weight: 800;
 }
-.op-price .label { color: var(--accent); }
-.op-price__amount { margin-top: 5px; font-family: "Montserrat", sans-serif; font-size: 26px; font-weight: 900; letter-spacing: -0.6px; line-height: 1; }
-.op-price__amount small { display: block; margin-top: 3px; font-family: "Inter", sans-serif; font-size: 9.5px; font-weight: 500; letter-spacing: 0; color: var(--on-dark-muted); }
-.op-price .dash { margin-top: 8px; gap: 3px; }
-.op-price .dash li { font-size: 9.5px; color: rgba(255, 255, 255, 0.88); }
+.op-points strong { color: var(--ink); }
+.op-diff {
+  margin-top: 10px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #1b1919 0%, #1a2f4c 100%);
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12.5px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.op-diff small { display: block; margin-top: 2px; font-family: "Inter", sans-serif; font-size: 9.5px; font-weight: 500; color: var(--on-dark-muted); }
 
-/* ---------------- Cierre ---------------- */
+/* ---------------- Cierre: precio, descarga y QR ---------------- */
 .op-cta {
   display: grid;
-  grid-template-columns: 1fr 30mm;
+  grid-template-columns: 1fr 29mm;
   gap: 8mm;
   align-items: center;
   padding: 6mm 12mm 6.5mm;
   background: var(--earth);
   color: #fff;
 }
-.op-cta h2 { font-size: 17px; font-weight: 900; letter-spacing: -0.3px; line-height: 1.2; }
-.op-cta__proof { margin-top: 3px; font-size: 9.5px; color: var(--on-dark-faint); }
-.op-cta__links { margin-top: 10px; display: flex; align-items: center; gap: 10px; }
-.op-cta__links img { display: block; height: 36px; width: auto; }
+.op-cta h2 { color: #fff; }
+.op-cta__price { margin-top: 3px; font-size: 10.5px; line-height: 1.45; color: var(--on-dark-muted); }
+.op-cta__price strong { color: var(--accent); font-weight: 700; }
+.op-cta__links { margin-top: 9px; display: flex; align-items: center; gap: 9px; }
+.op-cta__links img { display: block; height: 34px; width: auto; }
 .store-btn {
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  height: 36px;
-  padding: 0 11px;
+  height: 34px;
+  padding: 0 10px;
   border-radius: 7px;
   border: 1px solid #a6a6a6;
   background: #000;
@@ -282,14 +295,15 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
   line-height: 1.1;
 }
 .store-btn small { font-size: 7px; font-weight: 600; color: rgba(255, 255, 255, 0.72); }
-.store-btn strong { font-size: 12.5px; font-weight: 700; }
-.op-contact { margin-left: 6px; padding-left: 12px; border-left: 1px solid rgba(255, 255, 255, 0.14); }
+.store-btn strong { font-size: 12px; font-weight: 700; }
+.op-contact { margin-left: 4px; padding-left: 11px; border-left: 1px solid rgba(255, 255, 255, 0.14); }
 .op-contact span { display: block; font-size: 7.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--on-dark-faint); }
-.op-contact a { display: block; margin-top: 2px; font-size: 12px; font-weight: 700; color: #fff; text-decoration: none; }
+.op-contact a { display: block; margin-top: 2px; font-size: 11.5px; font-weight: 700; color: #fff; text-decoration: none; }
+.op-cta__proof { margin-top: 7px; font-size: 9px; color: var(--on-dark-faint); }
 
 .op-qr { text-align: center; }
 .op-qr__code {
-  width: 30mm; height: 30mm;
+  width: 29mm; height: 29mm;
   padding: 2mm;
   border-radius: 8px;
   background: #fff;
@@ -309,9 +323,9 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
 @media screen and (max-width: 860px) {
   .toolbar { width: auto; margin: 12px 16px 0; }
   .sheet { width: auto; height: auto; margin: 12px 0 0; box-shadow: none; }
-  .op-hero__body, .op-problem, .op-duo, .op-bottom, .op-cta { grid-template-columns: 1fr; }
+  .op-hero__body, .op-figures, .op-why, .op-solution, .op-cta { grid-template-columns: 1fr; }
   .op-hero h1 { font-size: 32px; }
-  .op-steps { grid-template-columns: 1fr; }
+  .op-phones { max-width: 70%; }
   .op-cta__links { flex-wrap: wrap; }
   .op-contact { margin-left: 0; }
 }
@@ -337,9 +351,8 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
         <span class="label">Gestión de flota agrícola con IA</span>
         <h1>Tu diésel es caro.<br /><em>Dejá de perderlo.</em></h1>
         <p>
-          Entre 5% y 15% del combustible de una flota agrícola se pierde por mala
-          gestión. Tracktor ordena el registro de cada máquina y te avisa del desvío
-          el mismo día, no a fin de mes.
+          Tracktor ordena el registro de cada máquina y te avisa del desvío el
+          mismo día, no a fin de mes.
         </p>
       </div>
       <aside class="op-alert" aria-label="Ejemplo de alerta de desvío">
@@ -354,76 +367,58 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
 
   <div class="op-content">
 
-    <!-- Problema -->
-    <section class="op-problem">
-      <div>
-        <span class="label">El problema</span>
-        <h2>El combustible es tu mayor costo. Y una parte se pierde sin que lo veas.</h2>
-        <ul class="dash">
-          <li><strong>Desvíos:</strong> litros que salen del tanque y no llegan a ninguna máquina.</li>
-          <li><strong>Registros con errores:</strong> planillas a mano que nadie cruza con el campo.</li>
-          <li><strong>Horas que no se trabajaron:</strong> jornadas infladas y manejo ineficiente.</li>
-          <li><strong>Fallas sin detectar:</strong> una máquina que consume de más avisa antes de romperse.</li>
-        </ul>
-      </div>
-      <div class="op-figures">
-        <div><strong>35%</strong><span>de los costos operativos de una empresa agrícola es combustible.</span></div>
-        <div><strong class="accent">5–15%</strong><span>de ese diésel se pierde por mala gestión.</span></div>
-      </div>
-    </section>
-
-    <!-- Solución -->
+    <!-- El problema -->
     <section>
-      <span class="label">La solución</span>
-      <h2>Un mismo dato, dos miradas.</h2>
-      <div class="op-duo">
-        <article>
-          <div class="phone"><img src="assets/screenshots/history.webp" alt="Historial de trabajo en la app Tracktor" width="1170" height="2532" /></div>
-          <div>
-            <span class="label">En el campo · el operador</span>
-            <h3>Registra en segundos, con o sin señal.</h3>
-            <ul class="dash">
-              <li>Diésel, horómetro, hectáreas y servicios en dos toques.</li>
-              <li>Dictado por voz con IA que completa el formulario.</li>
-              <li>Foto tomada en la app, con GPS y hora.</li>
-            </ul>
-          </div>
-        </article>
-        <article>
-          <div class="phone"><img src="assets/screenshots/report.webp" alt="Reporte de gasto y consumo en Tracktor" width="1170" height="2532" /></div>
-          <div>
-            <span class="label">En la oficina · el dueño</span>
-            <h3>Ve a dónde se va cada litro.</h3>
-            <ul class="dash">
-              <li>Consumo real por máquina y operador.</li>
-              <li>Costo por hectárea y por hora, con mantenimiento.</li>
-              <li>Alertas cuando algo se sale de lo normal.</li>
-            </ul>
-          </div>
-        </article>
+      <span class="label">El problema</span>
+      <h2>Todos los días se pierde diésel. Y casi nunca se ve a tiempo.</h2>
+
+      <div class="op-figures">
+        <div><strong>35%</strong><span>del costo operativo de una empresa agrícola es combustible.</span></div>
+        <div><strong class="accent">5–15%</strong><span>de ese diésel se pierde por mala gestión. En promedio, uno de cada diez litros.</span></div>
+        <div><strong>5.600 L</strong><span>por año en una operación de 700 ha: unos USD 5.600 que se van del tanque.*</span></div>
       </div>
+
+      <div class="op-why">
+        <div class="card">
+          <h3>¿A dónde se va?</h3>
+          <ul class="dash">
+            <li><strong>Desvíos:</strong> litros que salen del tanque y no llegan a ninguna máquina.</li>
+            <li><strong>Registros con errores:</strong> planillas a mano que nadie cruza con el campo.</li>
+            <li><strong>Horas que no se trabajaron:</strong> jornadas infladas y manejo que quema de más.</li>
+            <li><strong>Fallas sin detectar:</strong> una máquina que consume de más avisa antes de romperse.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>¿Por qué no lo ves?</h3>
+          <ol class="tl">
+            <li><span>Día 1</span>Se carga diésel y el operador manda una foto por WhatsApp.</li>
+            <li><span>Días después</span>Alguien pasa los datos a Excel, a mano.</li>
+            <li><span>Fin de mes</span>Llega el reporte. <em>Ya no hay nada que corregir.</em></li>
+          </ol>
+          <p class="op-why__fix">Con Tracktor, el desvío aparece el mismo día.</p>
+        </div>
+      </div>
+      <p class="op-note">* Ejemplo: 700 ha × 80 L/ha (MDRyT) = 56.000 L por año, con 10% de pérdida y diésel a ~10,6 Bs/L (≈ USD 1).</p>
     </section>
 
-    <!-- Cómo funciona + precio -->
-    <section class="op-bottom">
-      <div>
-        <span class="label">Cómo funciona</span>
-        <h2>Otros registran lo que el operador dice. Tracktor verifica lo que hizo.</h2>
-        <ol class="op-steps">
-          <li><span>Paso 1</span><strong>El operador registra</strong><p>Con foto, GPS y hora, aunque no haya señal.</p></li>
-          <li><span>Paso 2</span><strong>Tracktor cruza los datos</strong><p>Litros contra horas, horómetro contra el registro anterior.</p></li>
-          <li><span>Paso 3</span><strong>Vos actuás el mismo día</strong><p>El desvío aparece en tu Dashboard.</p></li>
-        </ol>
+    <!-- La solución -->
+    <section class="op-solution">
+      <div class="op-phones">
+        <div class="phone"><img src="assets/one-pager/historial.jpg" alt="Historial de trabajo en la app Tracktor" width="540" height="1169" /></div>
+        <div class="phone phone--up"><img src="assets/one-pager/reporte.jpg" alt="Reporte de gasto y consumo en Tracktor" width="540" height="1169" /></div>
       </div>
-      <div class="op-price">
-        <span class="label">Licencia de máquina</span>
-        <div class="op-price__amount">USD 5.99<small>por máquina al mes, desde la tercera</small></div>
-        <ul class="dash">
-          <li>2 máquinas gratis, para siempre.</li>
-          <li>Operadores ilimitados.</li>
-          <li>Dictado con IA desde la primera licencia.</li>
-          <li>Sin sensores ni hardware en las máquinas.</li>
-        </ul>
+      <div>
+        <span class="label">La solución</span>
+        <h2>Tracktor cierra la fuga.</h2>
+        <ol class="op-points">
+          <li><strong>El operador registra en segundos:</strong> por voz con IA o en dos toques, aunque no haya señal.</li>
+          <li><strong>Cada dato llega verificado:</strong> foto tomada en la app, GPS y hora. Litros contra horas, horómetro contra el registro anterior.</li>
+          <li><strong>Vos ves el desvío en tu Dashboard:</strong> consumo real por máquina y operador, costo por hectárea y alertas.</li>
+        </ol>
+        <p class="op-diff">
+          Otros registran lo que el operador dice. Tracktor verifica lo que hizo.
+          <small>Sin sensores ni hardware en las máquinas: solo el celular del operador.</small>
+        </p>
       </div>
     </section>
 
@@ -433,7 +428,10 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
   <footer class="op-cta">
     <div>
       <h2>Probalo gratis con tus primeras 2 máquinas.</h2>
-      <p class="op-cta__proof">Ya lo usan en campo: Círculo H · Fumipla · Estancias Valdez</p>
+      <p class="op-cta__price">
+        Después, <strong>USD 5.99 por máquina al mes</strong>. Operadores ilimitados y
+        dictado con IA desde la primera licencia.
+      </p>
       <div class="op-cta__links">
         <a href="https://apps.apple.com/bo/app/tracktor/id6781363801" target="_blank" rel="noopener" aria-label="Descargar Tracktor en la App Store">
           <img src="assets/app-store-badge-es.svg" alt="Descárgalo en el App Store" width="120" height="40" />
@@ -447,6 +445,7 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
           <a href="https://wa.me/59173620224?text=Hola%2C%20quiero%20una%20demo%20de%20Tracktor." target="_blank" rel="noopener">WhatsApp +591 73620224</a>
         </div>
       </div>
+      <p class="op-cta__proof">Ya lo usan en campo: Círculo H · Fumipla · Estancias Valdez</p>
     </div>
     <div class="op-qr">
       <div class="op-qr__code" id="qr" aria-label="Código QR a www.tracktor.lat"></div>
@@ -456,7 +455,7 @@ h1, h2, h3 { font-family: "Montserrat", system-ui, sans-serif; }
 
 </main>
 
-<!-- QR a la landing con UTM, así las visitas desde el papel se ven en la analítica. -->
+<!-- QR a la landing con UTM, así las visitas desde el papel o el PDF se ven en la analítica. -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   try {
