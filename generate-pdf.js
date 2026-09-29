@@ -1,3 +1,5 @@
+// Genera Tracktor-One-Pager.pdf (A4) desde one-pager.html.
+// La primera vez: npx playwright install chromium
 const { chromium } = require('playwright');
 
 (async () => {
@@ -9,7 +11,7 @@ const { chromium } = require('playwright');
   });
 
   await page.pdf({
-    path: 'TrackTor-One-Pager.pdf',
+    path: 'Tracktor-One-Pager.pdf',
     format: 'A4',
     printBackground: true,
     margin: {
@@ -22,5 +24,5 @@ const { chromium } = require('playwright');
 
   await browser.close();
 
-  console.log('✓ PDF generado: TrackTor-One-Pager.pdf');
+  console.log('✓ PDF generado: Tracktor-One-Pager.pdf');
 })();

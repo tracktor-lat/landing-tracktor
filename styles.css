@@ -635,12 +635,13 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
 }
 .tag--live { background: rgba(22, 163, 74, 0.12); color: #15803d; }
 
-/* ---------------- Preguntas ---------------- */
+/* ---------------- Preguntas ----------------
+   El acordeón cuelga de .faq__list para poder reusarlo en Soporte. */
 .faq { padding: var(--section-y) 0; background: var(--surface); }
 .faq__inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 56px; align-items: start; }
 .faq__list { border-top: 1px solid var(--card-border); }
-.faq details { border-bottom: 1px solid var(--card-border); }
-.faq summary {
+.faq__list details { border-bottom: 1px solid var(--card-border); }
+.faq__list summary {
   list-style: none;
   cursor: pointer;
   display: flex;
@@ -652,16 +653,16 @@ h1, h2, h3 { font-family: "Montserrat", sans-serif; }
   font-weight: 800;
   color: var(--ink);
 }
-.faq summary::-webkit-details-marker { display: none; }
+.faq__list summary::-webkit-details-marker { display: none; }
 /* Indicador de abierto/cerrado con tipografía, no con un ícono. */
-.faq summary::after {
+.faq__list summary::after {
   content: "+";
   flex-shrink: 0;
   font-weight: 600;
   color: var(--ink-muted);
 }
-.faq details[open] summary::after { content: "−"; }
-.faq details p { padding: 0 32px 22px 0; font-size: 15px; color: var(--ink-muted); }
+.faq__list details[open] summary::after { content: "−"; }
+.faq__list details p { padding: 0 32px 22px 0; font-size: 15px; color: var(--ink-muted); }
 
 /* ---------------- Cierre ---------------- */
 .closer {

@@ -5,172 +5,163 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Soporte — Tracktor</title>
   <meta name="description" content="Soporte de Tracktor: cómo contactarnos, tiempos de respuesta y ayuda con las funciones de la app." />
-  <link rel="canonical" href="https://tracktor.lat/soporte.html" />
-  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="canonical" href="https://www.tracktor.lat/soporte.html" />
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/assets/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#fbf8f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --navy-dark: #1B1919;
-      --navy: #1A2F4C;
-      --bg: #F8F9FA;
-      --white: #FFFFFF;
-      --text: #2D3436;
-      --text-secondary: #636E72;
-      --accent: #FDC82D;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, sans-serif;
-      line-height: 1.65;
-    }
-    header {
-      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
-      color: white;
-      padding: 48px 24px 40px;
-    }
-    header .wrap { max-width: 760px; margin: 0 auto; }
-    header .brand {
-      display: block;
-      height: 24px;
-      width: auto;
-      margin: 0 0 20px;
-    }
-    header h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: clamp(28px, 5vw, 40px);
-      margin: 0 0 8px;
-    }
-    header p { opacity: 0.75; margin: 0; font-size: 14px; }
-    main {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-    section {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 28px 28px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(45, 52, 54, 0.06);
-      box-shadow: 0 2px 24px rgba(0,0,0,0.03);
-    }
-    h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      color: var(--navy);
-      margin: 0 0 14px;
-    }
-    p, li { color: var(--text); font-size: 15px; }
-    ul { padding-left: 20px; margin: 8px 0; }
-    li { margin-bottom: 8px; }
-    strong { color: var(--navy-dark); }
-    a { color: var(--navy); }
-    .muted { color: var(--text-secondary); font-size: 13.5px; }
-    .contact-email {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: clamp(18px, 3.5vw, 22px);
-      color: var(--navy);
-      text-decoration: none;
-      display: inline-block;
-      margin: 4px 0 12px;
-    }
-    .btn {
-      display: inline-block;
-      background: var(--navy);
-      color: white;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-weight: 600;
-      margin-top: 4px;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/pages.css" />
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <img class="brand" src="assets/logo-fondo-oscuro.png" alt="Tracktor" width="800" height="148" />
-      <h1>Soporte</h1>
-      <p>Ayuda con tu cuenta y con las funciones de la app.</p>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="/" class="brand" aria-label="Tracktor, inicio">
+        <img src="/assets/logo-fondo-claro.png" alt="Tracktor" class="brand__logo" width="800" height="148" />
+      </a>
+      <div class="nav__actions">
+        <a href="https://dash.tracktor.lat" class="page-nav__link">Ingresar</a>
+        <a href="/#download" class="btn btn--primary btn--sm">Descargá la app</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section>
-      <h2>Cómo contactarnos</h2>
-      <p>Escribinos y te respondemos por el mismo medio:</p>
-      <a class="contact-email" href="mailto:soporte@tracktor.lat?subject=Soporte%20Tracktor">soporte@tracktor.lat</a>
-      <p class="muted">
-        Respondemos dentro de <strong>1 a 2 días hábiles</strong>. Para resolverlo
-        más rápido, contanos qué dispositivo usás (iPhone o Android), la versión de
-        la app (Config → Mi cuenta → Acerca de Tracktor) y qué pasó exactamente.
-      </p>
-      <p style="margin-top:14px;">
-        <a class="btn" href="mailto:soporte@tracktor.lat?subject=Soporte%20Tracktor">Escribir a soporte</a>
-      </p>
-    </section>
+  <section class="page-hero" style="background-image: url('/assets/campo-atardecer.webp');">
+    <div class="container page-hero__inner">
+      <span class="section-header section-header--on-dark">Ayuda</span>
+      <h1 class="page-hero__title">Soporte</h1>
+      <p class="page-hero__lead">Ayuda con tu cuenta y con las funciones de la app.</p>
+    </div>
+  </section>
 
-    <section>
-      <h2>Temas frecuentes</h2>
-      <ul>
-        <li>
-          <strong>No puedo iniciar sesión.</strong> El acceso lo da el titular del
-          equipo (no hay autorregistro para operadores). Verificá con él tu usuario
-          y contraseña. Para entrar necesitás conexión la primera vez.
-        </li>
-        <li>
-          <strong>Registré algo sin señal y no aparece en el panel.</strong> Es
-          normal: la app guarda todo en el teléfono y lo sincroniza cuando
-          recuperás internet. El indicador de pendientes muestra lo que falta subir.
-        </li>
-        <li>
-          <strong>La foto de evidencia no se toma desde la galería.</strong> Es a
-          propósito: la cámara se abre dentro de la app para que la foto tenga hora
-          y GPS confiables.
-        </li>
-        <li>
-          <strong>El dictado por voz no entiende bien.</strong> Hablá cerca del
-          micrófono y en un lugar con poco ruido; siempre podés revisar y corregir
-          los campos antes de guardar.
-        </li>
-        <li>
-          <strong>Quiero eliminar mi cuenta.</strong> Se hace desde la app: ver
-          <a href="/eliminar-cuenta.html">Eliminar cuenta</a>.
-        </li>
-        <li>
-          <strong>Qué datos guardan y por qué.</strong> Está todo en la
-          <a href="/privacidad.html">Política de Privacidad</a>.
-        </li>
-      </ul>
-    </section>
+  <main class="doc">
+    <div class="container doc__inner doc__inner--single">
+      <div class="doc__body">
+        <div class="contact-grid">
+          <div class="contact-card">
+            <span class="section-header">Por email</span>
+            <a class="contact-card__value" href="mailto:soporte@tracktor.lat?subject=Soporte%20Tracktor">soporte@tracktor.lat</a>
+            <p>Te respondemos por el mismo medio dentro de <strong>1 a 2 días hábiles</strong>.</p>
+            <a class="btn btn--primary" href="mailto:soporte@tracktor.lat?subject=Soporte%20Tracktor">Escribir a soporte</a>
+          </div>
+          <div class="contact-card">
+            <span class="section-header">Por WhatsApp</span>
+            <a class="contact-card__value" href="https://wa.me/59173620224?text=Hola%2C%20necesito%20ayuda%20con%20Tracktor." target="_blank" rel="noopener">+591 73620224</a>
+            <p>Para consultas rápidas y para sumarte a la prueba en Android.</p>
+            <a class="btn btn--primary" href="https://wa.me/59173620224?text=Hola%2C%20necesito%20ayuda%20con%20Tracktor." target="_blank" rel="noopener">Abrir WhatsApp</a>
+          </div>
+        </div>
 
-    <section>
-      <h2>Plataformas</h2>
-      <p>
-        Tracktor está disponible para <strong>iPhone</strong> y <strong>Android</strong>,
-        y el propietario del equipo también tiene un panel web para ver los reportes
-        de su flota. Funciona offline-first: la app es 100% usable sin conexión y
-        sincroniza en diferido.
-      </p>
-    </section>
+        <section class="doc__section" id="antes-de-escribir">
+          <h2>Para resolverlo más rápido</h2>
+          <p>
+            Contanos qué dispositivo usás (iPhone o Android), la versión de la app
+            (Config → Mi cuenta → Acerca de Tracktor) y qué pasó exactamente.
+          </p>
+        </section>
 
-    <section>
-      <h2>Otros enlaces</h2>
-      <ul>
-        <li><a href="/">Inicio</a></li>
-        <li><a href="/privacidad.html">Política de Privacidad</a></li>
-        <li><a href="/terminos.html">Términos de Servicio</a></li>
-        <li><a href="/eliminar-cuenta.html">Eliminar cuenta</a></li>
-      </ul>
-    </section>
+        <section class="doc__section" id="temas-frecuentes">
+          <h2>Temas frecuentes</h2>
+          <div class="faq__list">
+            <details>
+              <summary>No puedo iniciar sesión</summary>
+              <p>
+                El acceso lo da el titular del equipo (no hay autorregistro para
+                operadores). Verificá con él tu usuario y contraseña. Para entrar
+                necesitás conexión la primera vez.
+              </p>
+            </details>
+            <details>
+              <summary>Registré algo sin señal y no aparece en el Dashboard</summary>
+              <p>
+                Es normal: la app guarda todo en el teléfono y lo sincroniza cuando
+                recuperás internet. El indicador de pendientes muestra lo que falta subir.
+              </p>
+            </details>
+            <details>
+              <summary>La foto de evidencia no se toma desde la galería</summary>
+              <p>
+                Es a propósito: la cámara se abre dentro de la app para que la foto
+                tenga hora y GPS confiables.
+              </p>
+            </details>
+            <details>
+              <summary>El dictado por voz no entiende bien</summary>
+              <p>
+                Hablá cerca del micrófono y en un lugar con poco ruido; siempre podés
+                revisar y corregir los campos antes de guardar. El dictado necesita
+                conexión y está incluido desde la primera licencia.
+              </p>
+            </details>
+            <details>
+              <summary>Quiero sumar más máquinas</summary>
+              <p>
+                Las primeras 2 máquinas son gratis. Desde la tercera, cada máquina usa
+                una licencia de USD 5.99 al mes, que se contrata en Suscripción, desde el
+                <a href="https://dash.tracktor.lat">Dashboard</a>.
+              </p>
+            </details>
+            <details>
+              <summary>Quiero eliminar mi cuenta</summary>
+              <p>Se hace desde la app: ver <a href="/eliminar-cuenta.html">Eliminar cuenta</a>.</p>
+            </details>
+            <details>
+              <summary>Qué datos guardan y por qué</summary>
+              <p>Está todo en la <a href="/privacidad.html">Política de Privacidad</a>.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="doc__section" id="plataformas">
+          <h2>Plataformas</h2>
+          <p>
+            Tracktor está disponible para <strong>iPhone</strong> en la App Store y para
+            <strong>Android</strong> en prueba cerrada (escribinos por WhatsApp para
+            sumarte). El dueño o administrador del equipo también tiene el
+            <strong>Dashboard</strong> web para ver consumos, costos y alertas de su flota.
+          </p>
+          <p>
+            La app es online, pero funciona sin señal: todo registro se guarda primero en
+            el teléfono y se sincroniza cuando vuelve la conexión. El dictado con IA y los
+            pagos necesitan conexión.
+          </p>
+        </section>
+      </div>
+    </div>
   </main>
+
+  <footer class="footer">
+    <div class="container footer__grid footer__grid--compact">
+      <div class="footer__brand">
+        <img src="/assets/logo-fondo-oscuro.png" alt="Tracktor" class="footer__logo" width="800" height="148" loading="lazy" />
+        <span class="footer__tagline">Gestión de flota agrícola con IA.</span>
+      </div>
+      <div class="footer__col">
+        <h4>Producto</h4>
+        <a href="/#how">Cómo funciona</a>
+        <a href="/#pricing">Precio</a>
+        <a href="/#download">Descargar</a>
+        <a href="https://dash.tracktor.lat">Ingresar al Dashboard</a>
+      </div>
+      <div class="footer__col">
+        <h4>Ayuda</h4>
+        <a href="/#faq">Preguntas frecuentes</a>
+        <a href="/soporte.html" aria-current="page">Soporte</a>
+        <a href="https://wa.me/59173620224" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="footer__col">
+        <h4>Legal</h4>
+        <a href="/privacidad.html">Privacidad</a>
+        <a href="/terminos.html">Términos</a>
+        <a href="/eliminar-cuenta.html">Eliminar cuenta</a>
+      </div>
+    </div>
+    <div class="container">
+      <p class="footer__note">© 2026 Tracktor · Santa Cruz, Bolivia</p>
+    </div>
+  </footer>
 </body>
 </html>

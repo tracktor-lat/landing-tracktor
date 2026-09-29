@@ -11,8 +11,22 @@ runtime: Vercel la despliega sola en cada push a `main`.
   Montserrat/Inter, cards blancas, degradado azul marino). Sin íconos.
 - `app.js` — modal "Solicitar demo", calculadora de precio, nav móvil y analítica.
 - `apps-script.gs` — Web App de Google que recibe leads y eventos en un Sheet.
-- Páginas sueltas: `privacidad`, `terminos`, `soporte`, `eliminar-cuenta`,
-  `subscription-checkout-success` (retorno del checkout de Polar) y `one-pager`.
+- `pages.css` — estilos propios de las páginas secundarias. Se carga **después**
+  de `styles.css`, del que toma tokens, nav, botones, footer y vidrio.
+- Páginas secundarias (misma nav, footer y estética que la home):
+  - `privacidad`, `terminos`, `eliminar-cuenta` — legales, con índice lateral.
+    La app, App Store y Play enlazan estas URLs con `.html`: no renombrarlas.
+  - `soporte` — canales de contacto y temas frecuentes.
+  - `subscription-checkout-success` — vuelta del checkout de Polar. Verifica el
+    token contra la API y manda a la app (`rcm://`) o al Dashboard.
+  - `404.html` — Vercel la sirve sola ante cualquier ruta inexistente. Usa
+    rutas absolutas (`/assets/...`) porque puede mostrarse en cualquier path.
+- `vercel.json` — alias sin `.html` (`/privacidad`, `/soporte`, …). Son
+  rewrites, no redirecciones: las URLs con `.html` siguen respondiendo igual.
+- `one-pager.html` — la misma historia en una hoja A4 para imprimir, con QR a
+  la home (`utm_source=one-pager`). Mide exactamente 210 × 297 mm: si se le
+  agrega contenido, verificar que no desborde. PDF: botón "Imprimir / Guardar
+  PDF" o `node generate-pdf.js` (antes, `npx playwright install chromium`).
 
 ## Mensaje
 

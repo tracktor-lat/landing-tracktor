@@ -5,238 +5,236 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Política de Privacidad — Tracktor</title>
   <meta name="description" content="Política de privacidad de Tracktor: qué datos recopilamos, para qué los usamos y con quién los compartimos." />
-  <link rel="canonical" href="https://tracktor.lat/privacidad.html" />
-  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="canonical" href="https://www.tracktor.lat/privacidad.html" />
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="icon" href="/assets/favicon-16.png" sizes="16x16" type="image/png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#fbf8f1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --navy-dark: #1B1919;
-      --navy: #1A2F4C;
-      --bg: #F8F9FA;
-      --white: #FFFFFF;
-      --text: #2D3436;
-      --text-secondary: #636E72;
-      --accent: #FDC82D;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, sans-serif;
-      line-height: 1.65;
-    }
-    header {
-      background: linear-gradient(135deg, var(--navy-dark), var(--navy));
-      color: white;
-      padding: 48px 24px 40px;
-    }
-    header .wrap { max-width: 760px; margin: 0 auto; }
-    header .brand {
-      display: block;
-      height: 24px;
-      width: auto;
-      margin: 0 0 20px;
-    }
-    header h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: clamp(28px, 5vw, 40px);
-      color: white;
-      margin: 0 0 8px;
-    }
-    header p { color: white; opacity: 0.75; margin: 0; font-size: 14px; }
-    main {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-    section {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 28px 28px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(45, 52, 54, 0.06);
-      box-shadow: 0 2px 24px rgba(0,0,0,0.03);
-    }
-    h2 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      color: var(--navy);
-      margin: 0 0 14px;
-    }
-    p, li { color: var(--text); font-size: 15px; }
-    ul { padding-left: 20px; margin: 8px 0; }
-    li { margin-bottom: 6px; }
-    strong { color: var(--navy-dark); }
-    a { color: var(--navy); }
-    .muted { color: var(--text-secondary); font-size: 13.5px; }
-    /* La tabla scrollea dentro de su propio contenedor: sin esto sus 3 columnas
-       de texto empujan el ancho de toda la página en móvil. */
-    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-top: 8px; }
-    table { width: 100%; min-width: 520px; border-collapse: collapse; }
-    th, td { text-align: left; padding: 8px 6px; font-size: 14px; border-bottom: 1px solid rgba(45,52,54,0.06); vertical-align: top; }
-    th { color: var(--text-secondary); font-weight: 600; font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.5px; }
-  </style>
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/pages.css" />
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <img class="brand" src="assets/logo-fondo-oscuro.png" alt="Tracktor" width="800" height="148" />
-      <h1>Política de Privacidad</h1>
-      <p>Última actualización: 12 de agosto de 2026</p>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="/" class="brand" aria-label="Tracktor, inicio">
+        <img src="/assets/logo-fondo-claro.png" alt="Tracktor" class="brand__logo" width="800" height="148" />
+      </a>
+      <div class="nav__actions">
+        <a href="https://dash.tracktor.lat" class="page-nav__link">Ingresar</a>
+        <a href="/#download" class="btn btn--primary btn--sm">Descargá la app</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section>
-      <h2>1. Quiénes somos</h2>
-      <p>
-        Tracktor es una plataforma móvil y web para el registro y control de costos de
-        maquinaria agrícola y de campo. Esta política aplica a la app móvil (iOS/Android)
-        y a los servicios asociados (API y panel web). El responsable del tratamiento de
-        datos es <strong>Tracktor</strong>. Para cualquier consulta sobre esta política o
-        tus datos, escribinos a <a href="mailto:soporte@tracktor.lat">soporte@tracktor.lat</a>.
-      </p>
-    </section>
+  <section class="page-hero" style="background-image: url('/assets/campo-atardecer.webp');">
+    <div class="container page-hero__inner">
+      <span class="section-header section-header--on-dark">Legal</span>
+      <h1 class="page-hero__title">Política de Privacidad</h1>
+      <p class="page-hero__meta">Última actualización: 12 de agosto de 2026</p>
+    </div>
+  </section>
 
-    <section>
-      <h2>2. Qué datos recopilamos</h2>
-      <p>Recopilamos únicamente los datos necesarios para operar el servicio:</p>
-      <div class="table-scroll">
-      <table>
-        <tr><th>Categoría</th><th>Datos</th><th>Cómo se obtienen</th></tr>
-        <tr>
-          <td>Cuenta</td>
-          <td>Nombre, email, teléfono, fecha de nacimiento (opcional), foto de perfil</td>
-          <td>Registro manual o inicio de sesión con Google</td>
-        </tr>
-        <tr>
-          <td>Equipo de trabajo</td>
-          <td>Rol (administrador/operador), máquinas asignadas, salario del operador (opcional, visible solo para el administrador de su equipo)</td>
-          <td>Cargado por el administrador del equipo</td>
-        </tr>
-        <tr>
-          <td>Registros operativos</td>
-          <td>Horómetro/odómetro, hectáreas trabajadas, litros y costo de combustible, costos de mantenimiento, notas de texto</td>
-          <td>Ingresados por el operador durante el uso normal de la app</td>
-        </tr>
-        <tr>
-          <td>Evidencia de campo</td>
-          <td>Fotografías tomadas <em>dentro de la app</em> (no se accede a tu galería) y ubicación GPS precisa</td>
-          <td>Captura en el momento de registrar una operación, carga de combustible o mantenimiento</td>
-        </tr>
-        <tr>
-          <td>Dictado por voz (opcional)</td>
-          <td>Audio de voz, transcripto automáticamente para prellenar formularios</td>
-          <td>Solo si el usuario activa la función de dictado</td>
-        </tr>
-        <tr>
-          <td>Datos técnicos</td>
-          <td>Identificador de usuario, dirección IP, tipo de dispositivo, registros de uso de la API</td>
-          <td>Generados automáticamente al usar la app</td>
-        </tr>
-      </table>
+  <main class="doc">
+    <div class="container doc__inner">
+      <nav class="doc__toc" aria-label="Índice">
+        <span class="section-header">En esta página</span>
+        <ol>
+          <li><a href="#quienes-somos">1. Quiénes somos</a></li>
+          <li><a href="#datos">2. Qué datos recopilamos</a></li>
+          <li><a href="#uso">3. Para qué usamos tus datos</a></li>
+          <li><a href="#terceros">4. Con quién compartimos datos</a></li>
+          <li><a href="#almacenamiento">5. Dónde se almacenan</a></li>
+          <li><a href="#conservacion">6. Cuánto tiempo los conservamos</a></li>
+          <li><a href="#seguridad">7. Seguridad</a></li>
+          <li><a href="#derechos">8. Tus derechos</a></li>
+          <li><a href="#menores">9. Menores de edad</a></li>
+          <li><a href="#cambios">10. Cambios a esta política</a></li>
+          <li><a href="#contacto">11. Contacto</a></li>
+        </ol>
+      </nav>
+
+      <div class="doc__body">
+        <section class="doc__section" id="quienes-somos">
+          <h2>1. Quiénes somos</h2>
+          <p>
+            Tracktor es una plataforma móvil y web para el registro y control de costos de
+            maquinaria agrícola y de campo. Esta política aplica a la app móvil (iOS/Android)
+            y a los servicios asociados (API y panel web). El responsable del tratamiento de
+            datos es <strong>Tracktor</strong>. Para cualquier consulta sobre esta política o
+            tus datos, escribinos a <a href="mailto:soporte@tracktor.lat">soporte@tracktor.lat</a>.
+          </p>
+        </section>
+
+        <section class="doc__section" id="datos">
+          <h2>2. Qué datos recopilamos</h2>
+          <p>Recopilamos únicamente los datos necesarios para operar el servicio:</p>
+          <div class="table-scroll">
+            <table>
+              <tr><th>Categoría</th><th>Datos</th><th>Cómo se obtienen</th></tr>
+              <tr>
+                <td>Cuenta</td>
+                <td>Nombre, email, teléfono, fecha de nacimiento (opcional), foto de perfil</td>
+                <td>Registro manual o inicio de sesión con Google</td>
+              </tr>
+              <tr>
+                <td>Equipo de trabajo</td>
+                <td>Rol (administrador/operador), máquinas asignadas, salario del operador (opcional, visible solo para el administrador de su equipo)</td>
+                <td>Cargado por el administrador del equipo</td>
+              </tr>
+              <tr>
+                <td>Registros operativos</td>
+                <td>Horómetro/odómetro, hectáreas trabajadas, litros y costo de combustible, costos de mantenimiento, notas de texto</td>
+                <td>Ingresados por el operador durante el uso normal de la app</td>
+              </tr>
+              <tr>
+                <td>Evidencia de campo</td>
+                <td>Fotografías tomadas <em>dentro de la app</em> (no se accede a tu galería) y ubicación GPS precisa</td>
+                <td>Captura en el momento de registrar una operación, carga de combustible o mantenimiento</td>
+              </tr>
+              <tr>
+                <td>Dictado por voz (opcional)</td>
+                <td>Audio de voz, transcripto automáticamente para prellenar formularios</td>
+                <td>Solo si el usuario activa la función de dictado</td>
+              </tr>
+              <tr>
+                <td>Datos técnicos</td>
+                <td>Identificador de usuario, dirección IP, tipo de dispositivo, registros de uso de la API</td>
+                <td>Generados automáticamente al usar la app</td>
+              </tr>
+            </table>
+          </div>
+          <p class="muted">
+            La ubicación se captura únicamente mientras usás la app para registrar una
+            operación — no rastreamos tu ubicación en segundo plano ni cuando la app está cerrada.
+          </p>
+        </section>
+
+        <section class="doc__section" id="uso">
+          <h2>3. Para qué usamos tus datos</h2>
+          <ul>
+            <li>Prestar el servicio: registrar operaciones, calcular costos por hectárea y detectar desvíos de combustible.</li>
+            <li>Verificar la autenticidad de la evidencia de campo (foto + GPS + hora).</li>
+            <li>Generar reportes y análisis para el propietario del equipo.</li>
+            <li>Procesar pagos de suscripción y gestionar tu cuenta.</li>
+            <li>Brindar soporte técnico.</li>
+            <li>Seguridad de la cuenta (por ejemplo, bloqueo temporal tras intentos fallidos de inicio de sesión).</li>
+            <li>Mejorar el producto (diagnóstico de errores, uso agregado de funciones).</li>
+          </ul>
+          <p><strong>No usamos tus datos para publicidad ni los vendemos a terceros.</strong></p>
+        </section>
+
+        <section class="doc__section" id="terceros">
+          <h2>4. Con quién compartimos datos</h2>
+          <p>Usamos proveedores externos para operar el servicio. Cada uno accede solo a los datos necesarios para su función:</p>
+          <ul>
+            <li><strong>Supabase</strong> — alojamiento de base de datos y almacenamiento de las fotos de evidencia.</li>
+            <li><strong>Polar</strong> — procesamiento de pagos de suscripción. No almacenamos ni tenemos acceso a los datos de tu tarjeta; el pago se realiza en el sitio seguro de Polar.</li>
+            <li><strong>Google</strong> — si elegís iniciar sesión con Google, Google procesa tu autenticación según su propia política de privacidad.</li>
+            <li><strong>Groq</strong> — si usás el dictado por voz, el audio se envía a Groq para transcripción automática y no se almacena de forma permanente en sus servidores.</li>
+          </ul>
+          <p>No compartimos tus datos con terceros para fines de marketing o publicidad.</p>
+        </section>
+
+        <section class="doc__section" id="almacenamiento">
+          <h2>5. Dónde se almacenan tus datos</h2>
+          <p>
+            Los datos se almacenan en infraestructura en la nube (AWS, región eu-central-1
+            a través de Supabase). Esto puede implicar una transferencia internacional de
+            datos fuera de tu país; adoptamos medidas de seguridad razonables en todos los
+            casos.
+          </p>
+        </section>
+
+        <section class="doc__section" id="conservacion">
+          <h2>6. Cuánto tiempo conservamos tus datos</h2>
+          <p>
+            Conservamos tus datos mientras tu cuenta esté activa. Si solicitás la eliminación
+            de tu cuenta, eliminamos o anonimizamos tus datos personales dentro de un plazo
+            razonable, salvo que debamos conservar cierta información por obligaciones legales
+            o contables.
+          </p>
+        </section>
+
+        <section class="doc__section" id="seguridad">
+          <h2>7. Seguridad</h2>
+          <ul>
+            <li>Las contraseñas se almacenan cifradas (hash), nunca en texto plano.</li>
+            <li>Las comunicaciones entre la app y nuestros servidores viajan cifradas (HTTPS).</li>
+            <li>Bloqueamos temporalmente una cuenta tras varios intentos fallidos de inicio de sesión.</li>
+          </ul>
+        </section>
+
+        <section class="doc__section" id="derechos">
+          <h2>8. Tus derechos</h2>
+          <p>Podés en cualquier momento:</p>
+          <ul>
+            <li>Acceder a los datos personales que tenemos sobre vos.</li>
+            <li>Solicitar la corrección de datos inexactos.</li>
+            <li>Solicitar la eliminación de tu cuenta y tus datos personales.</li>
+            <li>Solicitar una copia de tus datos en un formato portable.</li>
+          </ul>
+          <p>Para ejercer cualquiera de estos derechos, escribinos a <a href="mailto:soporte@tracktor.lat">soporte@tracktor.lat</a>.</p>
+        </section>
+
+        <section class="doc__section" id="menores">
+          <h2>9. Menores de edad</h2>
+          <p>
+            Tracktor está dirigido a productores agrícolas, propietarios de maquinaria y su
+            personal de campo, y no está diseñado para ser usado por menores de 18 años.
+          </p>
+        </section>
+
+        <section class="doc__section" id="cambios">
+          <h2>10. Cambios a esta política</h2>
+          <p>
+            Podemos actualizar esta política ocasionalmente. Si hacemos cambios importantes,
+            te avisaremos dentro de la app o por email antes de que entren en vigencia.
+          </p>
+        </section>
+
+        <section class="doc__section" id="contacto">
+          <h2>11. Contacto</h2>
+          <p>
+            ¿Preguntas sobre esta política o tus datos? Escribinos a
+            <a href="mailto:soporte@tracktor.lat">soporte@tracktor.lat</a>.
+          </p>
+        </section>
       </div>
-      <p class="muted">
-        La ubicación se captura únicamente mientras usás la app para registrar una
-        operación — no rastreamos tu ubicación en segundo plano ni cuando la app está cerrada.
-      </p>
-    </section>
-
-    <section>
-      <h2>3. Para qué usamos tus datos</h2>
-      <ul>
-        <li>Prestar el servicio: registrar operaciones, calcular costos por hectárea y detectar desvíos de combustible.</li>
-        <li>Verificar la autenticidad de la evidencia de campo (foto + GPS + hora).</li>
-        <li>Generar reportes y análisis para el propietario del equipo.</li>
-        <li>Procesar pagos de suscripción y gestionar tu cuenta.</li>
-        <li>Brindar soporte técnico.</li>
-        <li>Seguridad de la cuenta (por ejemplo, bloqueo temporal tras intentos fallidos de inicio de sesión).</li>
-        <li>Mejorar el producto (diagnóstico de errores, uso agregado de funciones).</li>
-      </ul>
-      <p><strong>No usamos tus datos para publicidad ni los vendemos a terceros.</strong></p>
-    </section>
-
-    <section>
-      <h2>4. Con quién compartimos datos</h2>
-      <p>Usamos proveedores externos para operar el servicio. Cada uno accede solo a los datos necesarios para su función:</p>
-      <ul>
-        <li><strong>Supabase</strong> — alojamiento de base de datos y almacenamiento de las fotos de evidencia.</li>
-        <li><strong>Polar</strong> — procesamiento de pagos de suscripción. No almacenamos ni tenemos acceso a los datos de tu tarjeta; el pago se realiza en el sitio seguro de Polar.</li>
-        <li><strong>Google</strong> — si elegís iniciar sesión con Google, Google procesa tu autenticación según su propia política de privacidad.</li>
-        <li><strong>Groq</strong> — si usás el dictado por voz, el audio se envía a Groq para transcripción automática y no se almacena de forma permanente en sus servidores.</li>
-      </ul>
-      <p>No compartimos tus datos con terceros para fines de marketing o publicidad.</p>
-    </section>
-
-    <section>
-      <h2>5. Dónde se almacenan tus datos</h2>
-      <p>
-        Los datos se almacenan en infraestructura en la nube (AWS, región eu-central-1
-        a través de Supabase). Esto puede implicar una transferencia internacional de
-        datos fuera de tu país; adoptamos medidas de seguridad razonables en todos los
-        casos.
-      </p>
-    </section>
-
-    <section>
-      <h2>6. Cuánto tiempo conservamos tus datos</h2>
-      <p>
-        Conservamos tus datos mientras tu cuenta esté activa. Si solicitás la eliminación
-        de tu cuenta, eliminamos o anonimizamos tus datos personales dentro de un plazo
-        razonable, salvo que debamos conservar cierta información por obligaciones legales
-        o contables.
-      </p>
-    </section>
-
-    <section>
-      <h2>7. Seguridad</h2>
-      <ul>
-        <li>Las contraseñas se almacenan cifradas (hash), nunca en texto plano.</li>
-        <li>Las comunicaciones entre la app y nuestros servidores viajan cifradas (HTTPS).</li>
-        <li>Bloqueamos temporalmente una cuenta tras varios intentos fallidos de inicio de sesión.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>8. Tus derechos</h2>
-      <p>Podés en cualquier momento:</p>
-      <ul>
-        <li>Acceder a los datos personales que tenemos sobre vos.</li>
-        <li>Solicitar la corrección de datos inexactos.</li>
-        <li>Solicitar la eliminación de tu cuenta y tus datos personales.</li>
-        <li>Solicitar una copia de tus datos en un formato portable.</li>
-      </ul>
-      <p>Para ejercer cualquiera de estos derechos, escribinos a <a href="mailto:soporte@tracktor.lat">soporte@tracktor.lat</a>.</p>
-    </section>
-
-    <section>
-      <h2>9. Menores de edad</h2>
-      <p>
-        Tracktor está dirigido a productores agrícolas, propietarios de maquinaria y su
-        personal de campo, y no está diseñado para ser usado por menores de 18 años.
-      </p>
-    </section>
-
-    <section>
-      <h2>10. Cambios a esta política</h2>
-      <p>
-        Podemos actualizar esta política ocasionalmente. Si hacemos cambios importantes,
-        te avisaremos dentro de la app o por email antes de que entren en vigencia.
-      </p>
-    </section>
-
-    <section>
-      <h2>11. Contacto</h2>
-      <p>
-        ¿Preguntas sobre esta política o tus datos? Escribinos a
-        <a href="mailto:soporte@tracktor.lat">soporte@tracktor.lat</a>.
-      </p>
-    </section>
+    </div>
   </main>
+
+  <footer class="footer">
+    <div class="container footer__grid footer__grid--compact">
+      <div class="footer__brand">
+        <img src="/assets/logo-fondo-oscuro.png" alt="Tracktor" class="footer__logo" width="800" height="148" loading="lazy" />
+        <span class="footer__tagline">Gestión de flota agrícola con IA.</span>
+      </div>
+      <div class="footer__col">
+        <h4>Producto</h4>
+        <a href="/#how">Cómo funciona</a>
+        <a href="/#pricing">Precio</a>
+        <a href="/#download">Descargar</a>
+        <a href="https://dash.tracktor.lat">Ingresar al Dashboard</a>
+      </div>
+      <div class="footer__col">
+        <h4>Ayuda</h4>
+        <a href="/#faq">Preguntas frecuentes</a>
+        <a href="/soporte.html">Soporte</a>
+        <a href="https://wa.me/59173620224" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="footer__col">
+        <h4>Legal</h4>
+        <a href="/privacidad.html" aria-current="page">Privacidad</a>
+        <a href="/terminos.html">Términos</a>
+        <a href="/eliminar-cuenta.html">Eliminar cuenta</a>
+      </div>
+    </div>
+    <div class="container">
+      <p class="footer__note">© 2026 Tracktor · Santa Cruz, Bolivia</p>
+    </div>
+  </footer>
 </body>
 </html>

@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/privacidad", "destination": "/privacidad.html" },
+    { "source": "/terminos", "destination": "/terminos.html" },
+    { "source": "/soporte", "destination": "/soporte.html" },
+    { "source": "/eliminar-cuenta", "destination": "/eliminar-cuenta.html" },
+    { "source": "/one-pager", "destination": "/one-pager.html" }
+  ]
+}
