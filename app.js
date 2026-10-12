@@ -189,7 +189,7 @@
     });
   });
 
-  /* ---- Tiendas (App Store, Android por WhatsApp) e ingreso al Dashboard ----
+  /* ---- Tiendas (App Store y Google Play) e ingreso al Dashboard ----
      Son enlaces externos: no abren el modal, solo dejan el evento. */
   document.querySelectorAll("[data-store]").forEach(function (link) {
     link.addEventListener("click", function () {
