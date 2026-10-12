@@ -74,3 +74,7 @@ Web App (Implementar → Administrar implementaciones → editar → Nueva versi
 ```bash
 python3 -m http.server 4173
 ```
+
+**Caché:** los HTML cargan `styles.css`, `pages.css` y `app.js` con `?v=AAAAMMDD`.
+Al cambiar cualquiera de esos archivos, subí la fecha en todos los HTML; si no, los
+navegadores pueden mezclar el HTML nuevo con el CSS viejo.
