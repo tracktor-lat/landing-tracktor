@@ -1,15 +1,13 @@
 /* ========================================================================
    Tracktor — Landing.
-   Modal de demo (formulario → confirmación), calculadora de precio,
+   CTA de demo por WhatsApp, calculadora de precio,
    navegación móvil y la analítica que alimenta el Apps Script.
    ======================================================================== */
 (function () {
   "use strict";
 
   /* --------------------------------------------------------------------
-     CONFIG — Conecta aquí tu Google Sheet / Airtable / Formspree.
-     Crea un Apps Script Web App (doPost) o un endpoint de Formspree y pega
-     la URL. Si queda vacío, los datos solo se loguean en consola (modo test).
+     CONFIG — Apps Script que recibe el newsletter y la analítica.
      -------------------------------------------------------------------- */
   var FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbzV-RgTr1cyMF-rPAwjKtIfCgi8OrV_Nj2yFDBskPg9JBcWVw2ulRMGV8B1Paw2hIer/exec";
   var ANALYTICS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzV-RgTr1cyMF-rPAwjKtIfCgi8OrV_Nj2yFDBskPg9JBcWVw2ulRMGV8B1Paw2hIer/exec";
@@ -150,47 +148,20 @@
   })();
 
   /* --------------------------------------------------------------------
-     MODAL: SOLICITAR DEMO (formulario → confirmación)
+     SOLICITAR DEMO: abre WhatsApp con un mensaje ya escrito.
      -------------------------------------------------------------------- */
-  var modal = document.getElementById("modal");
-  var steps = {
-    form: modal.querySelector('[data-step="form"]'),
-    confirm: modal.querySelector('[data-step="confirm"]'),
-  };
-  var form = document.getElementById("leadForm");
+  var WHATSAPP_URL = "https://wa.me/59176001957?text=" +
+    encodeURIComponent("Hola, quiero una demo de Tracktor. Tengo __ máquinas en __.");
 
-  function showStep(name) {
-    Object.keys(steps).forEach(function (k) {
-      steps[k].hidden = k !== name;
-    });
-  }
-
-  function openModal(source) {
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-    showStep("form");
-    track("cta_click", { source: source });
-    track("form_open", { source: source });
-    var first = form.querySelector("input");
-    if (first) setTimeout(function () { first.focus(); }, 80);
-  }
-
-  function closeModal() {
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
-
-  /* ---- CTAs de demo ---- */
   document.querySelectorAll("[data-cta]").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      openModal(btn.getAttribute("data-cta"));
+      track("cta_click", { source: btn.getAttribute("data-cta"), channel: "whatsapp" });
+      window.open(WHATSAPP_URL, "_blank", "noopener");
     });
   });
 
   /* ---- Tiendas (App Store y Google Play) e ingreso al Dashboard ----
-     Son enlaces externos: no abren el modal, solo dejan el evento. */
+     Son enlaces externos: no abren WhatsApp, solo dejan el evento. */
   document.querySelectorAll("[data-store]").forEach(function (link) {
     link.addEventListener("click", function () {
       track("store_click", { store: link.getAttribute("data-store") });
@@ -201,61 +172,6 @@
       track("login_click", { source: link.getAttribute("data-login") });
     });
   });
-
-  /* ---- Cerrar modal ---- */
-  modal.querySelectorAll("[data-close]").forEach(function (el) {
-    el.addEventListener("click", closeModal);
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-  });
-
-  /* ---- Formulario de lead ---- */
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var inputs = form.querySelectorAll("input");
-    var valid = true;
-    inputs.forEach(function (input) {
-      var ok = input.checkValidity() && input.value.trim() !== "";
-      input.classList.toggle("invalid", !ok);
-      if (!ok && valid) input.focus();
-      if (!ok) valid = false;
-    });
-    if (!valid) {
-      track("form_validation_error");
-      return;
-    }
-
-    var leadData = {
-      nombre: form.nombre.value.trim(),
-      empresa: form.empresa.value.trim(),
-      ubicacion: form.ubicacion.value.trim(),
-      maquinarias: form.maquinarias.value.trim(),
-      telefono: form.telefono.value.trim(),
-    };
-
-    track("form_submit", leadData);
-    submitLead(leadData);
-    form.reset();
-    showStep("confirm");
-    track("confirm_view");
-  });
-
-  function submitLead(data) {
-    var record = Object.assign({ type: "lead", sid: sessionId, ts: new Date().toISOString() }, data);
-    if (!FORM_ENDPOINT) {
-      console.log("[RCM] (sin endpoint) lead capturado:", record);
-      return;
-    }
-    fetch(FORM_ENDPOINT, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(record),
-    }).catch(function (err) {
-      console.error("[RCM] error enviando lead", err);
-    });
-  }
 
   /* --------------------------------------------------------------------
      CALCULADORA DE PRECIO

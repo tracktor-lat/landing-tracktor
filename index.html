@@ -76,7 +76,7 @@
         el mismo día, no a fin de mes.
       </p>
       <div class="hero__actions">
-        <!-- Enlaces de tienda: llevan data-store, no data-cta (ese abre el modal). -->
+        <!-- Enlaces de tienda: llevan data-store, no data-cta (ese abre WhatsApp). -->
         <a class="store-badge" href="https://apps.apple.com/bo/app/tracktor/id6781363801"
            target="_blank" rel="noopener" data-store="ios"
            aria-label="Descargar Tracktor en la App Store">
@@ -378,54 +378,6 @@
     </div>
   </footer>
 
-  <!-- ============ MODAL: SOLICITAR DEMO ============ -->
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal__backdrop" data-close></div>
-    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal__close" data-close aria-label="Cerrar">&times;</button>
-
-      <div class="step" data-step="form">
-        <span class="section-header">Demo personalizada</span>
-        <h2 class="modal__title" id="modalTitle">Solicitá tu demo</h2>
-        <p class="modal__lead">Dejanos tus datos y te escribimos para coordinar una demo con tu operación.</p>
-        <form id="leadForm" novalidate>
-          <label class="field">
-            <span>Nombre</span>
-            <input type="text" name="nombre" required autocomplete="name" placeholder="Tu nombre completo" />
-          </label>
-          <label class="field">
-            <span>Empresa</span>
-            <input type="text" name="empresa" required autocomplete="organization" placeholder="Nombre de la propiedad o empresa" />
-          </label>
-          <label class="field">
-            <span>Ubicación</span>
-            <input type="text" name="ubicacion" required placeholder="Ej: Pailón, Santa Cruz" />
-          </label>
-          <div class="field-row">
-            <label class="field">
-              <span>Máquinas</span>
-              <input type="number" name="maquinarias" required min="1" inputmode="numeric" placeholder="Ej: 6" />
-            </label>
-            <label class="field">
-              <span>Teléfono</span>
-              <input type="tel" name="telefono" required inputmode="tel" autocomplete="tel" placeholder="+591 70000000" />
-            </label>
-          </div>
-          <button type="submit" class="btn btn--primary btn--block btn--lg">Enviar</button>
-        </form>
-      </div>
-
-      <div class="step step--confirm" data-step="confirm" hidden>
-        <h2 class="modal__title">Listo, recibimos tus datos.</h2>
-        <p class="modal__lead">
-          Te escribimos en un plazo de <strong>3 días hábiles</strong> para coordinar la demo.
-          Mientras tanto, podés descargar la app y cargar tus primeras 2 máquinas gratis.
-        </p>
-        <button class="btn btn--primary btn--block btn--lg" data-close>Entendido</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="app.js?v=20261012"></script>
+  <script src="app.js?v=20261012b"></script>
 </body>
 </html>
